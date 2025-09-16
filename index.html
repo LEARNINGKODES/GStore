@@ -1,215 +1,95 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GameStore</title>
+<!-- Favicon básico -->
+<link rel="icon" href="NEOMC11.png" type="image/png">
+
+<!-- Varias resoluciones para compatibilidad -->
+<link rel="icon" type="image/png" sizes="32x32" href="NEOMC11.png">
+<link rel="icon" type="image/png" sizes="48x48" href="NEOMC11.png">
+<link rel="icon" type="image/png" sizes="64x64" href="NEOMC11.png">
+<link rel="icon" type="image/png" sizes="192x192" href="NEOMC11.png">
+
+<!-- Para iPhone/iPad -->
+<link rel="apple-touch-icon" sizes="180x180" href="NEOMC11.png">
+
+<!-- Para Windows -->
+<meta name="msapplication-TileImage" content="NEOMC11.png">
+<meta name="msapplication-TileColor" content="#1ec76d">
+
 <style>
-  /* 🌌 THEME */
-  :root{
-    --bg: #0a0c0d;              /* negro elegante */
-    --panel: rgba(18,22,25,0.55);
-    --glass: rgba(255,255,255,0.06);
-    --accent: #2ecc71;           /* verde brillante */
-    --accent-glow: 0 0 18px #2ecc71;
-    --muted: #aeb6bf;
-    --card: rgba(20,24,28,0.8);
-    --radius: 20px;
-    --shadow: 0 10px 40px rgba(0,0,0,0.7);
-    font-family: "Inter", "SF Pro Display", "Segoe UI", Roboto, system-ui, sans-serif;
-  }
-  
-  html,body{
-    height:100%;
-    background: var(--bg);
-    color:#ecf0f1;
-    margin:0;
-  }
-  *{box-sizing:border-box; transition: all 0.25s ease;}
-  
-  /* 🌟 HEADER */
-  header{
-    backdrop-filter: blur(14px);
-    background: rgba(255,255,255,0.03);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    display:flex; align-items:center; justify-content:space-between;
-    padding:16px 26px; position:sticky; top:0; z-index:100;
-  }
-  .brand{display:flex; gap:14px; align-items:center;}
-  .logo{
-    width:56px;height:56px;border-radius:16px;
-    background:var(--card);
-    display:flex;align-items:center;justify-content:center;
-    font-weight:900;font-size:20px;
-    color:var(--accent);
-    box-shadow: var(--accent-glow);
-  }
-  .logo img{
-    width:100%;height:100%;border-radius:50%;
-    object-fit:contain;
-  }
-  .title h1{margin:0;font-size:20px;font-weight:800;}
-  .title p{margin:0;font-size:13px;color:var(--muted)}
-  
-  /* ⚡ LAYOUT */
-  .app{
-    display:grid; grid-template-columns:280px 1fr;
-    gap:24px; padding:24px;
-    min-height: calc(100vh - 88px);
-  }
-  
-  /* 📌 SIDEBAR */
-  aside{
-    background:var(--panel);
-    border-radius: var(--radius);
-    padding:18px; display:flex; flex-direction:column; gap:18px;
-    backdrop-filter: blur(12px);
-    border:1px solid rgba(255,255,255,0.06);
-    box-shadow: var(--shadow);
-  }
-  .search{display:flex;}
-  .search input{
-    flex:1; padding:12px; border-radius:14px;
-    border:1px solid rgba(255,255,255,0.1);
-    background:rgba(255,255,255,0.05); color:#fff;
-  }
-  .search input:focus{
-    border-color: var(--accent);
-    box-shadow: var(--accent-glow);
-    outline:none;
-  }
-  .nav-list{display:flex;flex-direction:column;gap:10px;}
-  .nav-btn{
-    padding:14px; border-radius:14px; border:none;
-    background:transparent; color:inherit;
-    font-weight:600; text-align:left;
-    cursor:pointer; font-size:15px;
-  }
-  .nav-btn:hover{
-    background:rgba(46,204,113,0.15);
-    transform: translateX(6px);
-    box-shadow: inset 4px 0 0 var(--accent);
-  }
-  .nav-btn.active{
-    background:linear-gradient(90deg, rgba(46,204,113,0.25), rgba(46,204,113,0.1));
-    border-left:5px solid var(--accent);
-    color: var(--accent); font-weight: 700;
-  }
-  
-  /* 🔗 SOCIALS */
-  .socials{margin-top:auto;display:flex;gap:14px;justify-content:center;}
-  .socials a{
-    width:46px;height:46px;border-radius:14px;
-    display:flex;align-items:center;justify-content:center;
-    background:var(--card);
-    color:var(--muted); font-size:22px;
-    box-shadow: var(--shadow);
-    text-decoration:none;
-  }
-  .socials img{
-    width:100%;height:100%;border-radius:50%;
-    object-fit:contain;
-  }
-  .socials a:hover{
-    background: var(--accent); color:#041010;
-    transform: scale(1.12);
-    box-shadow: var(--accent-glow);
-  }
-  .hint{font-size:12px;color:var(--muted);text-align:center;}
-  
-  /* 🖼 MAIN */
-  main{display:flex;flex-direction:column;gap:22px;}
-  .panel{
-    background:var(--panel);
-    border-radius:22px; padding:22px;
-    border:1px solid rgba(255,255,255,0.08);
-    backdrop-filter: blur(14px);
-    box-shadow: var(--shadow);
-  }
-  .panel h2{margin:0 0 10px;font-size:24px;}
-  .panel p{margin:0;color:var(--muted);font-size:15px;}
-  
-  /* 🎮 VERSIONS */
-  .versions{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
-  .v-btn{
-    padding:12px 16px;border-radius:14px;
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.08);
-    color:var(--muted); cursor:pointer; font-weight:700;
-  }
-  .v-btn:hover{
-    color:#fff; background: var(--accent);
-    box-shadow: var(--accent-glow);
-    transform: translateY(-3px);
-  }
-  
-  /* 📦 CARDS */
-  .items-grid{
-    margin-top:16px;
-    display:grid;
-    grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
-    gap:18px;
-  }
-  .card{
-    background: var(--card);
-    border-radius:18px; padding:14px;
-    border:1px solid rgba(255,255,255,0.05);
-    box-shadow: var(--shadow);
-    display:flex;flex-direction:column;gap:12px;
-  }
-  .card:hover{
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--accent-glow);
-  }
-  .thumb{
-    width:100%;height:160px;border-radius:12px;
-    background:#0d1114;
-    display:flex;align-items:center;justify-content:center;
-    color:var(--muted); overflow:hidden;
-  }
-  .meta{display:flex;justify-content:space-between;align-items:center;}
-  .meta .name{font-weight:700;font-size:15px;}
-  .meta .ver{font-size:13px;color:var(--muted);}
-  .desc{font-size:14px;color:var(--muted);min-height:42px;}
-  
-  /* 🔘 BUTTONS */
-  .actions{display:flex;gap:10px;justify-content:flex-end;}
-  .btn{
-    padding:10px 14px;border-radius:14px;
-    border:none;background:var(--accent);
-    color:#041010;font-weight:700;cursor:pointer;
-    font-size:14px; box-shadow: var(--accent-glow);
-  }
-  .btn:hover{transform:scale(1.05);}
-  .btn.secondary{
-    background:transparent; color:var(--muted);
-    border:1px solid rgba(255,255,255,0.1);
-  }
-  .btn.secondary:hover{
-    color:white; border-color: var(--accent);
-    box-shadow: var(--accent-glow);
-  }
-  
-  /* 🔙 BACK */
-  .back{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:10px 14px;border-radius:14px;
-    background:transparent;
-    border:1px solid rgba(255,255,255,0.08);
-    cursor:pointer;color:var(--muted)
-  }
-  .back:hover{
-    color: var(--accent); border-color: var(--accent);
-    box-shadow: var(--accent-glow);
-  }
-  
-  /* 🎠 CAROUSEL */
-  .carousel{
+/* ===== Reset ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+body{background:#0a1a0f;color:#fff;overflow-x:hidden;}
+
+/* ===== Particles Background ===== */
+#particles{
+  position:fixed;
+  top:0;left:0;width:100%;height:100%;
+  z-index:-1;
+  background: radial-gradient(circle at top, #0b1f10, #050b05);
+  overflow:hidden;
+}
+
+/* Particles animation */
+.particle{
+  position:absolute;
+  width:6px; height:6px;
+  background:rgba(0,255,120,0.6);
+  border-radius:50%;
+  animation:move 10s linear infinite;
+}
+@keyframes move{
+  0%{transform:translateY(0) translateX(0);}
+  100%{transform:translateY(-1000px) translateX(500px);}
+}
+
+/* ===== Header ===== */
+header{
+  text-align:center;padding:12px;
+  background:rgba(0,0,0,0.2);
+  backdrop-filter:blur(10px);
+}
+header img{width:120px;height:auto;}
+
+/* ===== Main Container ===== */
+.main{padding:12px;display:flex;flex-direction:column;gap:12px;}
+
+/* ===== Cards ===== */
+.card{
+  background:rgba(0,255,120,0.1);
+  backdrop-filter:blur(10px);
+  border-radius:16px;
+  padding:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.card:hover{transform:scale(1.02);background:rgba(0,255,120,0.2);}
+.card img{width:50px;height:50px;border-radius:12px;object-fit:cover;}
+.card .info{display:flex;flex-direction:column;}
+.card .info .title{font-weight:bold;font-size:16px;}
+.card .info .desc{font-size:12px;color:#c0ffc0;}
+
+/* ===== Cards Grid for items ===== */
+.items-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+/* ===== Carrusel ===== */
+.carousel{
     position: relative;
     overflow: hidden;
     border-radius: 20px;
     margin-top: 18px;
-    box-shadow: var(--shadow);
+    box-shadow: rgba(0,255,120,0.6);
     max-width: 1000px;
     margin-left:auto;margin-right:auto;
   }
@@ -240,145 +120,231 @@
   }
   .carousel .prev{ left: 14px; }
   .carousel .next{ right: 14px; }
-  
-  /* 📱 MOBILE */
-  @media (max-width:900px){
-    .app{grid-template-columns:1fr;padding:16px;}
-    aside{order:2}
-    main{order:1}
-    .items-grid{grid-template-columns:1fr;}
-    header{padding:12px;}
-    .slide img{height:200px;}
+
+
+/* ===== Footer ===== */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; /* empuja el footer al fondo */
+}
+
+footer {
+  position: relative; /* ya no está fijo */
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  padding: 14px 22px;
+  background: rgba(25, 25, 25, 0.85);
+  backdrop-filter: blur(16px) saturate(140%);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4),
+              4px 4px 12px rgba(0,0,0,0.5),
+              -4px 4px 12px rgba(255,255,255,0.05);
+}
+
+/* Botones dentro del footer */
+footer a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(40,40,40,0.9), rgba(15,15,15,0.9));
+  transition: all 0.35s ease;
+  overflow: hidden;
+}
+
+/* Efecto brillo */
+footer a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(0,255,170,0.4), transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+/* Hover */
+footer a:hover {
+  transform: translateY(-6px) scale(1.1);
+  box-shadow: 0 0 18px rgba(0,255,170,0.6), 0 0 28px rgba(0,255,255,0.4);
+}
+
+footer a:hover::before {
+  opacity: 1;
+}
+
+/* Iconos */
+footer a img {
+  width: 35px;
+  height: 35px;
+border-redius:10px;
+  object-fit: contain;
+  z-index: 1;
+}
+
+/* ===== Back Button ===== */
+.back-btn{
+  padding:8px 12px;
+  margin:8px 0;
+  background:rgba(0,255,120,0.2);
+  border:none;
+  border-radius:12px;
+  color:#fff;
+  cursor:pointer;
+  display:none;
+}
+/* HEADER centrado */
+header {
+  display: flex;
+  flex-direction: column; /* coloca logo arriba y texto abajo */
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  text-align: center;
+}
+
+/* LOGO con efecto glow animado */
+.logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(30, 199, 109, 0.9),
+              0 0 40px rgba(0, 255, 200, 0.6);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Efecto animado alrededor */
+.logo::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #1ec76d,
+    #00ffd9,
+    #1ec76d,
+    #00ffd9
+  );
+  animation: spinGlow 6s linear infinite;
+  z-index: 0;
+}
+
+@keyframes spinGlow {
+  to {
+    transform: rotate(360deg);
   }
-  </style>
+}
+
+/* Hover logo */
+.logo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(30, 199, 109, 1),
+              0 0 60px rgba(0, 255, 200, 0.9);
+}
+
+/* TEXTO debajo del logo */
+header h1 {
+  margin-top: 16px;
+  font-size: 28px;
+  font-weight: 800;
+  font-family: "Poppins", sans-serif;
+  color: #1ec76d;
+  text-shadow: 0 0 8px rgba(0, 255, 200, 0.8),
+               0 0 16px rgba(0, 255, 200, 0.5);
+}
+
+</style>
 </head>
 <body>
-  <head>
-    <div class="brand">
-      <div class="logo" ><img src="NEOMC11.png"> </div>
-      <div class="title">
-        <h1>GameStore By JLMC24</h1>
-        <p>Sigueme en mis Redes :)</p>
+  
+
+<div id="particles"></div>
+
+<header>
+  <img  class="logo" src="NEOMC11.png" alt="Logo"><h1>GameStore</h1>
+</header>
+
+<div class="main">
+  <!-- Carrusel -->
+  <div class="carousel">
+    <div class="slides">
+      <div class="slide">
+        <img src="craftsman.png" alt="Craftsman">
+        <div class="caption">Craftsman</div>
+      </div>
+      <div class="slide">
+        <img src="neocraft/2NEOCRAFT.png" alt="NeoCraft">
+        <div class="caption">NeoCraft</div>
+      </div>
+      <div class="slide">
+        <img src="texturas.jpg" alt="Texturas">
+        <div class="caption">Texturas</div>
+      </div>
+      <div class="slide">
+        <img src="extras.png" alt="Extras">
+        <div class="caption">Extras</div>
       </div>
     </div>
-    <div style="display:flex;gap:10px;align-items:center">
-      <button class="btn secondary" onclick="openHome()">Inicio</button>
-      <!-- placeholder for future actions -->
-    </div>
-  </header>
-
-  <div class="app">
-    <!-- SIDEBAR -->
-    <aside>
-      <div style="display:flex;gap:10px;align-items:center">
-        <div style="flex:1">
-          <div style="font-weight:700">Secciones</div>
-          <div style="font-size:12px;color:var(--muted)">Selecciona una sección</div>
-        </div>
-      </div>
-
-      <div class="search" style="margin-top:10px">
-        <input id="searchInput" placeholder="Buscar (título, versión, descripción)" />
-        <button class="btn secondary" onclick="clearSearch()">X</button>
-      </div>
-
-      <nav class="nav-list" id="navList">
-        <!-- botones generados por JS -->
-      </nav>
-      <!--pantalla de inicio-->
-      <div class="carousel">
-        <div class="slides">
-          <div class="slide">
-            <img src="craftsman.png" alt="Craftsman">
-            <div class="caption">Craftsman</div>
-          </div>
-          <div class="slide">
-            <img src="neocraft/2NEOCRAFT.png" alt="NeoCraft">
-            <div class="caption">NeoCraft</div>
-          </div>
-          <div class="slide">
-            <img src="texturas.jpg" alt="Texturas">
-            <div class="caption">Texturas</div>
-          </div>
-          <div class="slide">
-            <img src="extras.png" alt="Extras">
-            <div class="caption">Extras</div>
-          </div>
-        </div>
-        <!-- Botones -->
-        <button class="prev" onclick="moveSlide(-1)">❮</button>
-        <button class="next" onclick="moveSlide(1)">❯</button>
-      </div>
-
-
-
-      <div class="hint" style="margin-top:30px">JLMC24</div>
-
-      <div class="socials">
-        <a href="#" title="YouTube" id="yt"><img src="yt.png" alt="yt" /></a>
-        <a href="#" title="TikTok" id="tt"><img src="tiktok.png" alt="tt" /></a>
-        <a href="#" title="Instagram" id="ig"><img src="inta.jpg" alt="ig" /></a>
-      </div>
-    </aside>
-
-    <!-- MAIN -->
-    <main>
-      <section class="panel" id="panelIntro">
-        <h2 id="panelTitle">Bienvenido</h2>
-        <p id="panelDesc">Selecciona una sección para comenzar. La plantilla está vacía: rellena arrays en la variable <code>DATA</code> dentro del código.</p>
-      </section>
-
-      <!-- versions and items -->
-      <section class="panel" id="panelContent" style="display:none">
-        <div id="panelHeader" style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-          <div>
-            <button class="back" id="backBtn" onclick="goBack()" style="display:none">← Atrás</button>
-          </div>
-          <div style="text-align:right">
-            <div id="currentSectionLabel" style="font-weight:700"></div>
-            <div id="currentSubLabel" style="font-size:13px;color:var(--muted)"></div>
-          </div>
-        </div>
-
-        <div id="versionArea" style="margin-top:12px">
-          <div id="versionsWrap" class="versions"></div>
-        </div>
-
-        <div id="itemsArea" style="margin-top:16px">
-          <div id="itemsGrid" class="items-grid"></div>
-        </div>
-      </section>
-
-      <section style="margin-top:10px;text-align:center;color:var(--muted);font-size:13px">Nota: SUSCRIBETE A JLMC24, Y SIGUEME EN TODAS MIS REDES</section>
-
-    </main>
+    <!-- Botones -->
+    <button class="prev" onclick="moveSlide(-1)">❮</button>
+    <button class="next" onclick="moveSlide(1)">❯</button>
   </div>
 
+  <!-- Main Menu -->
+  <div id="mainMenu" class="items-grid"></div>
+
+  <!-- Submenu / Items -->
+  <button id="backBtn" class="back-btn" onclick="goBack()">Atrás</button>
+  <div id="contentMenu" class="items-grid"></div>
+</div>
+
+<footer>
+  <a href="#" id="yt"><img src="yt.png" alt="YouTube"></a>
+  <a href="#" id="tt"><img src="tiktok.png" alt="TikTok"></a>
+  <a href="#" id="ig"><img src="inta.jpg" alt="Instagram"></a>
+</footer>
+
 <script>
-/* ===========================
-   DATA (edítalo desde tu editor)
-   - Rellena title, desc, img (ruta/local o URL), url
-   - Cada sección (NEOCRAFT, Texturas, Extras) tiene items[] directo (sin subpestañas)
-   - Craftsman tiene versions[] con items[] por versión
-   =========================== */
+/* ================= DATA ================= */
 const DATA = {
   socials: {
-    youtube: { url: "https://youtube.com/@jlmc2?si=qHmc0eB24stW3Kcv", img: "yt.png" },      // deja img vacío si vas a reemplazar por archivo local
-    tiktok:  { url: "https://www.tiktok.com/@neomc1?_t=ZS-8zkfUb8Lnjm&_r=1", img: "tiktok.png" },
-    instagram:{ url: "https://www.instagram.com/neomc12?igsh=MXNqYmcwNHZmOGx3Yg==", img: "inta.jpg" }
+    youtube:{url:"https://youtube.com/@jlmc2?si=qHmc0eB24stW3Kcv", img:"yt.png"},
+    tiktok:{url:"https://www.tiktok.com/@neomc1?_t=ZS-8zkfUb8Lnjm&_r=1", img:"tiktok.png"},
+    instagram:{url:"https://www.instagram.com/neomc12?igsh=MXNqYmcwNHZmOGx3Yg==", img:"inta.jpg"}
   },
-  sections: [
+  sections:[
     {
-      id: "craftsman",
-      title: "Craftsman",
-      desc: "Colección Craftsman — selecciona una versión",
-      versions: [
-        {
-          id: "craftsman-main",
-          title: "Craftsman",
-          items: [
-            // 10 objetos vacíos (reemplaza con tus datos)
-            { id: "c-1", title: "Craftsman AB", version: "1.19.50", img: "craftsman.png", desc: "", url: "https://www.mediafire.com/file/ah73nfy17woyh7j/Craftsman_AB.apk/file" },
+      id:"craftsman",
+      title:"Craftsman",
+      desc:"Colección Craftsman",
+      versions:[
+        {id:"craftsman-main", title:"Craftsman"},
+        {id:"craftsman-01510", title:"Craftsman 0.15.10"},
+        {id:"craftsman-zero", title:"Craftsman Zero"}
+      ]
+    },
+    {id:"neocraft", title:"NEOCRAFT", desc:"Recursos NEOCRAFT"},
+    {id:"textures", title:"Texturas", desc:"Texturas, Shaders, Mundos"},
+    {id:"extras", title:"Extras", desc:"Complementos y utilidades"}
+  ],
+  items:{
+    "craftsman-main":[
+    { id: "c-1", title: "Craftsman AB", version: "1.19.50", img: "craftsman.png", desc: "", url: "https://www.mediafire.com/file/ah73nfy17woyh7j/Craftsman_AB.apk/file" },
             { id: "c-2", title: "Craftsman EMOTES", version: "1.18", img: "craftsman.png", desc: "PARA GRABAR EMOTES DESDE CRAFTSMAN", url: "https://www.mediafire.com/file/1l0wno4u23when8/Craftsman_emotes.apk/file" },
           { id: "c-3", title: "Craftsmine", version: "1.??", img: "craftsman.png", desc: " ", url: "https://www.mediafire.com/file/42lo3yruc2rh4bo/CraftMine_V2.apk/file" },
             { id: "c-4", title: "Craftsman PE", version: "", img: "craftsman.png", desc: "", url: "https://www.mediafire.com/file/r0ummjkdjinpnn1/Craftsman_Pe.apk/file" },
@@ -388,13 +354,9 @@ const DATA = {
             { id: "c-8", title: "Craftsman 1.17", version: "", img: "craftsman.png", desc: "", url: "https://www.mediafire.com/file/drep2uik81qjuqm/minecraft-1-17-2_mod.apk/file" },
             { id: "c-9", title: "Craftsman VI", version: "1.16.20", img: "craftsman.png", desc: "", url: "https://www.mediafire.com/file/hgi53l00ce4okrc/Craftsman+VI+1.16+NEOFACE.apk/file" },
             /*{ id: "c-10", title: "", version: "", img: "", desc: "", url: "" }*/
-          ]
-        },
-        {
-          id: "craftsman-01510",
-          title: "Craftsman 0.15.10",
-          items: [
-            { id: "c01510-1", title: "Craftsman 0.15.10", version: "0.15.10", img: "craftsman.png", desc: "CRAFTSMAN 0.15.10 PARA ANDOID 14 Y 15 EN ADELANTE", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" },
+    ],
+    "craftsman-01510":[
+    { id: "c01510-1", title: "Craftsman 0.15.10", version: "0.15.10", img: "craftsman.png", desc: "CRAFTSMAN 0.15.10 PARA ANDOID 14 Y 15 EN ADELANTE", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" },
             { id: "c01510-2", title: "Craftsman 0.15.10", version: "0.15.10", img: "craftsman.png", desc: "CRAFTSMAN 0.15.10", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" },
             /*
             { id: "c01510-3", title: "Craftsman 0.15.10", version: "0.15.10", img: "craftsman.png", desc: "", url: "" },
@@ -405,13 +367,9 @@ const DATA = {
             { id: "c01510-8", title: "Craftsman 0.15.10", version: "0.15.10", img: "craftsman.png", desc: "", url: "" },
             { id: "c01510-9", title: "Craftsman 0.15.10", version: "0.15.10", img: "craftsman.png", desc: "", url: "" },
             { id: "c01510-10", title: "", version: "0.15.10", img: "", desc: "", url: "" }*/
-          ]
-        },
-        {
-          id: "craftsman-zero",
-          title: "Craftsman Zero",
-          items: [
-            { id: "cz-1", title: "Craftsman zero", version: "DEMO 1", img: "zero.png", desc: "", url: "https://www.mediafire.com/file/k4krz1ww0299fvk/Craftsman+Zero+Demo+1.apk/file" },
+    ],
+    "craftsman-zero":[
+    { id: "cz-1", title: "Craftsman zero", version: "DEMO 1", img: "zero.png", desc: "", url: "https://www.mediafire.com/file/k4krz1ww0299fvk/Craftsman+Zero+Demo+1.apk/file" },
             { id: "cz-2", title: "Craftsman zero", version: "1.1.5", img: "zero.png", desc: "", url: "https://www.mediafire.com/file/vudh0hmv9mjh2tz/Cratsman+Zero+1.1.apk/file" },
             { id: "cz-3", title: "Craftsman zero NAVIDAD", version: "1.1.5", img: "zero.png", desc: "", url: "https://www.mediafire.com/file/guv0t148wko9h0i/Craftsman+Zero+Navidad.apk/file" },
             { id: "cz-4", title: "Craftsman zero", version: "DEMO 2", img: "zero.png", desc: "", url: "https://www.mediafire.com/file/7ds74aevus10761/Craftsman+Zero+Demo+2+Sin+Bugs.apk/file" },
@@ -422,18 +380,9 @@ const DATA = {
            /*
             { id: "cz-9", title: "Craftsman zero", version: "Zero", img: "zero.png", desc: "", url: "" },
             { id: "cz-10", title: "", version: "Zero", img: "", desc: "", url: "" }*/
-          ]
-        }
-      ]
-    },
-
-    // Simple sections (no sub-pestañas), 10 slots each
-    {
-      id: "neocraft",
-      title: "NEOCRAFT",
-      desc: "Recursos NEOCRAFT",
-      items: [
-        { id: "n-1", title: "NEOCRAFT v1", version: "1.20.12", img: "./neocraft/NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/cxqj0b3t0syd6vi/NEOCRAFT.apk/file" },
+    ],
+    "neocraft":[
+    { id: "n-1", title: "NEOCRAFT v1", version: "1.20.12", img: "./neocraft/NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/cxqj0b3t0syd6vi/NEOCRAFT.apk/file" },
         { id: "n-2", title: "NEOCRAFT v2", version: "", img: "./neocraft/1NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/9jc389tiz5qkcy4/NeoCraft+Old+Edition_optimized.apk/file" },
         { id: "n-3", title: "NEOCRAFT, trailer edition", version: "", img: "./neocraft/2NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/mookw5z8qrbintj/NEOCRAFT_Trailer_Edition_mod.apk/file" },
         { id: "n-4", title: "NEOCRAFT SE", version: "", img: "./neocraft/3NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/d9942l6uw7whh2n/NEOCRAFT_SE.apk/file" },
@@ -444,14 +393,9 @@ const DATA = {
         { id: "n-8", title: "", version: "", img: "./neocraft/7NEOCRAFT.png", desc: "", url: "" },
         { id: "n-9", title: "", version: "", img: "./neocraft/NEOCRAFT.png", desc: "", url: "" },
         { id: "n-10", title: "", version: "", img: "", desc: "", url: "" }*/
-      ]
-    },
-    {
-      id: "textures",
-      title: "Texturas",
-      desc: "Texturas, Shaders, Mundos",
-      items: [
-        { id: "t-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "", desc: "(SHADER) MINECRAFT PATCH", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
+    ],
+    "textures":[
+    { id: "t-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "", desc: "(SHADER) MINECRAFT PATCH", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
         { id: "t-2", title: "NEWB X LEGACY ", version: "1.21+", img: "", desc: "(SHADER) MINECRAFT PATCH 1.21+", url: "https://www.mediafire.com/file/8qmz4j57gi45ekd/Newb_X_Legacy_Mcpe_1.21.mcpack.zip/file" },
         { id: "t-3", title: "ONE BLOCK", version: "1.5", img: "", desc: "(MUNDO) PARA MINECRAFT 1.18 EN ADELANTE", url: "https://www.mediafire.com/file/fwxue1q70q93ybw/One_Block_%2528Spring_to_Life%2521%2529_v%253D1.5.9_By_DtA_MC.mcworld/file" },
         { id: "t-4", title: "TEXTURA OUTPUT", version: "", img: "", desc: "(TUXTURA) PARA MINECRAFT 1.18+", url: "https://www.mediafire.com/file/yxuie1v5m6v0khg/outcut2.mcpack/file" },
@@ -461,14 +405,9 @@ const DATA = {
         { id: "t-8", title: "texturas vanilla para craftsman 1.18+", version: "1.3", img: "", desc: "", url: "https://www.mediafire.com/file/2wsc0bpel7frifo/Texturas_Vanillas_1.18.0_By_NEOFACEMC.mcpack/file" },
         { id: "t-9", title: "", version: "", img: "", desc: "", url: "" },
         { id: "t-10", title: "", version: "", img: "", desc: "", url: "" }
-      ]
-    },
-    {
-      id: "extras",
-      title: "Extras",
-      desc: "Complementos y utilidades",
-      items: [
-        { id: "e-1", title: "", version: "", img: "", desc: "", url: "" },
+    ],
+    "extras":[
+    /*{ id: "e-1", title: "", version: "", img: "", desc: "", url: "" },
         { id: "e-2", title: "", version: "", img: "", desc: "", url: "" },
         { id: "e-3", title: "", version: "", img: "", desc: "", url: "" },
         { id: "e-4", title: "", version: "", img: "", desc: "", url: "" },
@@ -477,251 +416,103 @@ const DATA = {
         { id: "e-7", title: "", version: "", img: "", desc: "", url: "" },
         { id: "e-8", title: "", version: "", img: "", desc: "", url: "" },
         { id: "e-9", title: "", version: "", img: "", desc: "", url: "" },
-        { id: "e-10", title: "", version: "", img: "", desc: "", url: "" }
-      ]
-    }
-  ]
+        { id: "e-10", title: "", version: "", img: "", desc: "", url: "" }*/
+    ]
+  }
 };
 
-/* ===========================
-   UI Logic (no necesitas tocar)
-   =========================== */
+/* ===== Socials ===== */
+document.getElementById('yt').href = DATA.socials.youtube.url;
+document.getElementById('tt').href = DATA.socials.tiktok.url;
+document.getElementById('ig').href = DATA.socials.instagram.url;
 
-const navList = document.getElementById('navList');
-const panelIntro = document.getElementById('panelIntro');
-const panelContent = document.getElementById('panelContent');
-const panelTitle = document.getElementById('panelTitle');
-const panelDesc = document.getElementById('panelDesc');
-const versionsWrap = document.getElementById('versionsWrap');
-const itemsGrid = document.getElementById('itemsGrid');
+/* ===== Menu Logic ===== */
+const mainMenu = document.getElementById('mainMenu');
+const contentMenu = document.getElementById('contentMenu');
 const backBtn = document.getElementById('backBtn');
-const currentSectionLabel = document.getElementById('currentSectionLabel');
-const currentSubLabel = document.getElementById('currentSubLabel');
-const searchInput = document.getElementById('searchInput');
+let state = {section:null, version:null};
 
-// Populate socials (images optional)
-document.getElementById('yt').href = DATA.socials.youtube.url || '#';
-document.getElementById('tt').href = DATA.socials.tiktok.url || '#';
-document.getElementById('ig').href = DATA.socials.instagram.url || '#';
-function setSocialImgs(){
-  try{
-    if(DATA.socials.youtube.img) document.querySelector('#yt img').src = DATA.socials.youtube.img;
-    else document.querySelector('#yt img').src = svgPlaceholder(24,'YT');
-    if(DATA.socials.tiktok.img) document.querySelector('#tt img').src = DATA.socials.tiktok.img;
-    else document.querySelector('#tt img').src = svgPlaceholder(24,'TT');
-    if(DATA.socials.instagram.img) document.querySelector('#ig img').src = DATA.socials.instagram.img;
-    else document.querySelector('#ig img').src = svgPlaceholder(24,'IG');
-  }catch(e){}
-}
-setSocialImgs();
-
-/* render nav */
-function renderNav(){
-  navList.innerHTML = '';
+function renderMainMenu(){
+  mainMenu.innerHTML="";
   DATA.sections.forEach(sec=>{
-    const btn = document.createElement('button');
-    btn.className = 'nav-btn';
-    btn.innerHTML = `<div style="width:10px;height:10px;border-radius:50%;background:${sec.id==='craftsman'? 'var(--accent)':'transparent'};margin-right:8px"></div><div style="display:flex;flex-direction:column;align-items:flex-start"><span style="font-weight:700">${sec.title}</span><small style="color:var(--muted)">${sec.desc||''}</small></div>`;
-    btn.onclick = ()=>openSection(sec.id);
-    navList.appendChild(btn);
+    const c = document.createElement('div'); c.className='card';
+    const img = document.createElement('img'); 
+    img.src = sec.id==="craftsman"? "craftsman.png" : sec.id==="neocraft"? "./neocraft/NEOCRAFT.png" : "default.png";
+    const info = document.createElement('div'); info.className='info';
+    info.innerHTML=`<div class="title">${sec.title}</div><div class="desc">${sec.desc||''}</div>`;
+    c.appendChild(img); c.appendChild(info);
+    c.onclick = ()=>openSection(sec.id);
+    mainMenu.appendChild(c);
   });
-}
-renderNav();
-
-/* open section */
-let state = { sectionId:null, versionId:null };
-
-function openHome(){
-  panelIntro.style.display='block';
-  panelContent.style.display='none';
-  state.sectionId = null;
-  state.versionId = null;
-  clearActiveNav();
-}
-function clearActiveNav(){
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  // mark current
-  const idx = DATA.sections.findIndex(s=>s.id === state.sectionId);
-  if(idx>=0) document.querySelectorAll('.nav-btn')[idx].classList.add('active');
+  contentMenu.innerHTML=""; backBtn.style.display='none';
 }
 
 function openSection(id){
+  state.section=id; state.version=null;
+  mainMenu.innerHTML="";
+  contentMenu.innerHTML="";
   const sec = DATA.sections.find(s=>s.id===id);
-  if(!sec) return;
-  // set state
-  state.sectionId = id;
-  state.versionId = null;
-  panelIntro.style.display='none';
-  panelContent.style.display='block';
-  currentSectionLabel.textContent = sec.title;
-  currentSubLabel.textContent = sec.desc || '';
-  backBtn.style.display = 'none';
-  // if craftsman (has versions) show versions
-  if(sec.versions && sec.versions.length){
-    versionsWrap.innerHTML = '';
+  if(sec.versions){
     sec.versions.forEach(v=>{
-      const b = document.createElement('button');
-      b.className = 'v-btn';
-      b.textContent = v.title;
-      b.onclick = ()=>openVersion(id,v.id);
-      versionsWrap.appendChild(b);
+      const c = document.createElement('div'); c.className='card';
+      const img = document.createElement('img'); 
+      img.src=v.id==="craftsman-main"?"craftsman.png":v.id==="craftsman-zero"?"zero.png":"craftsman.png";
+      const info = document.createElement('div'); info.className='info';
+      info.innerHTML=`<div class="title">${v.title}</div>`;
+      c.appendChild(img); c.appendChild(info);
+      c.onclick=()=>openVersion(v.id);
+      contentMenu.appendChild(c);
     });
-    itemsGrid.innerHTML = ''; // no items until version chosen
+    backBtn.style.display='inline-flex';
   } else {
-    // simple section with items[]
-    versionsWrap.innerHTML = '';
-    renderItems(sec.items || []);
-  }
-  clearActiveNav();
-}
-
-/* open version */
-function openVersion(sectionId, versionId){
-  const sec = DATA.sections.find(s=>s.id===sectionId);
-  if(!sec) return;
-  const ver = (sec.versions || []).find(v=>v.id===versionId);
-  if(!ver) return;
-  state.sectionId = sectionId; state.versionId = versionId;
-  currentSectionLabel.textContent = sec.title;
-  currentSubLabel.textContent = ver.title;
-  backBtn.style.display = 'inline-flex';
-  versionsWrap.innerHTML = '';
-  renderItems(ver.items || []);
-  clearActiveNav();
-}
-
-/* go back */
-function goBack(){
-  const sec = DATA.sections.find(s=>s.id===state.sectionId);
-  if(!sec) return openHome();
-  // if we were in a version, go to version list
-  if(state.versionId){
-    state.versionId = null;
-    currentSubLabel.textContent = sec.desc || '';
-    backBtn.style.display = 'none';
-    // show versions again
-    versionsWrap.innerHTML = '';
-    sec.versions.forEach(v=>{
-      const b = document.createElement('button'); b.className='v-btn'; b.textContent = v.title; b.onclick = ()=>openVersion(sec.id,v.id);
-      versionsWrap.appendChild(b);
-    });
-    itemsGrid.innerHTML = '';
-  } else {
-    openHome();
+    renderItems(id);
+    backBtn.style.display='inline-flex';
   }
 }
 
-/* render items (list) */
-function renderItems(list){
-  itemsGrid.innerHTML = '';
-  if(!list || list.length===0){
-    itemsGrid.innerHTML = '<div style="grid-column:1/-1;padding:18px;border-radius:12px;background:rgba(255,255,255,0.02);color:var(--muted)">No hay elementos. Rellena <code>DATA</code> en el código.</div>';
-    return;
-  }
+function openVersion(versionId){
+  state.version=versionId;
+  renderItems(versionId);
+}
+
+function renderItems(key){
+  contentMenu.innerHTML="";
+  const list = DATA.items[key]||[];
+  if(list.length===0){contentMenu.innerHTML="<div style='padding:12px;'>No hay elementos</div>";return;}
   list.forEach(it=>{
     const c = document.createElement('div'); c.className='card';
-    // thumbnail
-    const thumb = document.createElement('div'); thumb.className='thumb';
-    if(it.img && it.img.trim() !== ''){
-      const im = document.createElement('img'); im.src = it.img; im.style.width='100%'; im.style.height='100%'; im.style.objectFit='cover';
-      thumb.appendChild(im);
-    } else {
-      thumb.innerHTML = svgPlaceholderBlock(it.title || 'Portada');
-    }
-    // meta
-    const name = document.createElement('div'); name.className='meta';
-    name.innerHTML = `<div style="display:flex;flex-direction:column"><div class="name">${it.title || 'Sin título'}</div><div class="ver">${it.version || ''}</div></div>`;
-    // desc
-    const desc = document.createElement('div'); desc.className='desc'; desc.textContent = it.desc || '';
-    // actions
-    const actions = document.createElement('div'); actions.className='actions';
-    const openBtn = document.createElement('a'); openBtn.className='btn'; openBtn.textContent = 'Abrir';
-    openBtn.href = it.url || '#'; openBtn.target = '_blank';
-    actions.appendChild(openBtn);
-    // assemble
-    c.appendChild(thumb); c.appendChild(name); c.appendChild(desc); c.appendChild(actions);
-    itemsGrid.appendChild(c);
+    const img = document.createElement('img'); img.src=it.img;
+    const info = document.createElement('div'); info.className='info';
+    info.innerHTML=`<div class="title">${it.title}</div><div class="desc">${it.version||''}</div>`;
+    c.appendChild(img); c.appendChild(info);
+    c.onclick=()=>window.open(it.url,'_blank');
+    contentMenu.appendChild(c);
   });
 }
 
-/* SEARCH */
-searchInput.addEventListener('input', e=>{
-  const q = (e.target.value || '').toLowerCase().trim();
-  if(!q){
-    // reopen current view
-    if(state.sectionId && state.versionId) openVersion(state.sectionId,state.versionId);
-    else if(state.sectionId) openSection(state.sectionId);
-    else openHome();
-    return;
-  }
-  // search across visible scope (preferably current section/version)
-  let pool = [];
-  if(state.sectionId){
-    const sec = DATA.sections.find(s=>s.id===state.sectionId);
-    if(state.versionId){
-      const ver = (sec.versions||[]).find(v=>v.id===state.versionId);
-      pool = ver ? ver.items.slice() : [];
-    } else {
-      // section with versions -> search across all versions; section without versions -> items
-      if(sec.versions) sec.versions.forEach(v=>pool.push(...(v.items || [])));
-      else pool = sec.items || [];
-    }
-  } else {
-    // global search across all sections and versions
-    DATA.sections.forEach(sec=>{
-      if(sec.versions) sec.versions.forEach(v=>pool.push(...(v.items || [])));
-      else pool.push(...(sec.items || []));
-    });
-  }
-
-  const filtered = pool.filter(it=>{
-    return (it.title||'').toLowerCase().includes(q) ||
-           (it.desc||'').toLowerCase().includes(q) ||
-           (it.version||'').toLowerCase().includes(q);
-  });
-  renderItems(filtered);
-});
-
-function clearSearch(){ searchInput.value=''; searchInput.dispatchEvent(new Event('input')); }
-
-/* helper: small SVG placeholder (base64-safe string) */
-function svgPlaceholder(sizeLabel, text){
-  const txt = encodeURIComponent(text || '');
-  const w=48, h=48;
-  return `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}'><rect width='100%' height='100%' fill='%23101412' rx='8'/><text x='50%' y='50%' fill='%23b8c6c9' font-family='Arial' font-size='10' text-anchor='middle' dominant-baseline='central'>${txt}</text></svg>`;
-}
-function svgPlaceholderBlock(title){
-  const txt = encodeURIComponent(title || 'Portada');
-  return `<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 400 200'><rect width='100%' height='100%' fill='#0b1216' rx='8'/><text x='50%' y='50%' fill='#6f7f84' font-family='Arial' font-size='18' text-anchor='middle' dominant-baseline='central'>${txt}</text></svg>`;
+function goBack(){
+  if(state.version){state.version=null; openSection(state.section);}
+  else{state.section=null; renderMainMenu();}
 }
 
+/* ===== Carrusel ===== */
+let currentSlide=0;
+const slides=document.querySelectorAll('.slide');
+function showSlide(i){currentSlide=i; if(currentSlide>=slides.length)currentSlide=0; if(currentSlide<0)currentSlide=slides.length-1; document.querySelector('.slides').style.transform=`translateX(-${currentSlide*100}%)`;}
+setInterval(()=>showSlide(currentSlide+1),4000);
 
-/* ===== Carrusel de bienvenida ===== */
-let currentSlide = 0;
-
-function showSlide(index){
-  const slides = document.querySelectorAll('.slides .slide');
-  if(index >= slides.length) currentSlide = 0;
-  else if(index < 0) currentSlide = slides.length - 1;
-  else currentSlide = index;
-  document.querySelector('.slides').style.transform = `translateX(-${currentSlide * 100}%)`;
+/* ===== Particles ===== */
+for(let i=0;i<40;i++){
+  const p=document.createElement('div'); p.className='particle';
+  p.style.left=Math.random()*100+'%';
+  p.style.top=Math.random()*100+'%';
+  p.style.width=(2+Math.random()*4)+'px';
+  p.style.height=p.style.width;
+  document.getElementById('particles').appendChild(p);
 }
 
-function moveSlide(step){
-  showSlide(currentSlide + step);
-}
-
-// autoplay cada 4 segundos
-setInterval(()=> moveSlide(1), 4000);
-
-showSlide(0);
-
-/* init: open home */
-openHome();
-
-/* expose for console debugging */
-window.__GAMESTORE = { DATA, openSection, openVersion, goBack, renderNav };
-
+/* ===== Init ===== */
+renderMainMenu();
 </script>
 </body>
 </html>
