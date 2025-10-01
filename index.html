@@ -395,7 +395,7 @@ const DATA = {
         { id: "n-10", title: "", version: "", img: "", desc: "", url: "" }*/
     ],
     "textures":[
-    { id: "t-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "", desc: "(SHADER) MINECRAFT PATCH", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
+    { id: "t-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "texturas.jpg", desc: "(SHADER) MINECRAFT PATCH", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
         { id: "t-2", title: "NEWB X LEGACY ", version: "1.21+", img: "", desc: "(SHADER) MINECRAFT PATCH 1.21+", url: "https://www.mediafire.com/file/8qmz4j57gi45ekd/Newb_X_Legacy_Mcpe_1.21.mcpack.zip/file" },
         { id: "t-3", title: "ONE BLOCK", version: "1.5", img: "", desc: "(MUNDO) PARA MINECRAFT 1.18 EN ADELANTE", url: "https://www.mediafire.com/file/fwxue1q70q93ybw/One_Block_%2528Spring_to_Life%2521%2529_v%253D1.5.9_By_DtA_MC.mcworld/file" },
         { id: "t-4", title: "TEXTURA OUTPUT", version: "", img: "", desc: "(TUXTURA) PARA MINECRAFT 1.18+", url: "https://www.mediafire.com/file/yxuie1v5m6v0khg/outcut2.mcpack/file" },
@@ -437,7 +437,7 @@ function renderMainMenu(){
   DATA.sections.forEach(sec=>{
     const c = document.createElement('div'); c.className='card';
     const img = document.createElement('img'); 
-    img.src = sec.id==="craftsman"? "craftsman.png" : sec.id==="neocraft"? "./neocraft/NEOCRAFT.png" : "default.png";
+    img.src = sec.id==="craftsman"? "craftsman.png" : sec.id==="neocraft"? "./neocraft/NEOCRAFT.png" : "texturaa.jpg";
     const info = document.createElement('div'); info.className='info';
     info.innerHTML=`<div class="title">${sec.title}</div><div class="desc">${sec.desc||''}</div>`;
     c.appendChild(img); c.appendChild(info);
