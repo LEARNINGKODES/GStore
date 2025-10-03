@@ -620,7 +620,7 @@ function renderMainMenu(){
   DATA.sections.forEach(sec=>{
     const c = document.createElement('div'); c.className='card';
     const img = document.createElement('img'); 
-    img.src = sec.id==="craftsman"? "craftsman.png" : sec.id==="neocraft"? "./neocraft/NEOCRAFT.png" : "default.png";
+    img.src = sec.id==="craftsman"? "craftsman.png" : sec.id==="neocraft"? "./neocraft/NEOCRAFT.png" : "texturaa.jpg";
     const info = document.createElement('div'); info.className='info';
     info.innerHTML=`<div class=\"title\">${sec.title}</div><div class=\"desc\">${sec.desc||''}</div>`;
     c.appendChild(img); c.appendChild(info);
