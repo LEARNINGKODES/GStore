@@ -22,24 +22,36 @@
 
 <style>
 /* ===== Reset ===== */
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
-body{background:#0a1a0f;color:#fff;overflow-x:hidden;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', 'Segoe UI', Arial, sans-serif;}
+body{
+  background: linear-gradient(135deg, #0a1a0f 0%, #0b1f10 100%);
+  color:#fff;
+  overflow-x:hidden;
+  min-height:100vh;
+  font-size:17px;
+  letter-spacing:0.01em;
+}
 
+/* ===== Particles Background ===== */
 /* ===== Particles Background ===== */
 #particles{
   position:fixed;
-  top:0;left:0;width:100%;height:100%;
+  top:0;left:0;width:100vw;height:100vh;
   z-index:-1;
-  background: radial-gradient(circle at top, #0b1f10, #050b05);
+  background: radial-gradient(circle at 60% 0%, #0b1f10 60%, #050b05 100%);
   overflow:hidden;
+  pointer-events:none;
 }
 
 /* Particles animation */
+/* Particles animation */
 .particle{
   position:absolute;
-  width:6px; height:6px;
-  background:rgba(0,255,120,0.6);
+  width:8px; height:8px;
+  background:linear-gradient(135deg, #1ec76d 60%, #00ffd9 100%);
+  box-shadow:0 0 16px 4px #1ec76d44;
   border-radius:50%;
+  opacity:0.7;
   animation:move 10s linear infinite;
 }
 @keyframes move{
@@ -49,104 +61,150 @@ body{background:#0a1a0f;color:#fff;overflow-x:hidden;}
 
 /* ===== Header ===== */
 header{
-  text-align:center;padding:12px;
-  background:rgba(0,0,0,0.2);
-  backdrop-filter:blur(10px);
+  text-align:center;
+  padding:24px 0 12px 0;
+  background:rgba(0,0,0,0.18);
+  backdrop-filter:blur(12px) saturate(120%);
+  border-radius:0 0 32px 32px;
+  box-shadow:0 8px 32px #1ec76d22;
 }
-header img{width:120px;height:auto;}
+header img{width:130px;height:auto;}
 
 /* ===== Main Container ===== */
-.main{padding:12px;display:flex;flex-direction:column;gap:12px;}
+/* ===== Main Container ===== */
+.main{
+  padding:24px 8vw 24px 8vw;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  max-width:1200px;
+  margin:auto;
+}
 
 /* ===== Cards ===== */
+/* ===== Cards ===== */
 .card{
-  background:rgba(0,255,120,0.1);
-  backdrop-filter:blur(10px);
-  border-radius:16px;
-  padding:12px;
+  background:rgba(0,255,120,0.10);
+  backdrop-filter:blur(18px) saturate(120%);
+  border-radius:22px;
+  padding:18px 18px 18px 12px;
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:18px;
   cursor:pointer;
-  transition:0.3s;
+  box-shadow:0 4px 24px #1ec76d22, 0 1.5px 8px #00ffd933;
+  border:1.5px solid #1ec76d33;
+  transition:transform 0.22s, box-shadow 0.22s, background 0.22s;
+  position:relative;
+  overflow:hidden;
 }
-.card:hover{transform:scale(1.02);background:rgba(0,255,120,0.2);}
-.card img{width:50px;height:50px;border-radius:12px;object-fit:cover;}
-.card .info{display:flex;flex-direction:column;}
-.card .info .title{font-weight:bold;font-size:16px;}
-.card .info .desc{font-size:12px;color:#c0ffc0;}
+.card:hover{
+  transform:scale(1.035) translateY(-2px);
+  background:linear-gradient(120deg, #1ec76d22 60%, #00ffd911 100%);
+  box-shadow:0 8px 32px #1ec76d44, 0 2px 12px #00ffd944;
+}
+.card img{
+  width:62px;height:62px;
+  border-radius:16px;
+  object-fit:cover;
+  box-shadow:0 2px 12px #1ec76d33;
+  background:#0a1a0f;
+}
+.card .info{
+  display:flex;flex-direction:column;gap:2px;
+}
+.card .info .title{
+  font-weight:800;
+  font-size:19px;
+  color:#1ec76d;
+  letter-spacing:0.01em;
+  text-shadow:0 1px 8px #00ffd933;
+}
+.card .info .desc{
+  font-size:13px;
+  color:#c0ffc0;
+  font-weight:500;
+  opacity:0.85;
+}
 
+/* ===== Cards Grid for items ===== */
 /* ===== Cards Grid for items ===== */
 .items-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
+  grid-template-columns:repeat(auto-fit, minmax(270px, 1fr));
+  gap:18px;
+  margin-bottom:12px;
 }
 
 /* ===== Carrusel ===== */
+/* ===== Carrusel ===== */
 .carousel{
-    position: relative;
-    overflow: hidden;
-    border-radius: 20px;
-    margin-top: 18px;
-    box-shadow: rgba(0,255,120,0.6);
-    max-width: 1000px;
-    margin-left:auto;margin-right:auto;
-  }
-  .slides{display:flex;transition:transform 0.6s ease;}
-  .slide{position: relative;min-width: 100%;}
-  .slide img{
-    width: 100%; height: 320px;
-    object-fit: cover;
-    border-radius: 18px;
-    filter: brightness(0.9);
-  }
-  .caption{
-    position: absolute;
-    bottom: 22px; left: 50%; transform: translateX(-50%);
-    background: rgba(0,0,0,0.55);
-    padding: 10px 20px; border-radius: 14px;
-    font-size: 22px; font-weight: bold;
-    color: #2ecc71;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.7);
-    backdrop-filter: blur(8px);
-  }
-  .carousel button{
-    position: absolute; top: 50%; transform: translateY(-50%);
-    background: rgba(0,0,0,0.6); border: none;
-    color: white; font-size: 24px;
-    padding: 10px 14px; cursor: pointer;
-    border-radius: 50%;
-  }
-  .carousel .prev{ left: 14px; }
-  .carousel .next{ right: 14px; }
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  margin-top: 18px;
+  box-shadow:0 8px 32px #1ec76d33, 0 2px 12px #00ffd933;
+  max-width: 1000px;
+  margin-left:auto;margin-right:auto;
+  background:rgba(0,255,120,0.07);
+  border:1.5px solid #1ec76d33;
+}
+.slides{display:flex;transition:transform 0.6s cubic-bezier(.7,.2,.2,1);}
+.slide{position: relative;min-width: 100%;}
+.slide img{
+  width: 100%; height: 340px;
+  object-fit: cover;
+  border-radius: 24px;
+  filter: brightness(0.93) saturate(1.1);
+  box-shadow:0 2px 16px #1ec76d22;
+}
+.caption{
+  position: absolute;
+  bottom: 28px; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,0.60);
+  padding: 12px 32px; border-radius: 18px;
+  font-size: 25px; font-weight: bold;
+  color: #1ec76d;
+  text-shadow: 0 2px 12px #00ffd9cc;
+  backdrop-filter: blur(10px);
+  border:1.5px solid #1ec76d44;
+  letter-spacing:0.02em;
+}
+.carousel button{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: linear-gradient(135deg, #1ec76d 60%, #00ffd9 100%);
+  border: none;
+  color: white; font-size: 28px;
+  padding: 12px 18px; cursor: pointer;
+  border-radius: 50%;
+  box-shadow:0 2px 12px #1ec76d44;
+  transition:background 0.2s, box-shadow 0.2s, transform 0.2s;
+  opacity:0.85;
+}
+.carousel button:hover{
+  background:linear-gradient(135deg, #00ffd9 60%, #1ec76d 100%);
+  box-shadow:0 4px 18px #00ffd944;
+  opacity:1;
+  transform:scale(1.12) translateY(-50%);
+}
+.carousel .prev{ left: 18px; }
+.carousel .next{ right: 18px; }
 
 
 /* ===== Footer ===== */
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-  flex: 1; /* empuja el footer al fondo */
-}
-
 footer {
-  position: relative; /* ya no está fijo */
-  margin-top: 20px;
+  position: relative;
+  margin-top: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 22px;
-  padding: 14px 22px;
-  background: rgba(25, 25, 25, 0.85);
-  backdrop-filter: blur(16px) saturate(140%);
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4),
-              4px 4px 12px rgba(0,0,0,0.5),
-              -4px 4px 12px rgba(255,255,255,0.05);
+  gap: 32px;
+  padding: 18px 32px;
+  background: rgba(25, 25, 25, 0.90);
+  backdrop-filter: blur(18px) saturate(160%);
+  border-radius: 28px;
+  box-shadow: 0 8px 32px #1ec76d22, 0 2px 12px #00ffd933;
+  border:1.5px solid #1ec76d33;
 }
 
 /* Botones dentro del footer */
@@ -155,12 +213,14 @@ footer a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 54px;
-  height: 54px;
+  width: 62px;
+  height: 62px;
   border-radius: 50%;
-  background: linear-gradient(145deg, rgba(40,40,40,0.9), rgba(15,15,15,0.9));
-  transition: all 0.35s ease;
+  background: linear-gradient(135deg, #1ec76d 60%, #00ffd9 100%);
+  transition: all 0.25s cubic-bezier(.7,.2,.2,1);
   overflow: hidden;
+  box-shadow:0 2px 12px #1ec76d44;
+  border:1.5px solid #1ec76d44;
 }
 
 /* Efecto brillo */
@@ -168,70 +228,84 @@ footer a::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top left, rgba(0,255,170,0.4), transparent 70%);
+  background: radial-gradient(circle at 60% 0%, #00ffd9 40%, transparent 80%);
   border-radius: 50%;
   opacity: 0;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.25s;
 }
 
 /* Hover */
 footer a:hover {
-  transform: translateY(-6px) scale(1.1);
-  box-shadow: 0 0 18px rgba(0,255,170,0.6), 0 0 28px rgba(0,255,255,0.4);
+  transform: translateY(-8px) scale(1.13);
+  box-shadow: 0 0 24px #00ffd9cc, 0 0 32px #1ec76dcc;
 }
 
 footer a:hover::before {
-  opacity: 1;
+  opacity: 0.7;
 }
 
 /* Iconos */
 footer a img {
-  width: 35px;
-  height: 35px;
-border-redius:10px;
+  width: 38px;
+  height: 38px;
+  border-radius:10px;
   object-fit: contain;
   z-index: 1;
+  filter:drop-shadow(0 2px 8px #1ec76d88);
 }
 
 /* ===== Back Button ===== */
+/* ===== Back Button ===== */
 .back-btn{
-  padding:8px 12px;
-  margin:8px 0;
-  background:rgba(0,255,120,0.2);
+  padding:10px 18px;
+  margin:10px 0 18px 0;
+  background:linear-gradient(135deg, #1ec76d 60%, #00ffd9 100%);
   border:none;
-  border-radius:12px;
+  border-radius:14px;
   color:#fff;
+  font-weight:700;
+  font-size:16px;
   cursor:pointer;
   display:none;
+  box-shadow:0 2px 12px #1ec76d44;
+  transition:background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.back-btn:hover{
+  background:linear-gradient(135deg, #00ffd9 60%, #1ec76d 100%);
+  box-shadow:0 4px 18px #00ffd944;
+  transform:scale(1.07);
 }
 /* HEADER centrado */
 header {
   display: flex;
-  flex-direction: column; /* coloca logo arriba y texto abajo */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 32px;
   text-align: center;
 }
 
 /* LOGO con efecto glow animado */
+/* LOGO con efecto glow animado */
 .logo {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   object-fit: cover;
   position: relative;
   z-index: 2;
-  box-shadow: 0 0 20px rgba(30, 199, 109, 0.9),
-              0 0 40px rgba(0, 255, 200, 0.6);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 0 32px #1ec76dcc, 0 0 64px #00ffd9bb;
+  transition: transform 0.4s, box-shadow 0.4s;
+  border:2.5px solid #1ec76d88;
+  background:#0a1a0f;
 }
 
+/* Efecto animado alrededor */
 /* Efecto animado alrededor */
 .logo::before {
   content: "";
   position: absolute;
-  inset: -8px;
+  inset: -10px;
   border-radius: 50%;
   background: conic-gradient(
     from 0deg,
@@ -242,6 +316,8 @@ header {
   );
   animation: spinGlow 6s linear infinite;
   z-index: 0;
+  opacity:0.7;
+  filter:blur(2px);
 }
 
 @keyframes spinGlow {
@@ -259,13 +335,107 @@ header {
 
 /* TEXTO debajo del logo */
 header h1 {
-  margin-top: 16px;
-  font-size: 28px;
-  font-weight: 800;
+  margin-top: 18px;
+  font-size: 38px;
+  font-weight: 900;
   font-family: "Poppins", sans-serif;
   color: #1ec76d;
-  text-shadow: 0 0 8px rgba(0, 255, 200, 0.8),
-               0 0 16px rgba(0, 255, 200, 0.5);
+  text-shadow: 0 0 16px #00ffd9cc, 0 0 32px #1ec76dcc;
+  letter-spacing:0.04em;
+  filter:drop-shadow(0 2px 8px #1ec76d88);
+}
+
+/* ===== Buscador Moderno ===== */
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 18px 0 24px 0;
+}
+.search-bar {
+  width: 100%;
+  max-width: 420px;
+  padding: 13px 18px;
+  border-radius: 18px;
+  border: 1.5px solid #1ec76d44;
+  background: rgba(0,255,120,0.10);
+  color: #1ec76d;
+  font-size: 18px;
+  font-weight: 600;
+  outline: none;
+  box-shadow: 0 2px 12px #1ec76d22;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.search-bar:focus {
+  border: 1.5px solid #1ec76d;
+  box-shadow: 0 4px 18px #00ffd944;
+  background: rgba(0,255,120,0.16);
+}
+
+/* ===== Formulario APK Moderno ===== */
+#apkFormContainer {
+  display: none;
+  margin: 24px 0 18px 0;
+}
+#apkForm {
+  background: rgba(0,255,120,0.10);
+  padding: 22px 24px 18px 24px;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 420px;
+  margin: auto;
+  box-shadow: 0 2px 12px #1ec76d22;
+  border: 1.5px solid #1ec76d33;
+}
+#apkForm h3 {
+  color: #1ec76d;
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  text-align: center;
+}
+#apkForm input {
+  padding: 11px 14px;
+  border-radius: 12px;
+  border: 1.5px solid #1ec76d33;
+  background: rgba(0,255,120,0.08);
+  color: #1ec76d;
+  font-size: 16px;
+  font-weight: 600;
+  outline: none;
+  margin-bottom: 2px;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+#apkForm input:focus {
+  border: 1.5px solid #1ec76d;
+  box-shadow: 0 2px 12px #00ffd944;
+  background: rgba(0,255,120,0.13);
+}
+#apkForm button {
+  background: linear-gradient(135deg, #1ec76d 60%, #00ffd9 100%);
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 17px;
+  margin-top: 6px;
+  box-shadow: 0 2px 12px #1ec76d44;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+#apkForm button:hover {
+  background: linear-gradient(135deg, #00ffd9 60%, #1ec76d 100%);
+  box-shadow: 0 4px 18px #00ffd944;
+  transform: scale(1.07);
+}
+#apkFormMsg {
+  color: #1ec76d;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 2px;
 }
 
 </style>
@@ -292,7 +462,7 @@ header h1 {
         <div class="caption">NeoCraft</div>
       </div>
       <div class="slide">
-        <img src="texturas.jpg" alt="Texturas">
+        <img src="texturaa.jpg" alt="Texturas">
         <div class="caption">Texturas</div>
       </div>
       <div class="slide">
@@ -305,12 +475,24 @@ header h1 {
     <button class="next" onclick="moveSlide(1)">❯</button>
   </div>
 
+  <!-- Buscador -->
+  <div class="search-bar-container">
+    <input id="searchBar" class="search-bar" type="text" placeholder="Buscar APK, textura, recurso...">
+  </div>
+
   <!-- Main Menu -->
   <div id="mainMenu" class="items-grid"></div>
 
   <!-- Submenu / Items -->
   <button id="backBtn" class="back-btn" onclick="goBack()">Atrás</button>
   <div id="contentMenu" class="items-grid"></div>
+
+  <!-- Instrucción para subir APKs -->
+  <div id="apkUploadInfo" style="max-width:500px;margin:32px auto 0 auto;padding:18px 22px;background:rgba(0,255,120,0.10);border-radius:18px;border:1.5px solid #1ec76d33;box-shadow:0 2px 12px #1ec76d22;text-align:center;color:#1ec76d;font-size:17px;">
+  <b>¿Quieres que tu APK aparezca aquí?</b><br>
+  Si quieres subir tu archivo APK a la página, comunícate conmigo por Discord: <b>neomc11</b><br>
+  <span style="color:#c0ffc0;font-size:15px;">¡Envíame tu APK, portada, descripción y link para publicarlo!</span>
+  </div>
 </div>
 
 <footer>
@@ -395,7 +577,7 @@ const DATA = {
         { id: "n-10", title: "", version: "", img: "", desc: "", url: "" }*/
     ],
     "textures":[
-    { id: "t-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "texturas.jpg", desc: "(SHADER) MINECRAFT PATCH", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
+    { id: "t-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "", desc: "(SHADER) MINECRAFT PATCH", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
         { id: "t-2", title: "NEWB X LEGACY ", version: "1.21+", img: "", desc: "(SHADER) MINECRAFT PATCH 1.21+", url: "https://www.mediafire.com/file/8qmz4j57gi45ekd/Newb_X_Legacy_Mcpe_1.21.mcpack.zip/file" },
         { id: "t-3", title: "ONE BLOCK", version: "1.5", img: "", desc: "(MUNDO) PARA MINECRAFT 1.18 EN ADELANTE", url: "https://www.mediafire.com/file/fwxue1q70q93ybw/One_Block_%2528Spring_to_Life%2521%2529_v%253D1.5.9_By_DtA_MC.mcworld/file" },
         { id: "t-4", title: "TEXTURA OUTPUT", version: "", img: "", desc: "(TUXTURA) PARA MINECRAFT 1.18+", url: "https://www.mediafire.com/file/yxuie1v5m6v0khg/outcut2.mcpack/file" },
@@ -426,20 +608,21 @@ document.getElementById('yt').href = DATA.socials.youtube.url;
 document.getElementById('tt').href = DATA.socials.tiktok.url;
 document.getElementById('ig').href = DATA.socials.instagram.url;
 
-/* ===== Menu Logic ===== */
+/* ===== Menu Logic y Buscador ===== */
 const mainMenu = document.getElementById('mainMenu');
 const contentMenu = document.getElementById('contentMenu');
 const backBtn = document.getElementById('backBtn');
-let state = {section:null, version:null};
+const searchBar = document.getElementById('searchBar');
+let state = {section:null, version:null, search:""};
 
 function renderMainMenu(){
   mainMenu.innerHTML="";
   DATA.sections.forEach(sec=>{
     const c = document.createElement('div'); c.className='card';
     const img = document.createElement('img'); 
-    img.src = sec.id==="craftsman"? "craftsman.png" : sec.id==="neocraft"? "./neocraft/NEOCRAFT.png" : "texturaa.jpg";
+    img.src = sec.id==="craftsman"? "craftsman.png" : sec.id==="neocraft"? "./neocraft/NEOCRAFT.png" : "default.png";
     const info = document.createElement('div'); info.className='info';
-    info.innerHTML=`<div class="title">${sec.title}</div><div class="desc">${sec.desc||''}</div>`;
+    info.innerHTML=`<div class=\"title\">${sec.title}</div><div class=\"desc\">${sec.desc||''}</div>`;
     c.appendChild(img); c.appendChild(info);
     c.onclick = ()=>openSection(sec.id);
     mainMenu.appendChild(c);
@@ -458,7 +641,7 @@ function openSection(id){
       const img = document.createElement('img'); 
       img.src=v.id==="craftsman-main"?"craftsman.png":v.id==="craftsman-zero"?"zero.png":"craftsman.png";
       const info = document.createElement('div'); info.className='info';
-      info.innerHTML=`<div class="title">${v.title}</div>`;
+      info.innerHTML=`<div class=\"title\">${v.title}</div>`;
       c.appendChild(img); c.appendChild(info);
       c.onclick=()=>openVersion(v.id);
       contentMenu.appendChild(c);
@@ -477,13 +660,22 @@ function openVersion(versionId){
 
 function renderItems(key){
   contentMenu.innerHTML="";
-  const list = DATA.items[key]||[];
+  let list = DATA.items[key]||[];
+  // Filtro por buscador
+  if(state.search && state.search.length>0){
+    const q = state.search.toLowerCase();
+    list = list.filter(it=>
+      (it.title && it.title.toLowerCase().includes(q)) ||
+      (it.desc && it.desc.toLowerCase().includes(q)) ||
+      (it.version && it.version.toLowerCase().includes(q))
+    );
+  }
   if(list.length===0){contentMenu.innerHTML="<div style='padding:12px;'>No hay elementos</div>";return;}
   list.forEach(it=>{
     const c = document.createElement('div'); c.className='card';
     const img = document.createElement('img'); img.src=it.img;
     const info = document.createElement('div'); info.className='info';
-    info.innerHTML=`<div class="title">${it.title}</div><div class="desc">${it.version||''}</div>`;
+    info.innerHTML=`<div class=\"title\">${it.title}</div><div class=\"desc\">${it.version||''}</div>`;
     c.appendChild(img); c.appendChild(info);
     c.onclick=()=>window.open(it.url,'_blank');
     contentMenu.appendChild(c);
@@ -493,6 +685,22 @@ function renderItems(key){
 function goBack(){
   if(state.version){state.version=null; openSection(state.section);}
   else{state.section=null; renderMainMenu();}
+}
+
+// Buscador funcional
+if(searchBar){
+  searchBar.addEventListener('input', function(){
+    state.search = this.value;
+    // Si estamos en una sección, filtra los items de esa sección
+    if(state.section && !state.version){
+      renderItems(state.section);
+    } else if(state.version){
+      renderItems(state.version);
+    } else {
+      // Si estamos en el menú principal, filtra secciones
+      renderMainMenu();
+    }
+  });
 }
 
 /* ===== Carrusel ===== */
