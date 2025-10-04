@@ -445,57 +445,70 @@ header h1 {
 
 <div id="particles"></div>
 
+
 <header>
   <img  class="logo" src="NEOMC11.png" alt="Logo"><h1>GameStore</h1>
 </header>
 
-<div class="main">
-  <!-- Carrusel -->
-  <div class="carousel">
-    <div class="slides">
-      <div class="slide">
-        <img src="craftsman.png" alt="Craftsman">
-        <div class="caption">Craftsman</div>
-      </div>
-      <div class="slide">
-        <img src="neocraft/2NEOCRAFT.png" alt="NeoCraft">
-        <div class="caption">NeoCraft</div>
-      </div>
-      <div class="slide">
-        <img src="texturaa.jpg" alt="Texturas">
-        <div class="caption">Texturas</div>
-      </div>
-      <div class="slide">
-        <img src="extras.png" alt="Extras">
-        <div class="caption">Extras</div>
-      </div>
+<div class="main" id="mainContent">
+  <!-- Pantallas dinámicas -->
+  <div id="homeScreen" style="display:none">
+    <div class="feed" id="feedContainer"></div>
+  </div>
+  <div id="apkScreen" style="display:none;text-align:center;">
+    <div style="max-width:500px;margin:32px auto 0 auto;padding:18px 22px;background:rgba(0,255,120,0.10);border-radius:18px;border:1.5px solid #1ec76d33;box-shadow:0 2px 12px #1ec76d22;text-align:center;color:#1ec76d;font-size:17px;">
+      <b>¿Quieres que tu APK aparezca aquí?</b><br>
+      Si quieres subir tu archivo APK a la página, comunícate conmigo por Telegram:<br>
+      <a href="https://t.me/+573046128902" style="color:#00ffd9;font-weight:bold;font-size:18px;word-break:break-all;">+57 3046128902</a><br>
+      <span style="color:#c0ffc0;font-size:15px;">¡Envíame tu APK, portada, descripción y link para publicarlo!</span>
     </div>
-    <!-- Botones -->
-    <button class="prev" onclick="moveSlide(-1)">❮</button>
-    <button class="next" onclick="moveSlide(1)">❯</button>
   </div>
-
-  <!-- Buscador -->
-  <div class="search-bar-container">
-    <input id="searchBar" class="search-bar" type="text" placeholder="Buscar APK, textura, recurso...">
-  </div>
-
-  <!-- Main Menu -->
-  <div id="mainMenu" class="items-grid"></div>
-
-  <!-- Submenu / Items -->
-  <button id="backBtn" class="back-btn" onclick="goBack()">Atrás</button>
-  <div id="contentMenu" class="items-grid"></div>
-
-  <!-- Instrucción para subir APKs -->
-  <div id="apkUploadInfo" style="max-width:500px;margin:32px auto 0 auto;padding:18px 22px;background:rgba(0,255,120,0.10);border-radius:18px;border:1.5px solid #1ec76d33;box-shadow:0 2px 12px #1ec76d22;text-align:center;color:#1ec76d;font-size:17px;">
-  <b>¿Quieres que tu APK aparezca aquí?</b><br>
-  Si quieres subir tu archivo APK a la página, comunícate conmigo por Discord: <b>neomc11</b><br>
-  <span style="color:#c0ffc0;font-size:15px;">¡Envíame tu APK, portada, descripción y link para publicarlo!</span>
+  <div id="resourcesScreen" style="display:none">
+    <!-- Carrusel -->
+    <div class="carousel">
+      <div class="slides">
+        <div class="slide">
+          <img src="craftsman.png" alt="Craftsman">
+          <div class="caption">Craftsman</div>
+        </div>
+        <div class="slide">
+          <img src="neocraft/2NEOCRAFT.png" alt="NeoCraft">
+          <div class="caption">NeoCraft</div>
+        </div>
+        <div class="slide">
+          <img src="texturaa.jpg" alt="Texturas">
+          <div class="caption">Texturas</div>
+        </div>
+        <div class="slide">
+          <img src="extras.png" alt="Extras">
+          <div class="caption">Extras</div>
+        </div>
+      </div>
+      <!-- Botones -->
+      <button class="prev" onclick="moveSlide(-1)">❮</button>
+      <button class="next" onclick="moveSlide(1)">❯</button>
+    </div>
+    <!-- Buscador -->
+    <div class="search-bar-container">
+      <input id="searchBar" class="search-bar" type="text" placeholder="Buscar APK, textura, recurso...">
+    </div>
+    <!-- Main Menu -->
+    <div id="mainMenu" class="items-grid"></div>
+    <!-- Submenu / Items -->
+    <button id="backBtn" class="back-btn" onclick="goBack()">Atrás</button>
+    <div id="contentMenu" class="items-grid"></div>
   </div>
 </div>
 
-<footer>
+<!-- Barra de navegación inferior -->
+<nav id="bottomNav" style="position:fixed;bottom:0;left:0;width:100vw;z-index:10;display:flex;justify-content:space-around;align-items:center;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px) saturate(120%);padding:8px 0 4px 0;box-shadow:0 -2px 16px #1ec76d22;">
+  <button id="navHome" style="background:none;border:none;outline:none;display:flex;flex-direction:column;align-items:center;gap:2px;color:#1ec76d;font-size:15px;cursor:pointer;"><span style="font-size:26px;">🏠</span>Inicio</button>
+  <button id="navApk" style="background:none;border:none;outline:none;display:flex;flex-direction:column;align-items:center;gap:2px;color:#1ec76d;font-size:15px;cursor:pointer;"><span style="font-size:26px;">⬆️</span>Subir APK</button>
+  <button id="navResources" style="background:none;border:none;outline:none;display:flex;flex-direction:column;align-items:center;gap:2px;color:#1ec76d;font-size:15px;cursor:pointer;"><span style="font-size:26px;">📦</span>Recursos</button>
+</nav>
+
+
+<footer style="margin-bottom:70px;">
   <a href="#" id="yt"><img src="yt.png" alt="YouTube"></a>
   <a href="#" id="tt"><img src="tiktok.png" alt="TikTok"></a>
   <a href="#" id="ig"><img src="inta.jpg" alt="Instagram"></a>
@@ -577,11 +590,11 @@ const DATA = {
         { id: "n-10", title: "", version: "", img: "", desc: "", url: "" }*/
     ],
     "textures":[
-    { id: "t-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "newbxd.png", desc: "(SHADER) MINECRAFT PATCH", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
-        { id: "t-2", title: "NEWB X LEGACY ", version: "1.21+", img: "newbxl.png", desc: "(SHADER) MINECRAFT PATCH 1.21+", url: "https://www.mediafire.com/file/8qmz4j57gi45ekd/Newb_X_Legacy_Mcpe_1.21.mcpack.zip/file" },
-        { id: "t-3", title: "ONE BLOCK", version: "1.5", img: "oneb.png", desc: "(MUNDO) PARA MINECRAFT 1.18 EN ADELANTE", url: "https://www.mediafire.com/file/fwxue1q70q93ybw/One_Block_%2528Spring_to_Life%2521%2529_v%253D1.5.9_By_DtA_MC.mcworld/file" },
-        { id: "t-4", title: "TEXTURA OUTPUT", version: "", img: "outcut.png", desc: "(TUXTURA) PARA MINECRAFT 1.18+", url: "https://www.mediafire.com/file/yxuie1v5m6v0khg/outcut2.mcpack/file" },
-        { id: "t-5", title: "LUCKY BLOCK", version: "", img: "lucky.png", desc: "(MUNDO) MINECRAFT 1.18+", url: "https://www.mediafire.com/file/x1fqf8d1d76a9zn/RainbowLuckyBlockRaceV1.1.mcworld/file" },
+    { id: "t-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "", desc: "(SHADER) MINECRAFT PATCH", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
+        { id: "t-2", title: "NEWB X LEGACY ", version: "1.21+", img: "", desc: "(SHADER) MINECRAFT PATCH 1.21+", url: "https://www.mediafire.com/file/8qmz4j57gi45ekd/Newb_X_Legacy_Mcpe_1.21.mcpack.zip/file" },
+        { id: "t-3", title: "ONE BLOCK", version: "1.5", img: "", desc: "(MUNDO) PARA MINECRAFT 1.18 EN ADELANTE", url: "https://www.mediafire.com/file/fwxue1q70q93ybw/One_Block_%2528Spring_to_Life%2521%2529_v%253D1.5.9_By_DtA_MC.mcworld/file" },
+        { id: "t-4", title: "TEXTURA OUTPUT", version: "", img: "", desc: "(TUXTURA) PARA MINECRAFT 1.18+", url: "https://www.mediafire.com/file/yxuie1v5m6v0khg/outcut2.mcpack/file" },
+        { id: "t-5", title: "LUCKY BLOCK", version: "", img: "", desc: "(MUNDO) MINECRAFT 1.18+", url: "https://www.mediafire.com/file/x1fqf8d1d76a9zn/RainbowLuckyBlockRaceV1.1.mcworld/file" },
         { id: "t-6", title: "BARE BONES", version: "", img: "", desc: "(TEXTURA) PARA MINECRAFT 1.18", url: "https://www.mediafire.com/file/s1ridznky8rp0fn/RP_BB.mcpack/file" },
         { id: "t-7", title: "I SEE YOU NOW, PARA CRAFTING AND BUILDING", version: "", img: "", desc: "TEXTURA PARA PODER VER LAS SKINS DE TUS ANIGOS EN CRAFING AND BUILDING", url: "https://www.mediafire.com/file/ykl2qy2d62fdnaw/I_SEE_YOU%2521_by_NEOMC11.mcpack/file" },
         { id: "t-8", title: "texturas vanilla para craftsman 1.18+", version: "1.3", img: "", desc: "", url: "https://www.mediafire.com/file/2wsc0bpel7frifo/Texturas_Vanillas_1.18.0_By_NEOFACEMC.mcpack/file" },
@@ -620,7 +633,7 @@ function renderMainMenu(){
   DATA.sections.forEach(sec=>{
     const c = document.createElement('div'); c.className='card';
     const img = document.createElement('img'); 
-    img.src = sec.id==="craftsman"? "craftsman.png" : sec.id==="neocraft"? "./neocraft/NEOCRAFT.png" : "texturaa.jpg";
+    img.src = sec.id==="craftsman"? "craftsman.png" : sec.id==="neocraft"? "./neocraft/NEOCRAFT.png" : "tecturaa.jpg";
     const info = document.createElement('div'); info.className='info';
     info.innerHTML=`<div class=\"title\">${sec.title}</div><div class=\"desc\">${sec.desc||''}</div>`;
     c.appendChild(img); c.appendChild(info);
@@ -719,8 +732,353 @@ for(let i=0;i<40;i++){
   document.getElementById('particles').appendChild(p);
 }
 
-/* ===== Init ===== */
-renderMainMenu();
+/* ===== Feed tipo red social (solo admin publica) ===== */
+// === EJEMPLO: Para agregar una publicación nueva, añade un objeto al array FEED como este:
+// ...existing code...
+// === PANEL DE ADMINISTRACIÓN PARA PUBLICAR ===
+// Panel admin con acceso por contraseña
+const ADMIN_PASSWORD = "JZ1081911721@1081912939";
+let isAdmin = false;
+
+function showAdminPanel() {
+  if (!isAdmin) {
+    let pass = prompt("Contraseña de administrador:");
+    if (pass !== ADMIN_PASSWORD) {
+      alert("Contraseña incorrecta");
+      return;
+    }
+    isAdmin = true;
+  }
+  document.getElementById('adminPanel').style.display = 'block';
+}
+window.showAdminPanel = showAdminPanel;
+
+function hideAdminPanel() {
+  isAdmin = false;
+  document.getElementById('adminPanel').style.display = 'none';
+}
+
+// Botón visible para abrir el panel admin (esquina inferior derecha)
+document.addEventListener('DOMContentLoaded',()=>{
+  const btn = document.createElement('button');
+  btn.innerHTML = '⚙️';
+  btn.title = 'Panel de administración';
+  btn.style = 'position:fixed;bottom:80px;right:18px;z-index:10001;background:linear-gradient(135deg,#1ec76d 60%,#00ffd9 100%);color:#fff;border:none;border-radius:50%;width:54px;height:54px;font-size:28px;box-shadow:0 2px 12px #1ec76d44;cursor:pointer;transition:transform 0.2s;';
+  btn.onmouseenter = ()=>btn.style.transform='scale(1.13)';
+  btn.onmouseleave = ()=>btn.style.transform='scale(1)';
+  btn.onclick = showAdminPanel;
+  document.body.appendChild(btn);
+});
+
+function addOptionField() {
+  const optionsDiv = document.getElementById('pollOptions');
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.placeholder = 'Opción de encuesta';
+  input.className = 'poll-option-input';
+  optionsDiv.appendChild(input);
+}
+
+function clearAdminForm() {
+  document.getElementById('adminContent').value = '';
+  document.getElementById('adminImg').value = '';
+  document.getElementById('adminType').value = 'normal';
+  document.getElementById('pollOptions').innerHTML = '';
+  addOptionField();
+  addOptionField();
+}
+
+function saveToLocalFeed(feed) {
+  localStorage.setItem('customFeed', JSON.stringify(feed));
+}
+function loadFromLocalFeed() {
+  try {
+    const f = JSON.parse(localStorage.getItem('customFeed'));
+    if(Array.isArray(f)) return f;
+  } catch(e){}
+  return null;
+}
+
+function addAdminPost() {
+  const type = document.getElementById('adminType').value;
+  const content = document.getElementById('adminContent').value.trim();
+  const img = document.getElementById('adminImg').value.trim();
+  let post = {
+    user: "NEOMC11",
+    avatar: "NEOMC11.png",
+    date: new Date().toISOString().slice(0,10),
+    content: content,
+    reactions: {like: 0, fire: 0, star: 0}
+  };
+  if(img) post.img = img;
+  if(type === 'poll') {
+    const opts = Array.from(document.querySelectorAll('.poll-option-input')).map(i=>i.value.trim()).filter(Boolean);
+    if(opts.length>0) post.poll = opts.map(o=>({option:o,votes:0}));
+  }
+  let customFeed = loadFromLocalFeed() || FEED.slice();
+  customFeed.unshift(post);
+  saveToLocalFeed(customFeed);
+  renderFeed();
+  clearAdminForm();
+  alert('¡Publicación agregada!');
+}
+
+function renderFeed() {
+  const feed = document.getElementById('feedContainer');
+  feed.innerHTML = '';
+  let customFeed = loadFromLocalFeed();
+  let showFeed = customFeed || FEED;
+  showFeed.forEach((post, idx) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.flexDirection = 'row';
+    card.style.alignItems = 'flex-start';
+    card.style.cursor = 'default';
+    let pollHtml = '';
+    if(post.poll) {
+      pollHtml = `<div style='margin:8px 0 0 0;'>${post.poll.map(opt => `<div style='background:rgba(0,255,120,0.08);border-radius:8px;padding:4px 10px;margin-bottom:3px;display:flex;align-items:center;gap:8px;'><span style='font-weight:700;color:#1ec76d;'>${opt.option}</span><span style='background:#1ec76d22;color:#1ec76d;font-size:13px;border-radius:6px;padding:2px 8px;margin-left:auto;'>${opt.votes} votos</span></div>`).join('')}</div>`;
+    }
+    let memeBadge = post.meme ? `<span style='background:#ffeb3b;color:#333;font-size:11px;font-weight:700;border-radius:6px;padding:2px 8px;margin-left:8px;'>MEME</span>` : '';
+    let reactions = post.reactions ? `<div style='margin-top:8px;display:flex;gap:12px;font-size:18px;align-items:center;'><span title='Me gusta'>👍 ${post.reactions.like}</span><span title='🔥'>🔥 ${post.reactions.fire}</span><span title='⭐'>⭐ ${post.reactions.star}</span></div>` : '';
+    let deleteBtn = '';
+    if(isAdmin && customFeed) {
+      deleteBtn = `<button onclick='deleteAdminPost(${idx})' style='margin-left:12px;background:#ff4444;color:#fff;border:none;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:13px;'>Eliminar</button>`;
+    }
+    card.innerHTML = `
+      <img src="${post.avatar}" style="width:54px;height:54px;border-radius:50%;object-fit:cover;margin-right:12px;">
+      <div class="info" style="gap:4px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="title" style="font-size:17px;">${post.user}</span>
+          <span style="font-size:12px;color:#c0ffc0;opacity:0.7;">${post.date}</span>
+          ${memeBadge}
+          ${deleteBtn}
+        </div>
+        <div style="font-size:15px;color:#fff;opacity:0.95;margin-bottom:6px;">${post.content}</div>
+        ${pollHtml}
+        ${post.img ? `<img src="${post.img}" style="width:100%;max-width:320px;border-radius:14px;box-shadow:0 2px 12px #1ec76d33;margin-top:6px;">` : ''}
+        ${reactions}
+      </div>
+    `;
+    feed.appendChild(card);
+  });
+}
+
+function deleteAdminPost(idx) {
+  if(!confirm('¿Eliminar esta publicación?')) return;
+  let customFeed = loadFromLocalFeed();
+  if(customFeed) {
+    customFeed.splice(idx,1);
+    saveToLocalFeed(customFeed);
+    renderFeed();
+  }
+}
+
+// Panel HTML (oculto por defecto)
+document.addEventListener('DOMContentLoaded',()=>{
+  const panel = document.createElement('div');
+  panel.id = 'adminPanel';
+  panel.style = 'display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.92);z-index:9999;overflow:auto;padding:0;';
+  panel.innerHTML = `
+    <div style='max-width:420px;margin:40px auto;background:rgba(0,255,120,0.10);border-radius:18px;padding:28px 24px;box-shadow:0 2px 12px #1ec76d22;border:1.5px solid #1ec76d33;color:#fff;'>
+      <h2 style='color:#1ec76d;text-align:center;margin-bottom:18px;'>Panel de Publicaciones</h2>
+      <label>Tipo:
+        <select id='adminType' style='margin-left:8px;margin-bottom:12px;'>
+          <option value='normal'>Publicación normal</option>
+          <option value='poll'>Encuesta</option>
+        </select>
+      </label><br>
+      <label>Mensaje:<br>
+        <textarea id='adminContent' style='width:100%;height:60px;border-radius:8px;margin-bottom:12px;'></textarea>
+      </label><br>
+      <label>Imagen (opcional):<br>
+        <input id='adminImg' type='text' placeholder='URL o nombre de archivo' style='width:100%;border-radius:8px;margin-bottom:12px;'>
+      </label><br>
+      <div id='pollOptions' style='display:none;flex-direction:column;gap:4px;margin-bottom:12px;'></div>
+      <button id='addOptionBtn' type='button' style='display:none;margin-bottom:12px;background:#1ec76d;color:#fff;border:none;border-radius:8px;padding:6px 12px;cursor:pointer;'>Añadir opción</button>
+      <div style='display:flex;gap:12px;justify-content:center;'>
+        <button onclick='addAdminPost()' style='background:#1ec76d;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:16px;cursor:pointer;'>Publicar</button>
+        <button onclick='hideAdminPanel()' style='background:#444;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:16px;cursor:pointer;'>Cerrar</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(panel);
+  // Mostrar/ocultar campos de encuesta
+  document.getElementById('adminType').addEventListener('change',function(){
+    if(this.value==='poll'){
+      document.getElementById('pollOptions').style.display='flex';
+      document.getElementById('addOptionBtn').style.display='inline-block';
+      document.getElementById('pollOptions').innerHTML='';
+      addOptionField();addOptionField();
+    }else{
+      document.getElementById('pollOptions').style.display='none';
+      document.getElementById('addOptionBtn').style.display='none';
+      document.getElementById('pollOptions').innerHTML='';
+    }
+  });
+  document.getElementById('addOptionBtn').onclick=addOptionField;
+});
+const FEED = [
+  {
+    user: "NEOMC11",
+    avatar: "NEOMC11.png",
+    date: "2025-10-04",
+    content: "¡Bienvenido a la nueva GameStore! Aquí publico novedades, APKs y recursos exclusivos. ¡Sígueme para no perderte nada!",
+    img: "craftsman.png",
+    reactions: {like: 32, fire: 12, star: 7}
+  },
+  {
+    user: "NEOMC11",
+    avatar: "NEOMC11.png",
+    date: "2025-10-03",
+    content: "¿Qué juego quieres que optimice próximamente? <b>Vota en los comentarios:</b><br>🟢 GTA V<br>🔵 Minecraft 1.21<br>🟡 FNAF Collection",
+    poll: [
+      {option: "GTA V", votes: 21},
+      {option: "Minecraft 1.21", votes: 34},
+      {option: "FNAF Collection", votes: 17}
+    ],
+    img: "neocraft/2NEOCRAFT.png",
+    reactions: {like: 18, fire: 7, star: 3}
+  },
+  {
+    user: "NEOMC11",
+    avatar: "NEOMC11.png",
+    date: "2025-10-02",
+    content: "<b>Tip de optimización:</b> Usa versiones Lite de apps y limpia tu caché cada semana para que tu Android vuele 🚀",
+    img: "extras.png",
+    reactions: {like: 25, fire: 9, star: 5}
+  },
+  {
+    user: "NEOMC11",
+    avatar: "NEOMC11.png",
+    date: "2025-10-01",
+    content: "¡Nuevo meme de la comunidad! 😂<br>¿Quién se identifica?",
+    img: "yt.png",
+    meme: true,
+    reactions: {like: 44, fire: 15, star: 2}
+  },
+  {
+    user: "NEOMC11",
+    avatar: "NEOMC11.png",
+    date: "2025-09-30",
+    content: "<b>¡Directo hoy a las 8PM!</b> Únete a mi canal de YouTube para ver el lanzamiento de la nueva versión de OptiCraft.",
+    img: "neocraft/NEOCRAFT.png",
+    reactions: {like: 19, fire: 11, star: 6}
+  },
+  {
+    user: "NEOMC11",
+    avatar: "NEOMC11.png",
+    date: "2025-09-29",
+    content: "¡Gracias a todos por 10,000 descargas! 🎉 Sois la mejor comunidad.",
+    img: "craftsman.png",
+    reactions: {like: 100, fire: 25, star: 20}
+  },
+  {
+    user: "NEOMC11",
+    avatar: "NEOMC11.png",
+    date: "2025-09-28",
+    content: "Nueva versión de Craftsman Zero disponible para Android 14+.",
+    img: "zero.png",
+    reactions: {like: 22, fire: 8, star: 4}
+  },
+  {
+    user: "NEOMC11",
+    avatar: "NEOMC11.png",
+    date: "2025-09-27",
+    content: "¿Sabías que puedes pedir optimizaciones personalizadas? Escríbeme por Telegram y lo hago posible.",
+    img: "extras.png",
+    reactions: {like: 13, fire: 3, star: 2}
+  },
+  {
+    user: "NEOMC11",
+    avatar: "NEOMC11.png",
+    date: "2025-09-26",
+    content: "¡Agregadas nuevas texturas y recursos para Minecraft!",
+    img: "texturaa.jpg",
+    reactions: {like: 17, fire: 6, star: 3}
+  }
+];
+
+function renderFeed() {
+  const feed = document.getElementById('feedContainer');
+  feed.innerHTML = '';
+  FEED.forEach(post => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.flexDirection = 'row';
+    card.style.alignItems = 'flex-start';
+    card.style.cursor = 'default';
+    let pollHtml = '';
+    if(post.poll) {
+      pollHtml = `<div style='margin:8px 0 0 0;'>${post.poll.map(opt => `<div style='background:rgba(0,255,120,0.08);border-radius:8px;padding:4px 10px;margin-bottom:3px;display:flex;align-items:center;gap:8px;'><span style='font-weight:700;color:#1ec76d;'>${opt.option}</span><span style='background:#1ec76d22;color:#1ec76d;font-size:13px;border-radius:6px;padding:2px 8px;margin-left:auto;'>${opt.votes} votos</span></div>`).join('')}</div>`;
+    }
+    let memeBadge = post.meme ? `<span style='background:#ffeb3b;color:#333;font-size:11px;font-weight:700;border-radius:6px;padding:2px 8px;margin-left:8px;'>MEME</span>` : '';
+    let reactions = post.reactions ? `<div style='margin-top:8px;display:flex;gap:12px;font-size:18px;align-items:center;'><span title='Me gusta'>👍 ${post.reactions.like}</span><span title='🔥'>🔥 ${post.reactions.fire}</span><span title='⭐'>⭐ ${post.reactions.star}</span></div>` : '';
+    card.innerHTML = `
+      <img src="${post.avatar}" style="width:54px;height:54px;border-radius:50%;object-fit:cover;margin-right:12px;">
+      <div class="info" style="gap:4px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="title" style="font-size:17px;">${post.user}</span>
+          <span style="font-size:12px;color:#c0ffc0;opacity:0.7;">${post.date}</span>
+          ${memeBadge}
+        </div>
+        <div style="font-size:15px;color:#fff;opacity:0.95;margin-bottom:6px;">${post.content}</div>
+        ${pollHtml}
+        ${post.img ? `<img src="${post.img}" style="width:100%;max-width:320px;border-radius:14px;box-shadow:0 2px 12px #1ec76d33;margin-top:6px;">` : ''}
+        ${reactions}
+      </div>
+    `;
+    feed.appendChild(card);
+  });
+}
+
+// Navegación inferior
+const navHome = document.getElementById('navHome');
+const navApk = document.getElementById('navApk');
+const navResources = document.getElementById('navResources');
+const homeScreen = document.getElementById('homeScreen');
+const apkScreen = document.getElementById('apkScreen');
+const resourcesScreen = document.getElementById('resourcesScreen');
+
+function showScreen(screen) {
+  homeScreen.style.display = 'none';
+  apkScreen.style.display = 'none';
+  resourcesScreen.style.display = 'none';
+  if(screen === 'home') homeScreen.style.display = 'block';
+  if(screen === 'apk') apkScreen.style.display = 'block';
+  if(screen === 'resources') resourcesScreen.style.display = 'block';
+}
+
+navHome.onclick = () => { showScreen('home'); };
+navApk.onclick = () => { showScreen('apk'); };
+navResources.onclick = () => { showScreen('resources'); };
+
+// Por defecto, mostrar inicio
+showScreen('home');
+renderFeed();
+
+// Recursos: inicializar menú solo cuando se entra a recursos
+let resourcesInitialized = false;
+function initResources() {
+  if(!resourcesInitialized) {
+    renderMainMenu();
+    resourcesInitialized = true;
+  }
+}
+navResources.addEventListener('click', initResources);
+
+// Si el usuario ya estaba en recursos, mantener buscador funcional
+if(document.getElementById('searchBar')){
+  document.getElementById('searchBar').addEventListener('input', function(){
+    state.search = this.value;
+    if(state.section && !state.version){
+      renderItems(state.section);
+    } else if(state.version){
+      renderItems(state.version);
+    } else {
+      renderMainMenu();
+    }
+  });
+}
 </script>
 </body>
 </html>
