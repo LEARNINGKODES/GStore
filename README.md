@@ -1,1 +1,1 @@
-# GameStoremMC
+# GameStoreMC
