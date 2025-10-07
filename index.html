@@ -96,6 +96,26 @@
             color: #00b7eb;
             text-shadow: 0 0 8px #00ff99cc;
         }
+        #searchInput {
+            flex: 1;
+            margin: 0 16px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #00b7eb33;
+            background: rgba(0, 183, 235, 0.08);
+            color: #e6f1ff;
+            font-size: 16px;
+            outline: none;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+        #searchInput:focus {
+            border: 1px solid #00b7eb;
+            box-shadow: 0 2px 10px #00ff9944;
+        }
+        #searchInput::placeholder {
+            color: #b3e5fc;
+            opacity: 0.7;
+        }
 
         /* ===== Main Container ===== */
         .main {
@@ -544,6 +564,7 @@
     <header>
         <img class="logo" src="NEOMC11.png" alt="Logo">
         <h1>GameStore</h1>
+        <input id="searchInput" type="text" placeholder="Buscar...">
     </header>
 
     <div class="main" id="mainContent">
@@ -574,6 +595,7 @@
             <div id="mainMenu" class="items-grid"></div>
             <button id="backBtn" class="back-btn" onclick="goBack()">Atrás</button>
             <div id="contentMenu" class="items-grid"></div>
+            <div id="searchResults" class="items-grid" style="display: none;"></div>
         </div>
 
         <!-- APK Upload Screen -->
@@ -707,12 +729,16 @@
         /* ===== Menu Logic ===== */
         const mainMenu = document.getElementById('mainMenu');
         const contentMenu = document.getElementById('contentMenu');
+        const searchResults = document.getElementById('searchResults');
         const backBtn = document.getElementById('backBtn');
         let state = { section: null, version: null };
+        let isSearching = false;
 
         function renderMainMenu() {
             mainMenu.innerHTML = "";
             contentMenu.innerHTML = "";
+            searchResults.innerHTML = "";
+            searchResults.style.display = 'none';
             backBtn.style.display = 'none';
             DATA.sections.forEach(sec => {
                 const c = document.createElement('div');
@@ -736,6 +762,8 @@
             state.version = null;
             mainMenu.innerHTML = "";
             contentMenu.innerHTML = "";
+            searchResults.innerHTML = "";
+            searchResults.style.display = 'none';
             const sec = DATA.sections.find(s => s.id === id);
             if (sec.versions) {
                 sec.versions.forEach(v => {
@@ -766,24 +794,31 @@
 
         function renderItems(key) {
             contentMenu.innerHTML = "";
+            searchResults.innerHTML = "";
+            searchResults.style.display = 'none';
             let list = DATA.items[key] || [];
             if (list.length === 0) {
                 contentMenu.innerHTML = "<div style='padding:12px;color:#b3e5fc;'>No hay elementos</div>";
                 return;
             }
             list.forEach(it => {
-                const c = document.createElement('div');
-                c.className = 'card';
-                const img = document.createElement('img');
-                img.src = it.img || 'craftsman.png';
-                const info = document.createElement('div');
-                info.className = 'info';
-                info.innerHTML = `<div class="title">${it.title}</div><div class="desc">${it.version || ''} - ${it.desc || ''}</div>`;
-                c.appendChild(img);
-                c.appendChild(info);
-                c.onclick = () => window.open(it.url, '_blank');
+                const c = createItemCard(it);
                 contentMenu.appendChild(c);
             });
+        }
+
+        function createItemCard(it) {
+            const c = document.createElement('div');
+            c.className = 'card';
+            const img = document.createElement('img');
+            img.src = it.img || 'craftsman.png';
+            const info = document.createElement('div');
+            info.className = 'info';
+            info.innerHTML = `<div class="title">${it.title}</div><div class="desc">${it.version || ''} - ${it.desc || ''}</div>`;
+            c.appendChild(img);
+            c.appendChild(info);
+            c.onclick = () => window.open(it.url, '_blank');
+            return c;
         }
 
         function goBack() {
@@ -794,6 +829,86 @@
                 state.section = null;
                 renderMainMenu();
             }
+        }
+
+        /* ===== Search Logic ===== */
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim().toLowerCase();
+            if (query === '') {
+                isSearching = false;
+                searchResults.style.display = 'none';
+                if (state.section) {
+                    if (state.version) {
+                        renderItems(state.version);
+                    } else {
+                        openSection(state.section);
+                    }
+                } else {
+                    renderMainMenu();
+                }
+            } else {
+                isSearching = true;
+                performSearch(query);
+            }
+        });
+
+        function performSearch(query) {
+            mainMenu.innerHTML = "";
+            contentMenu.innerHTML = "";
+            searchResults.innerHTML = "";
+            searchResults.style.display = 'grid';
+            backBtn.style.display = 'none';
+
+            let matches = [];
+
+            // Search sections
+            DATA.sections.forEach(sec => {
+                if (sec.title.toLowerCase().includes(query) || (sec.desc && sec.desc.toLowerCase().includes(query))) {
+                    matches.push({ type: 'section', data: sec });
+                }
+            });
+
+            // Search items across all keys
+            Object.keys(DATA.items).forEach(key => {
+                DATA.items[key].forEach(it => {
+                    if (it.title.toLowerCase().includes(query) || 
+                        (it.version && it.version.toLowerCase().includes(query)) || 
+                        (it.desc && it.desc.toLowerCase().includes(query))) {
+                        matches.push({ type: 'item', data: it });
+                    }
+                });
+            });
+
+            if (matches.length === 0) {
+                searchResults.innerHTML = "<div style='padding:12px;color:#b3e5fc;'>No se encontraron resultados</div>";
+                return;
+            }
+
+            matches.forEach(match => {
+                let c;
+                if (match.type === 'section') {
+                    const sec = match.data;
+                    c = document.createElement('div');
+                    c.className = 'card';
+                    const img = document.createElement('img');
+                    img.src = sec.id === "craftsman" ? "craftsman.png" :
+                              sec.id === "neocraft" ? "./neocraft/NEOCRAFT.png" :
+                              sec.id === "textures" ? "texturaa.jpg" : "extras.png";
+                    const info = document.createElement('div');
+                    info.className = 'info';
+                    info.innerHTML = `<div class="title">${sec.title}</div><div class="desc">${sec.desc || ''}</div>`;
+                    c.appendChild(img);
+                    c.appendChild(info);
+                    c.onclick = () => {
+                        searchInput.value = '';
+                        openSection(sec.id);
+                    };
+                } else if (match.type === 'item') {
+                    c = createItemCard(match.data);
+                }
+                searchResults.appendChild(c);
+            });
         }
 
         /* ===== Carousel ===== */
@@ -884,12 +999,11 @@
             const sectionId = document.getElementById('apkSection').value;
             const title = document.getElementById('apkTitle').value.trim();
             const version = document.getElementById('apkVersion').value.trim();
-            const apkFile = document.getElementById('apkFile').files[0];
             const apkImg = document.getElementById('apkImg').files[0];
             const desc = document.getElementById('apkDesc').value.trim();
             const url = document.getElementById('apkUrl').value.trim();
 
-            if (!title || !version || !apkFile || !apkImg || !desc || !url) {
+            if (!title || !version || !apkImg || !desc || !url) {
                 alert('Todos los campos son requeridos.');
                 return;
             }
@@ -899,28 +1013,31 @@
             reader.onload = function(e) {
                 const imgBase64 = e.target.result.split(',')[1]; // Solo la parte Base64
                 const telegramNumber = '+573046128902'; // Número predefinido
-                const message = `Nuevo APK subido:\nSección: ${sectionId}\nTítulo: ${title}\nVersión: ${version}\nDescripción: ${desc}\nArchivo APK: ${apkFile.name}\nPortada: ${apkImg.name}\nURL de descarga: ${url}\nImagen (Base64): ${imgBase64.substring(0, 1000)}...`; // Limitar Base64 para evitar mensajes largos
+                const message = `Nuevo APK subido:\nSección: ${sectionId}\nTítulo: ${title}\nVersión: ${version}\nDescripción: ${desc}\nPortada: ${apkImg.name}\nURL de descarga: ${url}\nImagen (Base64): ${imgBase64.substring(0, 1000)}...`; // Limitar Base64 para evitar mensajes largos
 
                 // Enviar a Telegram
                 const telegramBotUrl = `https://t.me/${telegramNumber}?text=${encodeURIComponent(message)}`;
                 window.open(telegramBotUrl, '_blank');
 
-                // Agregar el APK a los datos (manteniendo la URL para la imagen por compatibilidad)
+                // Agregar el APK a los datos (usando la URL para la imagen por compatibilidad, pero el archivo se envió a Telegram)
                 const newItem = {
                     id: `${sectionId}-${DATA.items[sectionId].length + 1}`,
                     title,
                     version,
-                    img: url, // Usamos la URL para la imagen en la lista, pero el archivo se envió a Telegram
+                    img: URL.createObjectURL(apkImg), // Usar objeto URL temporal para la imagen en la app
                     desc,
                     url
                 };
 
+                if (!DATA.items[sectionId]) {
+                    DATA.items[sectionId] = [];
+                }
                 DATA.items[sectionId].push(newItem);
-                saveData();
+                // saveData(); // Si tienes una función para guardar datos persistentes, úsala aquí
+
                 document.getElementById('apkMsg').textContent = '¡APK agregado y enviado a Telegram!';
                 document.getElementById('apkTitle').value = '';
                 document.getElementById('apkVersion').value = '';
-                document.getElementById('apkFile').value = '';
                 document.getElementById('apkImg').value = '';
                 document.getElementById('apkDesc').value = '';
                 document.getElementById('apkUrl').value = '';
