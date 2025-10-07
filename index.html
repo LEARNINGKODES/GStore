@@ -704,20 +704,6 @@
             ]
         };
 
-        /* ===== Cargar DATA desde localStorage si existe ===== */
-        function loadData() {
-            const storedData = localStorage.getItem('customData');
-            if (storedData) {
-                DATA = JSON.parse(storedData);
-            }
-        }
-        loadData();
-
-        /* ===== Guardar DATA en localStorage ===== */
-        function saveData() {
-            localStorage.setItem('customData', JSON.stringify(DATA));
-        }
-
         /* ===== Menu Logic ===== */
         const mainMenu = document.getElementById('mainMenu');
         const contentMenu = document.getElementById('contentMenu');
