@@ -418,6 +418,12 @@
             font-size: 14px;
             margin-top: 8px;
         }
+        #preview {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            display: none;
+        }
 
         /* ===== Videos Section ===== */
         .videos-grid {
@@ -575,12 +581,14 @@
             <div id="apkUploadForm">
                 <h3>Subir Nuevo APK</h3>
                 <select id="apkSection"></select>
-                <input id="apkTitle" type="text" placeholder="Título del APK">
-                <input id="apkVersion" type="text" placeholder="Versión">
-                <input id="apkImg" type="text" placeholder="URL de la imagen">
-                <input id="apkDesc" type="text" placeholder="Descripción">
-                <input id="apkUrl" type="text" placeholder="URL de descarga (ej. MediaFire)">
-                <button onclick="addNewApk()">Subir APK</button>
+                <input id="apkTitle" type="text" placeholder="Título del APK" required>
+                <input id="apkVersion" type="text" placeholder="Versión" required>
+                <input id="apkFile" type="file" accept=".apk" required>
+                <input id="apkImg" type="file" accept="image/*" required>
+                <img id="preview" alt="Vista previa de la portada" style="max-width:100%;height:auto;margin-top:10px;display:none;">
+                <input id="apkDesc" type="text" placeholder="Descripción" required>
+                <input id="apkUrl" type="text" placeholder="URL de descarga (ej. MediaFire)" required>
+                <button onclick="addNewApk()">Subir y Enviar a Telegram</button>
                 <p id="apkMsg"></p>
             </div>
             <div style="max-width:500px;margin:32px auto;padding:18px 22px;background:rgba(0,183,235,0.1);border-radius:16px;border:1px solid #00b7eb33;box-shadow:0 4px 16px #00b7eb22;text-align:center;color:#00b7eb;font-size:16px;">
@@ -680,7 +688,7 @@
                 "textures": [
                     { id: "t-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "texturaa.jpg", desc: "(SHADER) MINECRAFT PATCH", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
                     { id: "t-2", title: "NEWB X LEGACY", version: "1.21+", img: "texturaa.jpg", desc: "(SHADER) MINECRAFT PATCH 1.21+", url: "https://www.mediafire.com/file/8qmz4j57gi45ekd/Newb_X_Legacy_Mcpe_1.21.mcpack.zip/file" },
-                    { id: "t-3", title: "ONE BLOCK", version: "1.5", img: "texturaa.jpg", desc: "(MUNDO) PARA MINECRAFT 1.18 EN ADELANTE", url: "https://www.mediafire.com/file/fwxue1q70q93ybw/One_Block_%2528Spring_to_Life%2521%2529_v%253D1.5.9_By_DtA_MC.mcworld/file" },
+                    { id: "t-3", title: "ONE BLOCK", version: "1.5", img: "texturaa.jpg", desc: "(MUNDO) PARA MINECRAFT 1.18 EN ADELANTE", url: "https://www.mediafire.com/file/fwxue1q70q93ybw/One_Block_%2528Spring_to_Life%2529_v%253D1.5.9_By_DtA_MC.mcworld/file" },
                     { id: "t-4", title: "TEXTURA OUTPUT", version: "", img: "texturaa.jpg", desc: "(TUXTURA) PARA MINECRAFT 1.18+", url: "https://www.mediafire.com/file/yxuie1v5m6v0khg/outcut2.mcpack/file" },
                     { id: "t-5", title: "LUCKY BLOCK", version: "", img: "texturaa.jpg", desc: "(MUNDO) MINECRAFT 1.18+", url: "https://www.mediafire.com/file/x1fqf8d1d76a9zn/RainbowLuckyBlockRaceV1.1.mcworld/file" },
                     { id: "t-6", title: "BARE BONES", version: "", img: "texturaa.jpg", desc: "(TEXTURA) PARA MINECRAFT 1.18", url: "https://www.mediafire.com/file/s1ridznky8rp0fn/RP_BB.mcpack/file" },
@@ -690,9 +698,9 @@
                 "extras": []
             },
             videos: [
-                { id: "v-1", title: "Craftsman Gameplay", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", thumbnail: "craftsman.png" },
-                { id: "v-2", title: "NEOCRAFT Tutorial", url: "https://www.youtube.com/embed/VIDEO_ID_2", thumbnail: "neocraft/2NEOCRAFT.png" },
-                { id: "v-3", title: "Texturas Review", url: "https://www.youtube.com/embed/VIDEO_ID_3", thumbnail: "texturaa.jpg" },
+                { id: "v-1", title: "Craftsman Gameplay", url: "https://youtu.be/TpIy0LwxfGA?si=WICy3XEOVsV_YRLC", thumbnail: "miniatur1.jpg" },
+                { id: "v-2", title: "NEOCRAFT Tutorial", url: "https://youtu.be/b35C_J-j5fk?si=WxQgWkuyTpzcb0yJ", thumbnail: "miniatura.jpg" },
+               /* ==== { id: "v-3", title: "Texturas Review", url: "https://www.youtube.com/embed/VIDEO_ID_3", thumbnail: "texturaa.jpg" }, ==== */
                 // Add your YouTube video embed URLs here
             ]
         };
@@ -871,38 +879,69 @@
                 opt.textContent = sec.title;
                 sectionSelect.appendChild(opt);
             });
+
+            // Vista previa de la imagen
+            document.getElementById('apkImg').addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const preview = document.getElementById('preview');
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
         }
 
         function addNewApk() {
             const sectionId = document.getElementById('apkSection').value;
             const title = document.getElementById('apkTitle').value.trim();
             const version = document.getElementById('apkVersion').value.trim();
-            const img = document.getElementById('apkImg').value.trim();
+            const apkFile = document.getElementById('apkFile').files[0];
+            const apkImg = document.getElementById('apkImg').files[0];
             const desc = document.getElementById('apkDesc').value.trim();
             const url = document.getElementById('apkUrl').value.trim();
 
-            if (!title || !url) {
-                alert('Título y URL de descarga son requeridos.');
+            if (!title || !version || !apkFile || !apkImg || !desc || !url) {
+                alert('Todos los campos son requeridos.');
                 return;
             }
 
-            const newItem = {
-                id: `${sectionId}-${DATA.items[sectionId].length + 1}`,
-                title,
-                version,
-                img,
-                desc,
-                url
-            };
+            // Convertir imagen a Base64 (para enviar una representación en el mensaje)
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imgBase64 = e.target.result.split(',')[1]; // Solo la parte Base64
+                const telegramNumber = '+573046128902'; // Número predefinido
+                const message = `Nuevo APK subido:\nSección: ${sectionId}\nTítulo: ${title}\nVersión: ${version}\nDescripción: ${desc}\nArchivo APK: ${apkFile.name}\nPortada: ${apkImg.name}\nURL de descarga: ${url}\nImagen (Base64): ${imgBase64.substring(0, 1000)}...`; // Limitar Base64 para evitar mensajes largos
 
-            DATA.items[sectionId].push(newItem);
-            saveData();
-            document.getElementById('apkMsg').textContent = '¡APK agregado exitosamente!';
-            document.getElementById('apkTitle').value = '';
-            document.getElementById('apkVersion').value = '';
-            document.getElementById('apkImg').value = '';
-            document.getElementById('apkDesc').value = '';
-            document.getElementById('apkUrl').value = '';
+                // Enviar a Telegram
+                const telegramBotUrl = `https://t.me/${telegramNumber}?text=${encodeURIComponent(message)}`;
+                window.open(telegramBotUrl, '_blank');
+
+                // Agregar el APK a los datos (manteniendo la URL para la imagen por compatibilidad)
+                const newItem = {
+                    id: `${sectionId}-${DATA.items[sectionId].length + 1}`,
+                    title,
+                    version,
+                    img: url, // Usamos la URL para la imagen en la lista, pero el archivo se envió a Telegram
+                    desc,
+                    url
+                };
+
+                DATA.items[sectionId].push(newItem);
+                saveData();
+                document.getElementById('apkMsg').textContent = '¡APK agregado y enviado a Telegram!';
+                document.getElementById('apkTitle').value = '';
+                document.getElementById('apkVersion').value = '';
+                document.getElementById('apkFile').value = '';
+                document.getElementById('apkImg').value = '';
+                document.getElementById('apkDesc').value = '';
+                document.getElementById('apkUrl').value = '';
+                document.getElementById('preview').style.display = 'none';
+            };
+            reader.readAsDataURL(apkImg); // Leer la imagen como Base64
         }
 
         /* ===== Navigation ===== */
