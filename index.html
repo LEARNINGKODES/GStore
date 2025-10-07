@@ -12,19 +12,32 @@
     <link rel="icon" type="image/png" sizes="192x192" href="NEOMC11.png">
     <link rel="apple-touch-icon" sizes="180x180" href="NEOMC11.png">
     <meta name="msapplication-TileImage" content="NEOMC11.png">
-    <meta name="msapplication-TileColor" content="#0a192f">
-
+    <meta name="msapplication-TileColor" content="#0b0b0b">
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
+        /* ===== Root Colors from Learning Kodes ===== */
+        :root {
+            --color-azul: #0077ff;
+            --color-negro: #0b0b0b;
+            --color-gris: #1a1a1a;
+            --color-gris-claro: #2b2b2b;
+            --color-blanco: #ffffff;
+            --fuente-texto: 'Poppins', sans-serif;
+            --fuente-titulos: 'Playfair Display', serif;
+        }
+
         /* ===== Reset ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+            font-family: var(--fuente-texto);
         }
+
         body {
-            background: #0a192f;
-            color: #e6f1ff;
+            background: linear-gradient(135deg, var(--color-negro) 0%, var(--color-azul) 50%, var(--color-negro) 100%);
+            color: var(--color-blanco);
             overflow-x: hidden;
             min-height: 100vh;
             font-size: 17px;
@@ -36,19 +49,17 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at 60% 0%, #0a192f 60%, #050b15 100%);
-            overflow: hidden;
             pointer-events: none;
         }
         .particle {
             position: absolute;
             width: 6px;
             height: 6px;
-            background: linear-gradient(135deg, #00b7eb 60%, #00ff99 100%);
-            box-shadow: 0 0 12px 3px #00b7eb44;
+            background: var(--color-azul);
+            box-shadow: 0 0 12px var(--color-azul);
             border-radius: 50%;
             opacity: 0.6;
             animation: moveParticle 8s linear infinite, fadeParticle 8s ease-in-out infinite;
@@ -69,10 +80,10 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 16px 8vw;
-            background: rgba(10, 25, 47, 0.95);
-            backdrop-filter: blur(12px) saturate(120%);
-            box-shadow: 0 4px 16px rgba(0, 183, 235, 0.2);
+            padding: 16px 5%;
+            background: rgba(11, 11, 11, 0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 16px rgba(0, 119, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -83,77 +94,76 @@
             height: 60px;
             border-radius: 50%;
             object-fit: cover;
-            box-shadow: 0 0 16px #00b7eb88;
+            box-shadow: 0 0 16px var(--color-azul);
             transition: transform 0.4s, box-shadow 0.4s;
         }
         .logo:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 0 24px #00ff9988;
+            transform: scale(1.1);
+            box-shadow: 0 0 24px var(--color-azul);
         }
         header h1 {
+            font-family: var(--fuente-titulos);
             font-size: 24px;
             font-weight: 700;
-            color: #00b7eb;
-            text-shadow: 0 0 8px #00ff99cc;
+            color: var(--color-azul);
+            text-shadow: 0 0 8px var(--color-azul);
         }
         #searchInput {
             flex: 1;
             margin: 0 16px;
             padding: 8px 12px;
             border-radius: 8px;
-            border: 1px solid #00b7eb33;
-            background: rgba(0, 183, 235, 0.08);
-            color: #e6f1ff;
+            border: 1px solid var(--color-azul);
+            background: rgba(0, 119, 255, 0.08);
+            color: var(--color-blanco);
             font-size: 16px;
             outline: none;
             transition: border 0.3s, box-shadow 0.3s;
         }
         #searchInput:focus {
-            border: 1px solid #00b7eb;
-            box-shadow: 0 2px 10px #00ff9944;
+            border: 1px solid var(--color-blanco);
+            box-shadow: 0 2px 10px var(--color-azul);
         }
         #searchInput::placeholder {
-            color: #b3e5fc;
+            color: var(--color-blanco);
             opacity: 0.7;
         }
 
         /* ===== Main Container ===== */
         .main {
-            padding: 100px 8vw 80px 8vw;
+            padding: 100px 5% 80px;
+            max-width: 1200px;
+            margin: auto;
             display: flex;
             flex-direction: column;
             gap: 24px;
-            max-width: 1200px;
-            margin: auto;
         }
 
         /* ===== Cards ===== */
         .card {
-            background: rgba(0, 183, 235, 0.1);
-            backdrop-filter: blur(12px) saturate(120%);
+            background: var(--color-gris);
+            backdrop-filter: blur(12px);
             border-radius: 16px;
             padding: 16px;
             display: flex;
             align-items: center;
             gap: 16px;
             cursor: pointer;
-            box-shadow: 0 4px 16px rgba(0, 183, 235, 0.2);
-            border: 1px solid #00b7eb33;
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            position: relative;
-            transform-style: preserve-3d;
+            box-shadow: 0 4px 16px rgba(0, 119, 255, 0.2);
+            border: 1px solid var(--color-azul);
+            transition: transform 0.4s, box-shadow 0.3s;
         }
         .card:hover {
-            transform: rotateY(10deg) scale(1.05);
-            box-shadow: 0 8px 24px #00b7eb44;
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px var(--color-azul);
         }
         .card img {
             width: 60px;
             height: 60px;
             border-radius: 12px;
             object-fit: cover;
-            box-shadow: 0 2px 8px #00b7eb33;
-            background: #0a192f;
+            box-shadow: 0 2px 8px var(--color-azul);
+            background: var(--color-negro);
             transition: transform 0.3s;
         }
         .card:hover img {
@@ -165,14 +175,15 @@
             gap: 4px;
         }
         .card .info .title {
+            font-family: var(--fuente-titulos);
             font-weight: 700;
             font-size: 18px;
-            color: #00b7eb;
-            text-shadow: 0 1px 6px #00ff9933;
+            color: var(--color-azul);
+            text-shadow: 0 1px 6px var(--color-azul);
         }
         .card .info .desc {
             font-size: 12px;
-            color: #b3e5fc;
+            color: var(--color-blanco);
             font-weight: 500;
             opacity: 0.9;
         }
@@ -199,21 +210,21 @@
             overflow: hidden;
             border-radius: 20px;
             margin-top: 24px;
-            box-shadow: 0 8px 24px #00b7eb33;
+            box-shadow: 0 8px 24px var(--color-azul);
             max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
-            background: rgba(0, 183, 235, 0.05);
-            border: 1px solid #00b7eb33;
+            background: var(--color-gris);
+            border: 1px solid var(--color-azul);
         }
         .slides {
             display: flex;
-            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            width: 400%; /* Ajustado para 4 diapositivas */
+            transition: transform 0.8s ease-in-out;
         }
         .slide {
-            position: relative;
             min-width: 100%;
-            transition: transform 0.5s, opacity 0.5s;
+            transition: opacity 0.5s;
         }
         .slide img {
             width: 100%;
@@ -221,7 +232,7 @@
             object-fit: cover;
             border-radius: 16px;
             filter: brightness(0.95) saturate(1.1);
-            transition: transform 0.5s, filter 0.3s;
+            transition: transform 0.5s;
         }
         .slide.active img {
             transform: scale(1.05);
@@ -231,15 +242,16 @@
             bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(10, 25, 47, 0.7);
+            background: rgba(11, 11, 11, 0.7);
             padding: 10px 24px;
             border-radius: 12px;
+            font-family: var(--fuente-titulos);
             font-size: 22px;
             font-weight: 700;
-            color: #00b7eb;
-            text-shadow: 0 2px 8px #00ff99cc;
+            color: var(--color-azul);
+            text-shadow: 0 2px 8px var(--color-azul);
             backdrop-filter: blur(8px);
-            border: 1px solid #00b7eb44;
+            border: 1px solid var(--color-azul);
             animation: captionFade 0.5s ease-in-out;
         }
         @keyframes captionFade {
@@ -250,22 +262,19 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: linear-gradient(135deg, #00b7eb 60%, #00ff99 100%);
+            background: var(--color-azul);
             border: none;
-            color: white;
+            color: var(--color-blanco);
             font-size: 24px;
             padding: 10px 16px;
             cursor: pointer;
             border-radius: 50%;
-            box-shadow: 0 2px 10px #00b7eb44;
+            box-shadow: 0 2px 10px var(--color-azul);
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .carousel button:hover {
             transform: translateY(-50%) scale(1.15);
-            box-shadow: 0 4px 16px #00ff9944;
-        }
-        .carousel button:active {
-            transform: translateY(-50%) scale(0.95);
+            box-shadow: 0 4px 16px var(--color-azul);
         }
         .carousel .prev { left: 16px; }
         .carousel .next { right: 16px; }
@@ -278,34 +287,33 @@
             align-items: center;
             gap: 24px;
             padding: 16px 24px;
-            background: rgba(10, 25, 47, 0.9);
-            backdrop-filter: blur(12px) saturate(160%);
+            background: var(--color-gris);
+            backdrop-filter: blur(12px);
             border-radius: 20px;
-            box-shadow: 0 4px 16px #00b7eb22;
-            border: 1px solid #00b7eb33;
+            box-shadow: 0 4px 16px var(--color-azul);
+            border: 1px solid var(--color-azul);
             margin-bottom: 80px;
         }
         footer a {
-            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #00b7eb 60%, #00ff99 100%);
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            box-shadow: 0 2px 10px #00b7eb44;
+            background: var(--color-azul);
+            transition: transform 0.4s;
+            box-shadow: 0 2px 10px var(--color-azul);
         }
         footer a:hover {
-            transform: scale(1.2) rotate(360deg);
-            box-shadow: 0 4px 16px #00ff9944;
+            transform: scale(1.2);
+            box-shadow: 0 4px 16px var(--color-azul);
         }
         footer a img {
             width: 30px;
             height: 30px;
             object-fit: contain;
-            filter: drop-shadow(0 2px 6px #00b7eb88);
+            filter: drop-shadow(0 2px 6px var(--color-azul));
         }
 
         /* ===== Navigation Bar ===== */
@@ -313,15 +321,15 @@
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 100vw;
+            width: 100%;
             z-index: 10;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            background: rgba(10, 25, 47, 0.95);
-            backdrop-filter: blur(12px) saturate(120%);
+            background: var(--color-gris);
+            backdrop-filter: blur(12px);
             padding: 8px 0;
-            box-shadow: 0 -2px 12px #00b7eb22;
+            box-shadow: 0 -2px 12px var(--color-azul);
         }
         nav button {
             background: none;
@@ -331,15 +339,14 @@
             flex-direction: column;
             align-items: center;
             gap: 4px;
-            color: #00b7eb;
+            color: var(--color-azul);
             font-size: 14px;
             cursor: pointer;
             transition: transform 0.3s, text-shadow 0.3s;
-            position: relative;
         }
         nav button:hover {
             transform: scale(1.1);
-            text-shadow: 0 0 8px #00ff99cc;
+            text-shadow: 0 0 8px var(--color-azul);
         }
         nav button img {
             width: 24px;
@@ -353,7 +360,7 @@
             height: 2px;
             bottom: -4px;
             left: 0;
-            background: #00ff99;
+            background: var(--color-azul);
             transform: scaleX(0);
             transition: transform 0.3s;
         }
@@ -369,14 +376,15 @@
             max-width: 500px;
             margin: 32px auto 0 auto;
             padding: 20px;
-            background: rgba(0, 183, 235, 0.1);
+            background: var(--color-gris);
             border-radius: 16px;
-            border: 1px solid #00b7eb33;
-            box-shadow: 0 4px 16px #00b7eb22;
+            border: 1px solid var(--color-azul);
+            box-shadow: 0 4px 16px var(--color-azul);
             animation: slideIn 0.5s ease-in-out;
         }
         #apkUploadForm h3 {
-            color: #00b7eb;
+            font-family: var(--fuente-titulos);
+            color: var(--color-azul);
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 12px;
@@ -386,9 +394,9 @@
             width: 100%;
             padding: 10px;
             border-radius: 10px;
-            border: 1px solid #00b7eb33;
-            background: rgba(0, 183, 235, 0.08);
-            color: #00b7eb;
+            border: 1px solid var(--color-azul);
+            background: var(--color-gris-claro);
+            color: var(--color-blanco);
             font-size: 15px;
             font-weight: 600;
             outline: none;
@@ -397,44 +405,27 @@
         }
         #apkUploadForm select:focus,
         #apkUploadForm input:focus {
-            border: 1px solid #00b7eb;
-            box-shadow: 0 2px 10px #00ff9944;
+            border: 1px solid var(--color-blanco);
+            box-shadow: 0 2px 10px var(--color-azul);
         }
         #apkUploadForm button {
-            background: linear-gradient(135deg, #00b7eb 60%, #00ff99 100%);
-            color: #fff;
+            background: var(--color-azul);
+            color: var(--color-blanco);
             padding: 10px;
             border: none;
             border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
             font-size: 16px;
-            box-shadow: 0 2px 10px #00b7eb44;
+            box-shadow: 0 2px 10px var(--color-azul);
             transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
         }
         #apkUploadForm button:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 16px #00ff9944;
-        }
-        #apkUploadForm button::after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, rgba(255,255,255,0.3), transparent);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.3s;
-        }
-        #apkUploadForm button:active::after {
-            transform: translate(-50%, -50%) scale(1);
-            transition: transform 0.2s;
+            box-shadow: 0 4px 16px var(--color-azul);
         }
         #apkMsg {
-            color: #00ff99;
+            color: var(--color-blanco);
             font-size: 14px;
             margin-top: 8px;
         }
@@ -442,7 +433,29 @@
             max-width: 100%;
             height: auto;
             margin-top: 10px;
+            border-radius: 10px;
             display: none;
+        }
+        .apk-contact {
+            max-width: 500px;
+            margin: 32px auto;
+            padding: 18px 22px;
+            background: var(--color-gris);
+            border-radius: 16px;
+            border: 1px solid var(--color-azul);
+            box-shadow: 0 4px 16px var(--color-azul);
+            text-align: center;
+            color: var(--color-blanco);
+            font-size: 16px;
+        }
+        .apk-contact a {
+            color: var(--color-azul);
+            font-weight: bold;
+            font-size: 17px;
+            text-decoration: none;
+        }
+        .apk-contact a:hover {
+            text-decoration: underline;
         }
 
         /* ===== Videos Section ===== */
@@ -456,13 +469,13 @@
             position: relative;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 16px #00b7eb33;
+            box-shadow: 0 4px 16px var(--color-azul);
             transition: transform 0.4s, box-shadow 0.4s;
             cursor: pointer;
         }
         .video-card:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 24px #00ff9944;
+            box-shadow: 0 8px 24px var(--color-azul);
         }
         .video-card img {
             width: 100%;
@@ -476,7 +489,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 25, 47, 0.6);
+            background: rgba(11, 11, 11, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -509,9 +522,10 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(10, 25, 47, 0.7);
+            background: rgba(11, 11, 11, 0.7);
             padding: 8px;
-            color: #00b7eb;
+            color: var(--color-azul);
+            font-family: var(--fuente-titulos);
             font-size: 14px;
             font-weight: 600;
             text-align: center;
@@ -525,36 +539,19 @@
         .back-btn {
             padding: 10px 16px;
             margin: 10px 0 16px 0;
-            background: linear-gradient(135deg, #00b7eb 60%, #00ff99 100%);
+            background: var(--color-azul);
             border: none;
             border-radius: 12px;
-            color: #fff;
+            color: var(--color-blanco);
             font-weight: 700;
             font-size: 15px;
             cursor: pointer;
-            box-shadow: 0 2px 10px #00b7eb44;
+            box-shadow: 0 2px 10px var(--color-azul);
             transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
         }
         .back-btn:hover {
             transform: scale(1.07);
-            box-shadow: 0 4px 16px #00ff9944;
-        }
-        .back-btn::after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, rgba(255,255,255,0.3), transparent);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.3s;
-        }
-        .back-btn:active::after {
-            transform: translate(-50%, -50%) scale(1);
-            transition: transform 0.2s;
+            box-shadow: 0 4px 16px var(--color-azul);
         }
     </style>
 </head>
@@ -572,7 +569,7 @@
         <div id="homeScreen">
             <div class="carousel">
                 <div class="slides">
-                    <div class="slide">
+                    <div class="slide active">
                         <img src="craftsman.png" alt="Craftsman">
                         <div class="caption">Craftsman</div>
                     </div>
@@ -593,35 +590,35 @@
                 <button class="next" onclick="moveSlide(1)">❯</button>
             </div>
             <div id="mainMenu" class="items-grid"></div>
-            <button id="backBtn" class="back-btn" onclick="goBack()">Atrás</button>
+            <button id="backBtn" class="back-btn" onclick="goBack()" style="display: none;">Atrás</button>
             <div id="contentMenu" class="items-grid"></div>
             <div id="searchResults" class="items-grid" style="display: none;"></div>
         </div>
 
         <!-- APK Upload Screen -->
-        <div id="apkScreen" style="display:none;">
+        <div id="apkScreen" style="display: none;">
             <div id="apkUploadForm">
                 <h3>Subir Nuevo APK</h3>
                 <select id="apkSection"></select>
                 <input id="apkTitle" type="text" placeholder="Título del APK" required>
                 <input id="apkVersion" type="text" placeholder="Versión" required>
                 <input id="apkImg" type="file" accept="image/*" required>
-                <img id="preview" alt="Vista previa de la portada" style="max-width:100%;height:auto;margin-top:10px;display:none;">
+                <img id="preview" alt="Vista previa de la portada">
                 <input id="apkDesc" type="text" placeholder="Descripción" required>
                 <input id="apkUrl" type="text" placeholder="URL de descarga (ej. MediaFire)" required>
                 <button onclick="addNewApk()">Subir y Enviar a Telegram</button>
                 <p id="apkMsg"></p>
             </div>
-            <div style="max-width:500px;margin:32px auto;padding:18px 22px;background:rgba(0,183,235,0.1);border-radius:16px;border:1px solid #00b7eb33;box-shadow:0 4px 16px #00b7eb22;text-align:center;color:#00b7eb;font-size:16px;">
+            <div class="apk-contact">
                 <b>¿Quieres que tu APK aparezca aquí?</b><br>
                 Usa el formulario arriba si eres admin, o comunícate por Telegram:<br>
-                <a href="https://t.me/+573046128902" style="color:#00ff99;font-weight:bold;font-size:17px;word-break:break-all;">+57 3046128902</a><br>
-                <span style="color:#b3e5fc;font-size:14px;">¡Envíame tu APK, portada, descripción y link para publicarlo!</span>
+                <a href="https://t.me/+573046128902">+57 3046128902</a><br>
+                <span style="font-size: 14px;">¡Envíame tu APK, portada, descripción y link para publicarlo!</span>
             </div>
         </div>
 
         <!-- Videos Screen -->
-        <div id="videosScreen" style="display:none;">
+        <div id="videosScreen" style="display: none;">
             <div class="videos-grid" id="videosContainer"></div>
         </div>
     </div>
@@ -718,15 +715,12 @@
                 ],
                 "extras": [
                     { id: "ex-1", title: "GameStore", version: "1.0", img: "texturaa.jpg", desc: "Lleva GameStore contigo! La misma tienda, ahora en una app (apk). Decubre juegos y novedades con una navegacion rapida y fluiuda. Descarga GameStore AHORA!!", url: "https://www.mediafire.com/file/22blvwo2yeaxmea/GStore.apk/file" },
-                    { id: "ex-2", title: "Ultracraft", version: "1.1", img: "./port/ultra.png", desc: "", url: "https://www.mediafire.com/folder/h98zm2afn6tju/Updates" },
+                    { id: "ex-2", title: "Ultracraft", version: "1.1", img: "./port/ultra.png", desc: "", url: "https://www.mediafire.com/folder/h98zm2afn6tju/Updates" }
                 ]
-                
             },
             videos: [
-                { id: "v-1", title: "I SEE YOU NOW 👀", url: "https://youtu.be/TpIy0LwxfGA?si=WICy3XEOVsV_YRLC", thumbnail: "miniatura1.jpg" },
-                { id: "v-2", title: "NEW UPDATE OF CRAFTING", url: "https://youtu.be/b35C_J-j5fk?si=WxQgWkuyTpzcb0yJ", thumbnail: "miniatura.jpg" },
-               /* ==== { id: "v-3", title: "Texturas Review", url: "https://www.youtube.com/embed/VIDEO_ID_3", thumbnail: "texturaa.jpg" }, ==== */
-                // Add your YouTube video embed URLs here
+                { id: "v-1", title: "I SEE YOU NOW 👀", url: "https://www.youtube.com/embed/TpIy0LwxfGA?si=WICy3XEOVsV_YRLC", thumbnail: "miniatura1.jpg" },
+                { id: "v-2", title: "NEW UPDATE OF CRAFTING", url: "https://www.youtube.com/embed/b35C_J-j5fk?si=WxQgWkuyTpzcb0yJ", thumbnail: "miniatura.jpg" }
             ]
         };
 
@@ -802,7 +796,7 @@
             searchResults.style.display = 'none';
             let list = DATA.items[key] || [];
             if (list.length === 0) {
-                contentMenu.innerHTML = "<div style='padding:12px;color:#b3e5fc;'>No hay elementos</div>";
+                contentMenu.innerHTML = "<div style='padding:12px;color:var(--color-blanco);'>No hay elementos</div>";
                 return;
             }
             list.forEach(it => {
@@ -885,7 +879,7 @@
             });
 
             if (matches.length === 0) {
-                searchResults.innerHTML = "<div style='padding:12px;color:#b3e5fc;'>No se encontraron resultados</div>";
+                searchResults.innerHTML = "<div style='padding:12px;color:var(--color-blanco);'>No se encontraron resultados</div>";
                 return;
             }
 
@@ -924,13 +918,15 @@
             if (currentSlide < 0) currentSlide = slides.length - 1;
             slides.forEach((slide, index) => {
                 slide.classList.toggle('active', index === currentSlide);
+                slide.style.opacity = index === currentSlide ? '1' : '0';
             });
-            document.querySelector('.slides').style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelector('.slides').style.transform = `translateX(-${currentSlide * 25}%)`;
         }
         function moveSlide(n) {
             showSlide(currentSlide + n);
         }
-        setInterval(() => showSlide(currentSlide + 1), 4000);
+        setInterval(() => moveSlide(1), 4000);
+        showSlide(0); // Inicializar el carrusel
 
         /* ===== Particles ===== */
         for (let i = 0; i < 50; i++) {
@@ -985,7 +981,8 @@
             });
 
             // Vista previa de la imagen
-            document.getElementById('apkImg').addEventListener('change', function(event) {
+            const apkImgInput = document.getElementById('apkImg');
+            apkImgInput.addEventListener('change', function(event) {
                 const file = event.target.files[0];
                 if (file) {
                     const reader = new FileReader();
@@ -1012,23 +1009,20 @@
                 return;
             }
 
-            // Convertir imagen a Base64 (para enviar una representación en el mensaje)
             const reader = new FileReader();
             reader.onload = function(e) {
-                const imgBase64 = e.target.result.split(',')[1]; // Solo la parte Base64
-                const telegramNumber = '+573046128902'; // Número predefinido
-                const message = `Nuevo APK subido:\nSección: ${sectionId}\nTítulo: ${title}\nVersión: ${version}\nDescripción: ${desc}\nPortada: ${apkImg.name}\nURL de descarga: ${url}\nImagen (Base64): ${imgBase64.substring(0, 1000)}...`; // Limitar Base64 para evitar mensajes largos
+                const imgBase64 = e.target.result.split(',')[1];
+                const telegramNumber = '+573046128902';
+                const message = `Nuevo APK subido:\nSección: ${sectionId}\nTítulo: ${title}\nVersión: ${version}\nDescripción: ${desc}\nPortada: ${apkImg.name}\nURL de descarga: ${url}\nImagen (Base64): ${imgBase64.substring(0, 1000)}...`;
 
-                // Enviar a Telegram
                 const telegramBotUrl = `https://t.me/${telegramNumber}?text=${encodeURIComponent(message)}`;
                 window.open(telegramBotUrl, '_blank');
 
-                // Agregar el APK a los datos (usando la URL para la imagen por compatibilidad, pero el archivo se envió a Telegram)
                 const newItem = {
-                    id: `${sectionId}-${DATA.items[sectionId].length + 1}`,
+                    id: `${sectionId}-${DATA.items[sectionId]?.length + 1 || 1}`,
                     title,
                     version,
-                    img: URL.createObjectURL(apkImg), // Usar objeto URL temporal para la imagen en la app
+                    img: URL.createObjectURL(apkImg),
                     desc,
                     url
                 };
@@ -1037,7 +1031,6 @@
                     DATA.items[sectionId] = [];
                 }
                 DATA.items[sectionId].push(newItem);
-                // saveData(); // Si tienes una función para guardar datos persistentes, úsala aquí
 
                 document.getElementById('apkMsg').textContent = '¡APK agregado y enviado a Telegram!';
                 document.getElementById('apkTitle').value = '';
@@ -1047,7 +1040,7 @@
                 document.getElementById('apkUrl').value = '';
                 document.getElementById('preview').style.display = 'none';
             };
-            reader.readAsDataURL(apkImg); // Leer la imagen como Base64
+            reader.readAsDataURL(apkImg);
         }
 
         /* ===== Navigation ===== */
@@ -1062,14 +1055,23 @@
             homeScreen.style.display = 'none';
             apkScreen.style.display = 'none';
             videosScreen.style.display = 'none';
-            if (screen === 'home') homeScreen.style.display = 'block';
-            if (screen === 'apk') apkScreen.style.display = 'block';
-            if (screen === 'videos') videosScreen.style.display = 'block';
+            if (screen === 'home') {
+                homeScreen.style.display = 'block';
+                renderMainMenu();
+            }
+            if (screen === 'apk') {
+                apkScreen.style.display = 'block';
+                initApkUpload();
+            }
+            if (screen === 'videos') {
+                videosScreen.style.display = 'block';
+                renderVideos();
+            }
         }
 
         navHome.onclick = () => { showScreen('home'); };
-        navApk.onclick = () => { showScreen('apk'); initApkUpload(); };
-        navVideos.onclick = () => { showScreen('videos'); renderVideos(); };
+        navApk.onclick = () => { showScreen('apk'); };
+        navVideos.onclick = () => { showScreen('videos'); };
 
         /* ===== Initialization ===== */
         showScreen('home');
