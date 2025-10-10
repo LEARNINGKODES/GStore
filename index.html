@@ -12,40 +12,28 @@
     <link rel="icon" type="image/png" sizes="192x192" href="NEOMC11.png">
     <link rel="apple-touch-icon" sizes="180x180" href="NEOMC11.png">
     <meta name="msapplication-TileImage" content="NEOMC11.png">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <!-- Google Fonts: Roboto for Play Store look -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <meta name="msapplication-TileColor" content="#000000">
+    <!-- Google Fonts: Inter for a modern look -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <!-- Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
         :root {
-            --bg: #ffffff;
-            --surface: #f5f5f5;
-            --primary: #1a73e8;
-            --primary-variant: #174ea6;
-            --text-primary: #202124;
-            --text-secondary: #5f6368;
+            --bg: #0d1b2a;
+            --surface: #1b263b;
+            --primary: #1e90ff;
+            --primary-dark: #1565c0;
+            --accent: #00e676;
+            --text-primary: #e0e0e0;
+            --text-secondary: #90a4ae;
             --text-on-primary: #ffffff;
-            --accent: #00c4b4;
-            --divider: #dadce0;
-            --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            --radius: 12px;
+            --divider: #41506b;
+            --shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            --blur: blur(8px);
+            --radius: 20px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 16px;
-        }
-
-        /* Dark Theme */
-        [data-theme="dark"] {
-            --bg: #202124;
-            --surface: #303134;
-            --primary: #8ab4f8;
-            --primary-variant: #4285f4;
-            --text-primary: #e8eaed;
-            --text-secondary: #bdc1c6;
-            --text-on-primary: #202124;
-            --accent: #00c4b4;
-            --divider: #5f6368;
         }
 
         * {
@@ -55,11 +43,11 @@
         }
 
         body {
-            background: var(--bg);
+            background: linear-gradient(180deg, var(--bg) 0%, #0b1320 100%);
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
-            padding-bottom: 56px; /* Space for bottom nav */
+            padding-bottom: 72px;
         }
 
         /* App Bar */
@@ -68,52 +56,67 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 56px;
-            background: var(--primary);
+            height: 68px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: var(--text-on-primary);
             display: flex;
             align-items: center;
-            padding: 0 16px;
+            padding: 0 24px;
             box-shadow: var(--shadow);
+            backdrop-filter: var(--blur);
             z-index: 1000;
         }
 
         .app-bar .hamburger {
             cursor: pointer;
-            font-size: 24px;
+            font-size: 30px;
             margin-right: 16px;
+            transition: var(--transition);
+        }
+
+        .app-bar .hamburger:hover {
+            color: var(--accent);
         }
 
         .app-bar .logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            margin-right: 8px;
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            margin-right: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .app-bar h1 {
-            font-size: 20px;
-            font-weight: 500;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .app-bar .profile {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: var(--text-on-primary);
             margin-left: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+
+        .app-bar .profile:hover {
+            transform: scale(1.1);
         }
 
         /* Search Bar */
         .search-bar {
             display: none;
             position: fixed;
-            top: 56px;
+            top: 68px;
             left: 0;
             width: 100%;
-            padding: 8px 16px;
-            background: var(--surface);
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--surface), #223144);
             box-shadow: var(--shadow);
+            backdrop-filter: var(--blur);
             z-index: 999;
         }
 
@@ -123,28 +126,34 @@
 
         .search-bar input {
             width: 100%;
-            padding: 10px 16px;
+            padding: 14px 24px;
             border: none;
-            border-radius: 24px;
-            background: var(--bg);
+            border-radius: 32px;
+            background: rgba(255, 255, 255, 0.1);
             color: var(--text-primary);
             font-size: 16px;
             outline: none;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+
+        .search-bar input:focus {
+            background: rgba(255, 255, 255, 0.15);
         }
 
         /* Sidebar */
         .sidebar {
             position: fixed;
             top: 0;
-            left: -280px;
-            width: 280px;
+            left: -320px;
+            width: 320px;
             height: 100%;
-            background: var(--surface);
-            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(180deg, var(--surface), #223144);
+            box-shadow: 4px 0 16px rgba(0, 0, 0, 0.5);
+            backdrop-filter: var(--blur);
             z-index: 2000;
             transition: var(--transition);
-            padding: 16px;
+            padding: 24px;
             overflow-y: auto;
         }
 
@@ -153,43 +162,52 @@
         }
 
         .sidebar .close-btn {
-            font-size: 24px;
+            font-size: 30px;
             cursor: pointer;
             color: var(--text-primary);
-            margin-bottom: 16px;
+            margin-bottom: 24px;
+            transition: var(--transition);
+        }
+
+        .sidebar .close-btn:hover {
+            color: var(--accent);
         }
 
         .sidebar .sidebar-item {
             display: flex;
             align-items: center;
-            padding: 12px 16px;
+            padding: 16px 20px;
             color: var(--text-primary);
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 500;
             cursor: pointer;
-            border-radius: 8px;
-            margin-bottom: 8px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
         }
 
         .sidebar .sidebar-item:hover {
-            background: var(--divider);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(8px);
         }
 
         .sidebar .sidebar-item img {
-            width: 24px;
-            height: 24px;
+            width: 30px;
+            height: 30px;
             margin-right: 16px;
         }
 
         .sidebar .theme-toggle {
             display: flex;
             align-items: center;
-            padding: 12px 16px;
+            padding: 16px 20px;
             color: var(--text-primary);
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 500;
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .sidebar .theme-toggle input {
@@ -202,13 +220,14 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 56px;
-            background: var(--primary);
+            height: 72px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: var(--text-on-primary);
             display: flex;
             justify-content: space-around;
             align-items: center;
-            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.5);
+            backdrop-filter: var(--blur);
             z-index: 1000;
         }
 
@@ -220,59 +239,97 @@
             flex-direction: column;
             align-items: center;
             font-size: 12px;
+            font-weight: 600;
             cursor: pointer;
-            padding: 4px;
+            padding: 10px;
+            transition: var(--transition);
         }
 
         .bottom-nav button i {
-            font-size: 24px;
-            margin-bottom: 4px;
+            font-size: 30px;
+            margin-bottom: 6px;
         }
 
         .bottom-nav button.active {
+            color: var(--accent);
+            transform: scale(1.15);
+        }
+
+        .bottom-nav button:hover {
             color: var(--accent);
         }
 
         /* Main Content */
         .main {
-            padding: 72px 16px 16px;
-            max-width: 1200px;
+            padding: 84px 24px 24px;
+            max-width: 1600px;
             margin: auto;
         }
 
         .hero {
-            background: var(--surface);
+            background: linear-gradient(135deg, var(--surface), #223144);
             border-radius: var(--radius);
-            padding: 24px;
-            margin-bottom: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
             text-align: center;
             box-shadow: var(--shadow);
+            backdrop-filter: var(--blur);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(30, 144, 255, 0.2), transparent);
+            opacity: 0.4;
         }
 
         .hero h2 {
-            font-size: 28px;
+            font-size: 36px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .hero p {
-            font-size: 18px;
+            font-size: 20px;
             color: var(--text-secondary);
-            margin-bottom: 16px;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
         }
 
         .hero .featured-info {
-            font-size: 16px;
+            font-size: 18px;
             color: var(--text-primary);
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 24px;
+            border-radius: 12px;
         }
 
         /* Sub Tabs */
         .sub-tabs {
             display: flex;
             overflow-x: auto;
-            margin-bottom: 16px;
+            margin-bottom: 32px;
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            backdrop-filter: var(--blur);
         }
 
         .sub-tabs::-webkit-scrollbar {
@@ -280,17 +337,22 @@
         }
 
         .sub-tab {
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: 500;
+            padding: 14px 36px;
+            font-size: 18px;
+            font-weight: 600;
             color: var(--text-secondary);
             cursor: pointer;
-            border-bottom: 2px solid transparent;
+            border-radius: 28px;
+            transition: var(--transition);
         }
 
         .sub-tab.active {
-            color: var(--primary);
-            border-bottom: 2px solid var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--text-on-primary);
+        }
+
+        .sub-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* Carousel */
@@ -298,7 +360,7 @@
             position: relative;
             overflow: hidden;
             border-radius: var(--radius);
-            margin-bottom: 24px;
+            margin-bottom: 40px;
             box-shadow: var(--shadow);
         }
 
@@ -314,75 +376,142 @@
 
         .slide img {
             width: 100%;
-            height: 240px;
+            height: 360px;
             object-fit: cover;
             border-radius: var(--radius);
+            transition: transform 0.5s ease;
+        }
+
+        .slide:hover img {
+            transform: scale(1.08);
         }
 
         .caption {
             position: absolute;
-            bottom: 16px;
-            left: 16px;
-            background: rgba(0, 0, 0, 0.5);
+            bottom: 32px;
+            left: 32px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(30, 144, 255, 0.5));
             color: var(--text-on-primary);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 500;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
 
         .carousel button {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             border: none;
             color: var(--text-on-primary);
-            font-size: 24px;
-            padding: 8px;
+            font-size: 32px;
+            padding: 16px;
             cursor: pointer;
             border-radius: 50%;
+            transition: var(--transition);
         }
 
-        .carousel .prev { left: 16px; }
-        .carousel .next { right: 16px; }
+        .carousel button:hover {
+            background: var(--primary);
+        }
+
+        .carousel .prev { left: 24px; }
+        .carousel .next { right: 24px; }
 
         /* Sections */
         .section-container {
-            margin-bottom: 32px;
+            margin-bottom: 56px;
         }
 
         .section-header {
-            font-size: 22px;
-            font-weight: 500;
-            margin-bottom: 12px;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--accent);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .section-banner {
             width: 100%;
-            height: 180px;
+            height: 280px;
             object-fit: cover;
             border-radius: var(--radius);
-            margin-bottom: 12px;
+            margin-bottom: 24px;
             box-shadow: var(--shadow);
+            transition: transform 0.4s ease;
+        }
+
+        .section-banner:hover {
+            transform: scale(1.03);
         }
 
         .section-desc {
-            font-size: 16px;
+            font-size: 18px;
             color: var(--text-secondary);
-            margin-bottom: 16px;
+            margin-bottom: 28px;
+            line-height: 1.7;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 16px;
+            border-radius: 12px;
         }
 
-        /* Cards */
+        /* App Carousel */
+        .app-carousel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        .app-card {
+            background: linear-gradient(135deg, var(--surface), #223144);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .app-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+        }
+
+        .app-card .info {
+            padding: 20px;
+        }
+
+        .app-card .title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .app-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .app-card .desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Item Cards */
         .items-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-bottom: 40px;
         }
 
         .card {
-            background: var(--surface);
+            background: linear-gradient(135deg, var(--surface), #223144);
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow);
@@ -391,52 +520,113 @@
         }
 
         .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+        }
+
+        .card .info {
+            padding: 20px;
+        }
+
+        .card .title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
         }
 
         .card img {
             width: 100%;
-            height: 140px;
+            height: 200px;
             object-fit: cover;
         }
 
-        .card .info {
-            padding: 12px;
-        }
-
-        .card .title {
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
-
         .card .desc {
-            font-size: 14px;
+            font-size: 16px;
             color: var(--text-secondary);
-            margin-bottom: 8px;
+            line-height: 1.6;
         }
 
         .card .creator {
-            padding: 0 12px 12px;
-            border-top: 1px solid var(--divider);
+            padding: 20px;
+            border-top: 2px solid var(--divider);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .card .creator-label {
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 4px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--accent);
         }
 
         .card .creator-link {
             color: var(--primary);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .card .creator-link:hover {
+            color: var(--accent);
         }
 
         .card .creator-desc {
-            font-size: 13px;
+            font-size: 15px;
             color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .card .creator-video {
+            position: relative;
+            margin-top: 16px;
+        }
+
+        .card .creator-video img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .card .creator-video .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(30, 144, 255, 0.5));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .card .creator-video:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .card .creator-video .play-overlay .material-icons {
+            font-size: 56px;
+            color: var(--text-on-primary);
+        }
+
+        .card .creator-video iframe {
+            width: 100%;
+            height: 140px;
+            display: none;
+            border-radius: 12px;
+        }
+
+        .card .creator-video.active iframe {
+            display: block;
+        }
+
+        .card .creator-video.active img,
+        .card .creator-video.active .play-overlay {
+            display: none;
         }
 
         .card .copy-link-overlay {
@@ -445,7 +635,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(30, 144, 255, 0.6));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -458,34 +648,46 @@
         }
 
         .copy-link-btn {
-            padding: 8px 16px;
+            padding: 14px 32px;
             background: var(--primary);
             color: var(--text-on-primary);
             border: none;
-            border-radius: 24px;
-            font-size: 14px;
-            font-weight: 500;
+            border-radius: 28px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .copy-link-btn:hover {
+            background: var(--accent);
+            transform: scale(1.05);
         }
 
         /* Videos Section */
         .videos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
         }
 
         .video-card {
-            background: var(--surface);
+            background: linear-gradient(135deg, var(--surface), #223144);
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow);
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
         }
 
         .video-card img {
             width: 100%;
-            height: 160px;
+            height: 200px;
             object-fit: cover;
         }
 
@@ -495,7 +697,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(30, 144, 255, 0.5));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -508,14 +710,15 @@
         }
 
         .video-card .play-overlay .material-icons {
-            font-size: 48px;
+            font-size: 64px;
             color: var(--text-on-primary);
         }
 
         .video-card iframe {
             width: 100%;
-            height: 160px;
+            height: 200px;
             display: none;
+            border-radius: var(--radius);
         }
 
         .video-card.active iframe {
@@ -528,63 +731,110 @@
         }
 
         .video-title {
-            padding: 12px;
-            font-size: 16px;
-            font-weight: 500;
+            padding: 20px;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
         }
 
         /* Contact Section */
         .apk-contact {
-            background: var(--surface);
+            background: linear-gradient(135deg, var(--surface), #223144);
             border-radius: var(--radius);
-            padding: 24px;
-            margin: 16px 0;
+            padding: 40px;
+            margin: 32px 0;
             text-align: center;
             box-shadow: var(--shadow);
+            backdrop-filter: var(--blur);
         }
 
         .apk-contact b {
-            font-size: 24px;
+            font-size: 32px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
             display: block;
+            color: var(--accent);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .apk-contact p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.6;
         }
 
         .telegram-btn {
             display: inline-flex;
             align-items: center;
-            padding: 12px 24px;
-            background: var(--primary);
+            padding: 16px 36px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: var(--text-on-primary);
             text-decoration: none;
-            border-radius: 24px;
-            font-size: 16px;
-            font-weight: 500;
-            margin: 8px 0;
+            border-radius: 32px;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 16px 0;
+            transition: var(--transition);
+        }
+
+        .telegram-btn:hover {
+            background: var(--accent);
+            transform: scale(1.05);
         }
 
         .telegram-btn img {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
+            width: 28px;
+            height: 28px;
+            margin-right: 12px;
         }
 
         /* Responsive Design */
         @media (max-width: 600px) {
-            .sub-tabs {
-                font-size: 14px;
+            .app-bar h1 {
+                font-size: 22px;
             }
 
-            .card img {
-                height: 120px;
+            .app-bar .logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .hero h2 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .sub-tabs {
+                padding: 8px;
+            }
+
+            .sub-tab {
+                padding: 12px 24px;
+                font-size: 16px;
             }
 
             .slide img {
-                height: 180px;
+                height: 240px;
             }
 
             .section-banner {
-                height: 140px;
+                height: 200px;
+            }
+
+            .app-card img, .card img {
+                height: 160px;
+            }
+
+            .video-card img, .video-card iframe {
+                height: 160px;
+            }
+
+            .card .creator-video img, .card .creator-video iframe {
+                height: 120px;
             }
 
             .bottom-nav button {
@@ -592,12 +842,12 @@
             }
 
             .bottom-nav button i {
-                font-size: 22px;
+                font-size: 26px;
             }
         }
     </style>
 </head>
-<body data-theme="dark">
+<body>
     <div class="app-bar">
         <i class="material-icons hamburger" onclick="toggleSidebar()">menu</i>
         <img class="logo" src="NEOMC11.png" alt="Logo">
@@ -632,9 +882,9 @@
     <div class="main">
         <div id="homeScreen" style="display: block;">
             <div class="hero">
-                <h2>Bienvenido a GameStore</h2>
-                <p>Descubre la mejor selección de APKs, texturas, shaders y mundos para juegos como Craftsman y NeoCraft. ¡Explora mods exclusivos, actualizaciones y contenido creado por apasionados del gaming!</p>
-                <div class="featured-info">Destacados: Nuevas versiones de Craftsman Zero y shaders ultra-realistas. ¡Descarga ahora y eleva tu experiencia de juego!</div>
+                <h2>Descubre GameStore</h2>
+                <p>Explora un universo de APKs, texturas, shaders y mundos para juegos como Craftsman, NeoCraft y Minecraft. Personaliza tu experiencia con mods exclusivos y únete a una comunidad apasionada por el gaming.</p>
+                <div class="featured-info">¡Novedades! Craftsman Zero sin anuncios y shaders ultra-realistas para Minecraft 1.21+. ¡Descarga ahora!</div>
             </div>
             <div class="sub-tabs">
                 <div class="sub-tab active" data-sub="para-ti" onclick="showSubTab('para-ti')">Para ti</div>
@@ -645,23 +895,27 @@
                     <div class="slides">
                         <div class="slide active">
                             <img src="./port/craftsman.png" alt="Craftsman">
-                            <div class="caption">Craftsman - Construye sin límites</div>
+                            <div class="caption">Craftsman - Crea sin límites</div>
                         </div>
                         <div class="slide">
                             <img src="neocraft/2NEOCRAFT.png" alt="NeoCraft">
-                            <div class="caption">NeoCraft - Innovación en crafting</div>
+                            <div class="caption">NeoCraft - Innovación en cada bloque</div>
                         </div>
                         <div class="slide">
                             <img src="./port/texturaa.jpg" alt="Texturas">
-                            <div class="caption">Texturas - Personaliza tu mundo</div>
+                            <div class="caption">Texturas - Transforma tu mundo</div>
                         </div>
                         <div class="slide">
                             <img src="./port/extras.png" alt="Otras Apps">
-                            <div class="caption">Otras Apps - Más herramientas</div>
+                            <div class="caption">Otras Apps - Herramientas épicas</div>
                         </div>
                     </div>
                     <button class="prev" onclick="moveSlide(-1)">❮</button>
                     <button class="next" onclick="moveSlide(1)">❯</button>
+                </div>
+                <div class="section-container">
+                    <h3 class="section-header">Aplicaciones Destacadas</h3>
+                    <div class="app-carousel" id="appCarousel"></div>
                 </div>
                 <div id="mainMenu"></div>
             </div>
@@ -674,21 +928,21 @@
 
         <div id="apkScreen" style="display: none;">
             <div class="apk-contact">
-                <b>¿Quieres que tu APK aparezca aquí?</b>
-                <br>
-                Contáctanos vía Telegram para enviar tu APK, portada, descripción y enlace:
-                <br>
+                <b>¡Comparte tu APK en GameStore!</b>
+                <p>¿Tienes un mod, textura o APK increíble? Contáctanos vía Telegram con tu APK, portada, descripción y enlace para publicarlo en nuestra plataforma.</p>
                 <a href="https://t.me/+573046128902" class="telegram-btn">
                     <img src="./port/telegram.png" alt="Telegram">
                     Contactar por Telegram
                 </a>
-                <br>
-                <span style="font-size: 14px;">¡Envíanos tu contenido y lo publicaremos en GameStore!</span>
+                <p style="font-size: 16px; color: var(--text-secondary);">¡Haz que tu creación destaque en GameStore!</p>
             </div>
         </div>
 
         <div id="videosScreen" style="display: none;">
-            <div class="videos-grid" id="videosContainer"></div>
+            <div class="section-container">
+                <h3 class="section-header">Videos Destacados</h3>
+                <div class="videos-grid" id="videosContainer"></div>
+            </div>
         </div>
     </div>
 
@@ -742,21 +996,23 @@
                     openSection(state.section, state.version);
                 } else {
                     renderMainMenu();
+                    renderAppCarousel();
                 }
             }
         }
 
-        // Data (updated with creator info)
+        // Data (structured to allow adding new sections)
         const DATA = {
-            socials: {
-                youtube: {url: "https://youtube.com/@jlmc2?si=qHmc0eB24stW3Kcv", img: "./port/yt.png"},
-                tiktok: {url: "https://www.tiktok.com/@neomc1?_t=ZS-8zkfUb8Lnjm&_r=1", img: "./port/tiktok.png"},
-                instagram: {url: "https://www.instagram.com/neomc12?igsh=MXNqYmcwNHZmOGx3Yg==", img: "./port/inta.jpg"}
-            },
             creator: {
                 name: "NEOMC11",
                 youtube: "https://youtube.com/@jlmc2?si=qHmc0eB24stW3Kcv",
-                desc: "NEOMC11 es un creador de contenido y modder especializado en juegos como Minecraft y Craftsman, ofreciendo mods innovadores, APKs personalizados y tutoriales para mejorar la experiencia de juego."
+                desc: "NEOMC11 es un creador de contenido y modder especializado en juegos como Minecraft y Craftsman. Apasionado por ofrecer mods innovadores, APKs personalizados y tutoriales para elevar la experiencia de juego al siguiente nivel.",
+                video: {
+                    id: "creator-video",
+                    title: "NEOMC11 Showcase",
+                    url: "https://www.youtube.com/embed/TpIy0LwxfGA?si=WICy3XEOVsV_YRLC",
+                    thumbnail: "./port/miniatura1 (1).jpg"
+                }
             },
             sections: [
                 {
@@ -788,56 +1044,64 @@
                     desc: "Encuentra complementos, utilidades y apps adicionales como Minecraft y más. ¡Todo lo que necesitas para elevar tu gaming al siguiente nivel!",
                     banner: "./port/extras.png"
                 }
+                // Add new sections here, e.g.:
+                // {
+                //     id: "new-section",
+                //     title: "New Section",
+                //     desc: "Description of the new section.",
+                //     banner: "./port/new-section.png",
+                //     versions: [] // Optional: add versions if needed
+                // }
             ],
             items: {
                 "craftsman-main": [
-                    { id: "c-1", title: "Craftsman AB", version: "1.19.50", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/ah73nfy17woyh7j/Craftsman_AB.apk/file" },
-                    { id: "c-2", title: "Craftsman EMOTES", version: "1.18", img: "./port/craftsman.png", desc: "PARA GRABAR EMOTES DESDE CRAFTSMAN", url: "https://www.mediafire.com/file/1l0wno4u23when8/Craftsman_emotes.apk/file" },
-                    { id: "c-3", title: "Craftsmine", version: "1.??", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/42lo3yruc2rh4bo/CraftMine_V2.apk/file" },
-                    { id: "c-4", title: "Craftsman PE", version: "", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/r0ummjkdjinpnn1/Craftsman_Pe.apk/file" },
-                    { id: "c-5", title: "Craftsman Trial", version: "1.0", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/p2vj2wjczn2qf3j/Craftsman_Trial_1.0.0.16.apk/file" },
-                    { id: "c-6", title: "Craftsman uno", version: "0.15.10", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/briwk3jkzyald7o/Craftsman_UNO.apk/file" },
-                    { id: "c-7", title: "Craftsman ??", version: "", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/i2jyn06j46j8jur/Craftsman__signed.apk/file" },
-                    { id: "c-8", title: "Craftsman 1.17", version: "", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/drep2uik81qjuqm/minecraft-1-17-2_mod.apk/file" },
-                    { id: "c-9", title: "Craftsman VI", version: "1.16.20", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/hgi53l00ce4okrc/Craftsman+VI+1.16+NEOFACE.apk/file" }
+                    { id: "c-1", title: "Craftsman AB", version: "1.19.50", img: "./port/craftsman.png", desc: "Versión optimizada con nuevas funciones de construcción.", url: "https://www.mediafire.com/file/ah73nfy17woyh7j/Craftsman_AB.apk/file" },
+                    { id: "c-2", title: "Craftsman EMOTES", version: "1.18", img: "./port/craftsman.png", desc: "Graba emotes únicos directamente desde Craftsman.", url: "https://www.mediafire.com/file/1l0wno4u23when8/Craftsman_emotes.apk/file" },
+                    { id: "c-3", title: "Craftsmine", version: "1.??", img: "./port/craftsman.png", desc: "Explora nuevos mundos con gráficos mejorados.", url: "https://www.mediafire.com/file/42lo3yruc2rh4bo/CraftMine_V2.apk/file" },
+                    { id: "c-4", title: "Craftsman PE", version: "", img: "./port/craftsman.png", desc: "Edición portátil con optimizaciones para móviles.", url: "https://www.mediafire.com/file/r0ummjkdjinpnn1/Craftsman_Pe.apk/file" },
+                    { id: "c-5", title: "Craftsman Trial", version: "1.0", img: "./port/craftsman.png", desc: "Prueba las nuevas funciones antes del lanzamiento oficial.", url: "https://www.mediafire.com/file/p2vj2wjczn2qf3j/Craftsman_Trial_1.0.0.16.apk/file" },
+                    { id: "c-6", title: "Craftsman uno", version: "0.15.10", img: "./port/craftsman.png", desc: "Versión clásica con estilo retro.", url: "https://www.mediafire.com/file/briwk3jkzyald7o/Craftsman_UNO.apk/file" },
+                    { id: "c-7", title: "Craftsman ??", version: "", img: "./port/craftsman.png", desc: "Edición misteriosa con sorpresas ocultas.", url: "https://www.mediafire.com/file/i2jyn06j46j8jur/Craftsman__signed.apk/file" },
+                    { id: "c-8", title: "Craftsman 1.17", version: "", img: "./port/craftsman.png", desc: "Mod con características de la actualización 1.17.", url: "https://www.mediafire.com/file/drep2uik81qjuqm/minecraft-1-17-2_mod.apk/file" },
+                    { id: "c-9", title: "Craftsman VI", version: "1.16.20", img: "./port/craftsman.png", desc: "Versión mejorada con texturas NeoFace.", url: "https://www.mediafire.com/file/hgi53l00ce4okrc/Craftsman+VI+1.16+NEOFACE.apk/file" }
                 ],
                 "craftsman-01510": [
-                    { id: "c01510-1", title: "Craftsman 0.15.10", version: "0.15.10", img: "./port/craftsman.png", desc: "CRAFTSMAN 0.15.10 PARA ANDROID 14 Y 15 EN ADELANTE", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" },
-                    { id: "c01510-2", title: "Craftsman 0.15.10", version: "0.15.10", img: "./port/craftsman.png", desc: "CRAFTSMAN 0.15.10", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" }
+                    { id: "c01510-1", title: "Craftsman 0.15.10", version: "0.15.10", img: "./port/craftsman.png", desc: "Optimizado para Android 14 y 15, con rendimiento mejorado.", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" },
+                    { id: "c01510-2", title: "Craftsman 0.15.10", version: "0.15.10", img: "./port/craftsman.png", desc: "Versión estable para Android 13+.", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" }
                 ],
                 "craftsman-zero": [
-                    { id: "cz-1", title: "Craftsman zero", version: "DEMO 1", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/k4krz1ww0299fvk/Craftsman+Zero+Demo+1.apk/file" },
-                    { id: "cz-2", title: "Craftsman zero", version: "1.1.5", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/vudh0hmv9mjh2tz/Cratsman+Zero+1.1.apk/file" },
-                    { id: "cz-3", title: "Craftsman zero NAVIDAD", version: "1.1.5", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/guv0t148wko9h0i/Craftsman+Zero+Navidad.apk/file" },
-                    { id: "cz-4", title: "Craftsman zero", version: "DEMO 2", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/7ds74aevus10761/Craftsman+Zero+Demo+2+Sin+Bugs.apk/file" },
-                    { id: "cz-5", title: "Craftsman zero", version: "DEMO 3", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/ev9m698nl3sjjxt/CRAFTSMAN_ZERO_DEMO_3_WITH_ANIMATIONS__by_NEOMC11.apk/file" },
-                    { id: "cz-6", title: "Craftsman zero", version: "DEMO 3 SKINS", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/4koz7twgiqge5lu/CRAFTSMAN_ZERO_DEMO_3_FOR_SKINS_BY_NEOMC11.apk/file" },
-                    { id: "cz-7", title: "Craftsman zero", version: "SIN ANUNCIOS", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/0h2pdhzy9wktolw/Craftsman_zero_sin_anuncios_By_NEOMC11.apk/file" },
-                    { id: "cz-8", title: "Craftsman zero", version: "1.16.40", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/bdvo2pcqrp5n7g4/Craftsman+Zero+1.16.apk/file" }
+                    { id: "cz-1", title: "Craftsman zero", version: "DEMO 1", img: "./port/zero.png", desc: "Primera demo con mecánicas innovadoras.", url: "https://www.mediafire.com/file/k4krz1ww0299fvk/Craftsman+Zero+Demo+1.apk/file" },
+                    { id: "cz-2", title: "Craftsman zero", version: "1.1.5", img: "./port/zero.png", desc: "Actualización con mejoras de estabilidad.", url: "https://www.mediafire.com/file/vudh0hmv9mjh2tz/Cratsman+Zero+1.1.apk/file" },
+                    { id: "cz-3", title: "Craftsman zero NAVIDAD", version: "1.1.5", img: "./port/zero.png", desc: "Edición navideña con temáticas festivas.", url: "https://www.mediafire.com/file/guv0t148wko9h0i/Craftsman+Zero+Navidad.apk/file" },
+                    { id: "cz-4", title: "Craftsman zero", version: "DEMO 2", img: "./port/zero.png", desc: "Segunda demo sin bugs.", url: "https://www.mediafire.com/file/7ds74aevus10761/Craftsman+Zero+Demo+2+Sin+Bugs.apk/file" },
+                    { id: "cz-5", title: "Craftsman zero", version: "DEMO 3", img: "./port/zero.png", desc: "Demo con animaciones mejoradas.", url: "https://www.mediafire.com/file/ev9m698nl3sjjxt/CRAFTSMAN_ZERO_DEMO_3_WITH_ANIMATIONS__by_NEOMC11.apk/file" },
+                    { id: "cz-6", title: "Craftsman zero", version: "DEMO 3 SKINS", img: "./port/zero.png", desc: "Demo con soporte para skins personalizadas.", url: "https://www.mediafire.com/file/4koz7twgiqge5lu/CRAFTSMAN_ZERO_DEMO_3_FOR_SKINS_BY_NEOMC11.apk/file" },
+                    { id: "cz-7", title: "Craftsman zero", version: "SIN ANUNCIOS", img: "./port/zero.png", desc: "Versión sin publicidad para una experiencia fluida.", url: "https://www.mediafire.com/file/0h2pdhzy9wktolw/Craftsman_zero_sin_anuncios_By_NEOMC11.apk/file" },
+                    { id: "cz-8", title: "Craftsman zero", version: "1.16.40", img: "./port/zero.png", desc: "Versión optimizada para dispositivos antiguos.", url: "https://www.mediafire.com/file/bdvo2pcqrp5n7g4/Craftsman+Zero+1.16.apk/file" }
                 ],
                 "neocraft": [
-                    { id: "n-1", title: "NEOCRAFT v1", version: "1.20.12", img: "neocraft/NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/cxqj0b3t0syd6vi/NEOCRAFT.apk/file" },
-                    { id: "n-2", title: "NEOCRAFT v2", version: "", img: "neocraft/1NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/9jc389tiz5qkcy4/NeoCraft+Old+Edition_optimized.apk/file" },
-                    { id: "n-3", title: "NEOCRAFT, trailer edition", version: "", img: "neocraft/2NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/mookw5z8qrbintj/NEOCRAFT_Trailer_Edition_mod.apk/file" },
-                    { id: "n-4", title: "NEOCRAFT SE", version: "", img: "neocraft/3NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/d9942l6uw7whh2n/NEOCRAFT_SE.apk/file" },
-                    { id: "n-5", title: "NEOCRAFT AS", version: "", img: "neocraft/4NEOCRAFT.jpeg", desc: "", url: "https://www.mediafire.com/file/23a74qf7fbv9s7n/Neocraft_AS_V1.apk/file" },
-                    { id: "n-6", title: "NEOCRAFT", version: "1.21.92", img: "neocraft/5NEOCRAFT.jpeg", desc: "", url: "https://www.mediafire.com/file/xml11u44xavdzs6/NEOCRAFT.apk/file" },
-                    { id: "n-7", title: "NEOCRAFT", version: "1.21.92", img: "neocraft/6NEOCRAFT.jpeg", desc: "", url: "https://www.mediafire.com/file/gbqt15tt1htjijv/NEOCRAFT_LTE.apk/file" }
+                    { id: "n-1", title: "NEOCRAFT v1", version: "1.20.12", img: "neocraft/NEOCRAFT.png", desc: "Primera versión con gráficos avanzados.", url: "https://www.mediafire.com/file/cxqj0b3t0syd6vi/NEOCRAFT.apk/file" },
+                    { id: "n-2", title: "NEOCRAFT v2", version: "", img: "neocraft/1NEOCRAFT.png", desc: "Edición optimizada para mejor rendimiento.", url: "https://www.mediafire.com/file/9jc389tiz5qkcy4/NeoCraft+Old+Edition_optimized.apk/file" },
+                    { id: "n-3", title: "NEOCRAFT, trailer edition", version: "", img: "neocraft/2NEOCRAFT.png", desc: "Edición especial con contenido del tráiler.", url: "https://www.mediafire.com/file/mookw5z8qrbintj/NEOCRAFT_Trailer_Edition_mod.apk/file" },
+                    { id: "n-4", title: "NEOCRAFT SE", version: "", img: "neocraft/3NEOCRAFT.png", desc: "Versión especial con características únicas.", url: "https://www.mediafire.com/file/d9942l6uw7whh2n/NEOCRAFT_SE.apk/file" },
+                    { id: "n-5", title: "NEOCRAFT AS", version: "", img: "neocraft/4NEOCRAFT.jpeg", desc: "Edición avanzada con nuevos bloques.", url: "https://www.mediafire.com/file/23a74qf7fbv9s7n/Neocraft_AS_V1.apk/file" },
+                    { id: "n-6", title: "NEOCRAFT", version: "1.21.92", img: "neocraft/5NEOCRAFT.jpeg", desc: "Última versión con mejoras de rendimiento.", url: "https://www.mediafire.com/file/xml11u44xavdzs6/NEOCRAFT.apk/file" },
+                    { id: "n-7", title: "NEOCRAFT", version: "1.21.92", img: "neocraft/6NEOCRAFT.jpeg", desc: "Versión LTE optimizada para conexiones lentas.", url: "https://www.mediafire.com/file/gbqt15tt1htjijv/NEOCRAFT_LTE.apk/file" }
                 ],
                 "textures": [
-                    { id: "t-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "./port/texturaa.jpg", desc: "(SHADER) MINECRAFT PATCH", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
-                    { id: "t-2", title: "NEWB X LEGACY", version: "1.21+", img: "./port/texturaa.jpg", desc: "(SHADER) MINECRAFT PATCH 1.21+", url: "https://www.mediafire.com/file/8qmz4j57gi45ekd/Newb_X_Legacy_Mcpe_1.21.mcpack.zip/file" },
-                    { id: "t-3", title: "ONE BLOCK", version: "1.5", img: "./port/texturaa.jpg", desc: "(MUNDO) PARA MINECRAFT 1.18 EN ADELANTE", url: "https://www.mediafire.com/file/fwxue1q70q93ybw/One_Block_%2528Spring_to_Life%2529_v%253D1.5.9_By_DtA_MC.mcworld/file" },
-                    { id: "t-4", title: "TEXTURA OUTPUT", version: "", img: "./port/texturaa.jpg", desc: "(TUXTURA) PARA MINECRAFT 1.18+", url: "https://www.mediafire.com/file/yxuie1v5m6v0khg/outcut2.mcpack/file" },
-                    { id: "t-5", title: "LUCKY BLOCK", version: "", img: "./port/texturaa.jpg", desc: "(MUNDO) MINECRAFT 1.18+", url: "https://www.mediafire.com/file/x1fqf8d1d76a9zn/RainbowLuckyBlockRaceV1.1.mcworld/file" },
-                    { id: "t-6", title: "BARE BONES", version: "", img: "./port/texturaa.jpg", desc: "(TEXTURA) PARA MINECRAFT 1.18", url: "https://www.mediafire.com/file/s1ridznky8rp0fn/RP_BB.mcpack/file" },
-                    { id: "t-7", title: "I SEE YOU NOW", version: "", img: "./port/texturaa.jpg", desc: "TEXTURA PARA VER SKINS EN CRAFTING AND BUILDING", url: "https://www.mediafire.com/file/ykl2qy2d62fdnaw/I_SEE_YOU%2521_by_NEOMC11.mcpack/file" },
-                    { id: "t-8", title: "Texturas Vanilla", version: "1.3", img: "./port/texturaa.jpg", desc: "PARA CRAFTSMAN 1.18+", url: "https://www.mediafire.com/file/2wsc0bpel7frifo/Texturas_Vanillas_1.18.0_By_NEOFACEMC.mcpack/file" }
+                    { id: "t-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "./port/texturaa.jpg", desc: "Shader de alta calidad para Minecraft.", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
+                    { id: "t-2", title: "NEWB X LEGACY", version: "1.21+", img: "./port/texturaa.jpg", desc: "Shader optimizado para Minecraft 1.21+.", url: "https://www.mediafire.com/file/8qmz4j57gi45ekd/Newb_X_Legacy_Mcpe_1.21.mcpack.zip/file" },
+                    { id: "t-3", title: "ONE BLOCK", version: "1.5", img: "./port/texturaa.jpg", desc: "Mundo para Minecraft 1.18+ con desafío One Block.", url: "https://www.mediafire.com/file/fwxue1q70q93ybw/One_Block_%2528Spring_to_Life%2529_v%253D1.5.9_By_DtA_MC.mcworld/file" },
+                    { id: "t-4", title: "TEXTURA OUTPUT", version: "", img: "./port/texturaa.jpg", desc: "Textura personalizada para Minecraft 1.18+.", url: "https://www.mediafire.com/file/yxuie1v5m6v0khg/outcut2.mcpack/file" },
+                    { id: "t-5", title: "LUCKY BLOCK", version: "", img: "./port/texturaa.jpg", desc: "Mundo con Lucky Blocks para Minecraft 1.18+.", url: "https://www.mediafire.com/file/x1fqf8d1d76a9zn/RainbowLuckyBlockRaceV1.1.mcworld/file" },
+                    { id: "t-6", title: "BARE BONES", version: "", img: "./port/texturaa.jpg", desc: "Textura minimalista para Minecraft 1.18.", url: "https://www.mediafire.com/file/s1ridznky8rp0fn/RP_BB.mcpack/file" },
+                    { id: "t-7", title: "I SEE YOU NOW", version: "", img: "./port/texturaa.jpg", desc: "Textura para ver skins en Crafting and Building.", url: "https://www.mediafire.com/file/ykl2qy2d62fdnaw/I_SEE_YOU%2521_by_NEOMC11.mcpack/file" },
+                    { id: "t-8", title: "Texturas Vanilla", version: "1.3", img: "./port/texturaa.jpg", desc: "Texturas vanilla optimizadas para Craftsman 1.18+.", url: "https://www.mediafire.com/file/2wsc0bpel7frifo/Texturas_Vanillas_1.18.0_By_NEOFACEMC.mcpack/file" }
                 ],
                 "extras": [
-                    { id: "ex-1", title: "GameStore", version: "1.0", img: "./port/texturaa.jpg", desc: "Lleva GameStore contigo! La misma tienda, ahora en una app (apk). Decubre juegos y novedades con una navegacion rapida y fluiuda. Descarga GameStore AHORA!!", url: "https://www.mediafire.com/file/22blvwo2yeaxmea/GStore.apk/file" },
-                    { id: "ex-2", title: "Ultracraft", version: "1.1", img: "port/ultra.png", desc: "", url: "https://www.mediafire.com/folder/h98zm2afn6tju/Updates" },
-                    { id: "ex-3", title: "Minecraft", version: "1.21.113", img: "port/Minecraft_Bedrock.png", desc: "Minecraft 1.21.113 ya esta aqui... lo mejor, en un solo link podras encontra muchas versiones de MINECRAFT BEDROCK, disfrúta!", url: "https://app.mediafire.com/folder/6vzirxgmdn4r2/1.21.94+Oficial+Grissby.com" }
+                    { id: "ex-1", title: "GameStore", version: "1.0", img: "./port/texturaa.jpg", desc: "Lleva GameStore contigo! La misma tienda, ahora en una app (apk). Descubre juegos y novedades con una navegación rápida y fluida.", url: "https://www.mediafire.com/file/22blvwo2yeaxmea/GStore.apk/file" },
+                    { id: "ex-2", title: "Ultracraft", version: "1.1", img: "port/ultra.png", desc: "Herramienta avanzada para personalizar tu experiencia de juego.", url: "https://www.mediafire.com/folder/h98zm2afn6tju/Updates" },
+                    { id: "ex-3", title: "Minecraft", version: "1.21.113", img: "port/Minecraft_Bedrock.png", desc: "Explora múltiples versiones de Minecraft Bedrock en un solo lugar.", url: "https://app.mediafire.com/folder/6vzirxgmdn4r2/1.21.94+Oficial+Grissby.com" }
                 ]
             },
             videos: [
@@ -874,11 +1138,44 @@
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.onclick = () => openSection(sec.id);
-                card.appendChild(banner);
-                card.appendChild(desc);
+                card.innerHTML = `
+                    <div class="info">
+                        <div class="title">${sec.title}</div>
+                    </div>
+                    <img src="${sec.banner}" alt="${sec.title}">
+                    <div class="info">
+                        <div class="desc">${sec.desc}</div>
+                    </div>
+                `;
                 container.appendChild(header);
                 container.appendChild(card);
                 mainMenu.appendChild(container);
+            });
+        }
+
+        function renderAppCarousel() {
+            const appCarousel = document.getElementById('appCarousel');
+            appCarousel.innerHTML = '';
+            const featuredItems = [
+                DATA.items['craftsman-main'][0],
+                DATA.items['neocraft'][0],
+                DATA.items['textures'][0],
+                DATA.items['extras'][0]
+            ];
+            featuredItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'app-card';
+                card.innerHTML = `
+                    <div class="info">
+                        <div class="title">${item.title}</div>
+                    </div>
+                    <img src="${item.img}" alt="${item.title}">
+                    <div class="info">
+                        <div class="desc">${item.version ? `v${item.version} - ` : ''}${item.desc}</div>
+                    </div>
+                `;
+                card.onclick = () => window.open(item.url, '_blank');
+                appCarousel.appendChild(card);
             });
         }
 
@@ -894,14 +1191,14 @@
                 sec.versions.forEach(v => {
                     const c = document.createElement('div');
                     c.className = 'card';
-                    const img = document.createElement('img');
-                    img.src = v.id === "craftsman-main" ? "./port/craftsman.png" :
-                              v.id === "craftsman-zero" ? "zero.png" : "./port/craftsman.png";
-                    const info = document.createElement('div');
-                    info.className = 'info';
-                    info.innerHTML = `<div class="title">${v.title}</div>`;
-                    c.appendChild(img);
-                    c.appendChild(info);
+                    const imgSrc = v.id === "craftsman-main" ? "./port/craftsman.png" :
+                                  v.id === "craftsman-zero" ? "./port/zero.png" : "./port/craftsman.png";
+                    c.innerHTML = `
+                        <div class="info">
+                            <div class="title">${v.title}</div>
+                        </div>
+                        <img src="${imgSrc}" alt="${v.title}">
+                    `;
                     c.onclick = () => openSection(id, v.id, targetItemId);
                     contentMenu.appendChild(c);
                 });
@@ -916,7 +1213,7 @@
             searchResults.style.display = 'none';
             let list = DATA.items[key] || [];
             if (list.length === 0) {
-                contentMenu.innerHTML = "<div style='padding:12px;color: var(--text-secondary);'>No hay elementos</div>";
+                contentMenu.innerHTML = "<div style='padding:20px;color: var(--text-secondary);'>No hay elementos</div>";
                 return;
             }
             list.forEach(it => {
@@ -934,23 +1231,30 @@
         function createItemCard(it, sectionKey) {
             const c = document.createElement('div');
             c.className = 'card';
-            const img = document.createElement('img');
-            img.src = it.img || 'craftsman.png';
-            const info = document.createElement('div');
-            info.className = 'info';
-            info.innerHTML = `<div class="title">${it.title}</div><div class="desc">${it.version || ''} - ${it.desc || ''}</div>`;
-            const creator = document.createElement('div');
-            creator.className = 'creator';
-            creator.innerHTML = `
-                <div class="creator-label">Creador: <a href="${DATA.creator.youtube}" class="creator-link" target="_blank">${DATA.creator.name}</a></div>
-                <p class="creator-desc">${DATA.creator.desc}</p>
+            c.innerHTML = `
+                <div class="info">
+                    <div class="title">${it.title}</div>
+                </div>
+                <img src="${it.img || 'craftsman.png'}" alt="${it.title}">
+                <div class="info">
+                    <div class="desc">${it.version ? `v${it.version} - ` : ''}${it.desc || ''}</div>
+                </div>
+                <div class="creator">
+                    <div class="creator-label">Creador: <a href="${DATA.creator.youtube}" class="creator-link" target="_blank">${DATA.creator.name}</a></div>
+                    <p class="creator-desc">${DATA.creator.desc}</p>
+                    <div class="creator-video" id="creator-video-${it.id}">
+                        <img src="${DATA.creator.video.thumbnail}" alt="${DATA.creator.video.title}">
+                        <div class="play-overlay">
+                            <i class="material-icons">play_circle</i>
+                        </div>
+                        <iframe src="${DATA.creator.video.url}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="copy-link-overlay">
+                    <button class="copy-link-btn">Copiar Link</button>
+                </div>
             `;
-            const overlay = document.createElement('div');
-            overlay.className = 'copy-link-overlay';
-            const copyBtn = document.createElement('button');
-            copyBtn.className = 'copy-link-btn';
-            copyBtn.textContent = 'Copiar Link';
-            copyBtn.onclick = (e) => {
+            c.querySelector('.copy-link-btn').onclick = (e) => {
                 e.stopPropagation();
                 const baseUrl = window.location.origin + window.location.pathname;
                 const section = DATA.sections.find(s => s.id === sectionKey || s.versions?.some(v => v.id === sectionKey));
@@ -961,12 +1265,21 @@
                     alert('Link copiado al portapapeles!');
                 });
             };
-            overlay.appendChild(copyBtn);
-            c.appendChild(img);
-            c.appendChild(info);
-            c.appendChild(creator);
-            c.appendChild(overlay);
-            c.onclick = () => window.open(it.url, '_blank');
+            c.onclick = (e) => {
+                if (!e.target.closest('.creator-video') && !e.target.closest('.copy-link-btn')) {
+                    window.open(it.url, '_blank');
+                }
+            };
+            const videoContainer = c.querySelector(`#creator-video-${it.id}`);
+            videoContainer.onclick = (e) => {
+                e.stopPropagation();
+                videoContainer.classList.toggle('active');
+                if (videoContainer.classList.contains('active')) {
+                    videoContainer.querySelector('iframe').src += "?autoplay=1";
+                } else {
+                    videoContainer.querySelector('iframe').src = DATA.creator.video.url;
+                }
+            };
             let pressTimer;
             c.addEventListener('mousedown', () => {
                 pressTimer = setTimeout(() => {
@@ -985,7 +1298,7 @@
             return c;
         }
 
-        // Render Top Charts (flat list of all items)
+        // Render Top Charts
         function renderTopCharts() {
             const topGrid = document.getElementById('topChartsGrid');
             topGrid.innerHTML = '';
@@ -1005,6 +1318,9 @@
             document.getElementById('subListaExitos').style.display = sub === 'lista-exitos' ? 'block' : 'none';
             if (sub === 'lista-exitos') {
                 renderTopCharts();
+            } else {
+                renderMainMenu();
+                renderAppCarousel();
             }
         }
 
@@ -1019,6 +1335,7 @@
                     openSection(state.section, state.version);
                 } else {
                     renderMainMenu();
+                    renderAppCarousel();
                 }
             } else {
                 isSearching = true;
@@ -1047,7 +1364,7 @@
                 });
             });
             if (matches.length === 0) {
-                searchResults.innerHTML = "<div style='padding:12px;color: var(--text-secondary);'>No se encontraron resultados</div>";
+                searchResults.innerHTML = "<div style='padding:20px;color: var(--text-secondary);'>No se encontraron resultados</div>";
                 return;
             }
             matches.forEach(match => {
@@ -1056,13 +1373,15 @@
                     const sec = match.data;
                     c = document.createElement('div');
                     c.className = 'card';
-                    const img = document.createElement('img');
-                    img.src = sec.banner;
-                    const info = document.createElement('div');
-                    info.className = 'info';
-                    info.innerHTML = `<div class="title">${sec.title}</div><div class="desc">${sec.desc || ''}</div>`;
-                    c.appendChild(img);
-                    c.appendChild(info);
+                    c.innerHTML = `
+                        <div class="info">
+                            <div class="title">${sec.title}</div>
+                        </div>
+                        <img src="${sec.banner}" alt="${sec.title}">
+                        <div class="info">
+                            <div class="desc">${sec.desc || ''}</div>
+                        </div>
+                    `;
                     c.onclick = () => {
                         searchInput.value = '';
                         openSection(sec.id);
@@ -1135,6 +1454,7 @@
                 document.getElementById('navHome').classList.add('active');
                 if (!isSearching) {
                     renderMainMenu();
+                    renderAppCarousel();
                 }
             }
             if (screen === 'apk') {
@@ -1157,6 +1477,7 @@
         // Initialization
         showScreen('home');
         renderMainMenu();
+        renderAppCarousel();
         showSubTab('para-ti');
         const savedTheme = localStorage.getItem('theme') || 'dark';
         document.body.dataset.theme = savedTheme;
