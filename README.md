@@ -1,1 +1,1 @@
-# GameStoreMC
+# JLStore
