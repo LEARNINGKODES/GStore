@@ -59,6 +59,7 @@
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
+            padding-bottom: 56px; /* Space for bottom nav */
         }
 
         /* App Bar */
@@ -95,18 +96,12 @@
             font-weight: 500;
         }
 
-        .app-bar .search-btn {
-            margin-left: auto;
-            cursor: pointer;
-            font-size: 24px;
-        }
-
         .app-bar .profile {
             width: 32px;
             height: 32px;
             border-radius: 50%;
             background: var(--text-on-primary);
-            margin-left: 16px;
+            margin-left: auto;
         }
 
         /* Search Bar */
@@ -201,6 +196,43 @@
             margin-left: auto;
         }
 
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 56px;
+            background: var(--primary);
+            color: var(--text-on-primary);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .bottom-nav button {
+            background: none;
+            border: none;
+            color: var(--text-on-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .bottom-nav button i {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .bottom-nav button.active {
+            color: var(--accent);
+        }
+
         /* Main Content */
         .main {
             padding: 72px 16px 16px;
@@ -211,25 +243,31 @@
         .hero {
             background: var(--surface);
             border-radius: var(--radius);
-            padding: 16px;
-            margin-bottom: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
             text-align: center;
+            box-shadow: var(--shadow);
         }
 
         .hero h2 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .hero p {
-            font-size: 16px;
+            font-size: 18px;
             color: var(--text-secondary);
             margin-bottom: 16px;
         }
 
-        /* Tabs */
-        .tabs {
+        .hero .featured-info {
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        /* Sub Tabs */
+        .sub-tabs {
             display: flex;
             overflow-x: auto;
             margin-bottom: 16px;
@@ -237,11 +275,11 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .tabs::-webkit-scrollbar {
+        .sub-tabs::-webkit-scrollbar {
             display: none;
         }
 
-        .tab {
+        .sub-tab {
             padding: 12px 24px;
             font-size: 16px;
             font-weight: 500;
@@ -250,7 +288,7 @@
             border-bottom: 2px solid transparent;
         }
 
-        .tab.active {
+        .sub-tab.active {
             color: var(--primary);
             border-bottom: 2px solid var(--primary);
         }
@@ -260,7 +298,7 @@
             position: relative;
             overflow: hidden;
             border-radius: var(--radius);
-            margin-bottom: 16px;
+            margin-bottom: 24px;
             box-shadow: var(--shadow);
         }
 
@@ -276,20 +314,20 @@
 
         .slide img {
             width: 100%;
-            height: 200px;
+            height: 240px;
             object-fit: cover;
             border-radius: var(--radius);
         }
 
         .caption {
             position: absolute;
-            bottom: 8px;
+            bottom: 16px;
             left: 16px;
             background: rgba(0, 0, 0, 0.5);
             color: var(--text-on-primary);
             padding: 8px 16px;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 500;
         }
 
@@ -300,21 +338,47 @@
             background: rgba(0, 0, 0, 0.5);
             border: none;
             color: var(--text-on-primary);
-            font-size: 20px;
+            font-size: 24px;
             padding: 8px;
             cursor: pointer;
             border-radius: 50%;
         }
 
-        .carousel .prev { left: 8px; }
-        .carousel .next { right: 8px; }
+        .carousel .prev { left: 16px; }
+        .carousel .next { right: 16px; }
+
+        /* Sections */
+        .section-container {
+            margin-bottom: 32px;
+        }
+
+        .section-header {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .section-banner {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
 
         /* Cards */
         .items-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 16px;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
         }
 
         .card {
@@ -323,6 +387,7 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             cursor: pointer;
+            transition: var(--transition);
         }
 
         .card:hover {
@@ -332,7 +397,7 @@
 
         .card img {
             width: 100%;
-            height: 120px;
+            height: 140px;
             object-fit: cover;
         }
 
@@ -341,13 +406,36 @@
         }
 
         .card .title {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 500;
             margin-bottom: 4px;
         }
 
         .card .desc {
             font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .card .creator {
+            padding: 0 12px 12px;
+            border-top: 1px solid var(--divider);
+        }
+
+        .card .creator-label {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .card .creator-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .card .creator-desc {
+            font-size: 13px;
             color: var(--text-secondary);
         }
 
@@ -445,23 +533,24 @@
             font-weight: 500;
         }
 
-        /* Contact and Links Sections */
-        .apk-contact, .links-container {
+        /* Contact Section */
+        .apk-contact {
             background: var(--surface);
             border-radius: var(--radius);
-            padding: 16px;
+            padding: 24px;
             margin: 16px 0;
             text-align: center;
             box-shadow: var(--shadow);
         }
 
-        .apk-contact b, .links-container h3 {
-            font-size: 20px;
+        .apk-contact b {
+            font-size: 24px;
             font-weight: 700;
             margin-bottom: 12px;
+            display: block;
         }
 
-        .telegram-btn, .link-btn {
+        .telegram-btn {
             display: inline-flex;
             align-items: center;
             padding: 12px 24px;
@@ -471,7 +560,7 @@
             border-radius: 24px;
             font-size: 16px;
             font-weight: 500;
-            margin: 8px;
+            margin: 8px 0;
         }
 
         .telegram-btn img {
@@ -480,35 +569,39 @@
             margin-right: 8px;
         }
 
-        .links-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 16px;
-        }
-
         /* Responsive Design */
         @media (max-width: 600px) {
-            .tabs {
+            .sub-tabs {
                 font-size: 14px;
             }
 
             .card img {
-                height: 100px;
+                height: 120px;
             }
 
             .slide img {
-                height: 150px;
+                height: 180px;
+            }
+
+            .section-banner {
+                height: 140px;
+            }
+
+            .bottom-nav button {
+                font-size: 10px;
+            }
+
+            .bottom-nav button i {
+                font-size: 22px;
             }
         }
     </style>
 </head>
-<body data-theme="light">
+<body data-theme="dark">
     <div class="app-bar">
         <i class="material-icons hamburger" onclick="toggleSidebar()">menu</i>
         <img class="logo" src="NEOMC11.png" alt="Logo">
         <h1>GameStore</h1>
-        <i class="material-icons search-btn" onclick="toggleSearch()">search</i>
         <div class="profile"></div>
     </div>
 
@@ -532,57 +625,64 @@
         </div>
         <div class="theme-toggle">
             <span>Modo Oscuro</span>
-            <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
+            <input type="checkbox" id="themeToggle" onchange="toggleTheme()" checked>
         </div>
     </div>
 
     <div class="main">
-        <div id="homeScreen">
+        <div id="homeScreen" style="display: block;">
             <div class="hero">
                 <h2>Bienvenido a GameStore</h2>
-                <p>Descubre una amplia selección de APKs, texturas, shaders, mundos y videos para tus juegos favoritos como Craftsman, NeoCraft y más. ¡Explora, descarga y conéctate con nosotros!</p>
+                <p>Descubre la mejor selección de APKs, texturas, shaders y mundos para juegos como Craftsman y NeoCraft. ¡Explora mods exclusivos, actualizaciones y contenido creado por apasionados del gaming!</p>
+                <div class="featured-info">Destacados: Nuevas versiones de Craftsman Zero y shaders ultra-realistas. ¡Descarga ahora y eleva tu experiencia de juego!</div>
             </div>
-            <div class="tabs">
-                <div class="tab active" onclick="showScreen('home')">Inicio</div>
-                <div class="tab" onclick="showScreen('apk')">Contacto</div>
-                <div class="tab" onclick="showScreen('videos')">Videos</div>
-                <div class="tab" onclick="showScreen('links')">Links</div>
+            <div class="sub-tabs">
+                <div class="sub-tab active" data-sub="para-ti" onclick="showSubTab('para-ti')">Para ti</div>
+                <div class="sub-tab" data-sub="lista-exitos" onclick="showSubTab('lista-exitos')">Lista de éxitos</div>
             </div>
-            <div class="carousel">
-                <div class="slides">
-                    <div class="slide active">
-                        <img src="./port/craftsman.png" alt="Craftsman">
-                        <div class="caption">Craftsman</div>
+            <div id="subParaTi">
+                <div class="carousel">
+                    <div class="slides">
+                        <div class="slide active">
+                            <img src="./port/craftsman.png" alt="Craftsman">
+                            <div class="caption">Craftsman - Construye sin límites</div>
+                        </div>
+                        <div class="slide">
+                            <img src="neocraft/2NEOCRAFT.png" alt="NeoCraft">
+                            <div class="caption">NeoCraft - Innovación en crafting</div>
+                        </div>
+                        <div class="slide">
+                            <img src="./port/texturaa.jpg" alt="Texturas">
+                            <div class="caption">Texturas - Personaliza tu mundo</div>
+                        </div>
+                        <div class="slide">
+                            <img src="./port/extras.png" alt="Otras Apps">
+                            <div class="caption">Otras Apps - Más herramientas</div>
+                        </div>
                     </div>
-                    <div class="slide">
-                        <img src="neocraft/2NEOCRAFT.png" alt="NeoCraft">
-                        <div class="caption">NeoCraft</div>
-                    </div>
-                    <div class="slide">
-                        <img src="./port/texturaa.jpg" alt="Texturas">
-                        <div class="caption">Texturas</div>
-                    </div>
-                    <div class="slide">
-                        <img src="./port/extras.png" alt="Extras">
-                        <div class="caption">Extras</div>
-                    </div>
+                    <button class="prev" onclick="moveSlide(-1)">❮</button>
+                    <button class="next" onclick="moveSlide(1)">❯</button>
                 </div>
-                <button class="prev" onclick="moveSlide(-1)">❮</button>
-                <button class="next" onclick="moveSlide(1)">❯</button>
+                <div id="mainMenu"></div>
             </div>
-            <div id="mainMenu" class="items-grid"></div>
+            <div id="subListaExitos" style="display: none;">
+                <div class="items-grid" id="topChartsGrid"></div>
+            </div>
             <div id="contentMenu" class="items-grid"></div>
             <div id="searchResults" class="items-grid" style="display: none;"></div>
         </div>
 
         <div id="apkScreen" style="display: none;">
             <div class="apk-contact">
-                <b>¿Quieres que tu APK aparezca aquí?</b><br>
-                Contáctanos vía Telegram para enviar tu APK, portada, descripción y enlace:<br>
+                <b>¿Quieres que tu APK aparezca aquí?</b>
+                <br>
+                Contáctanos vía Telegram para enviar tu APK, portada, descripción y enlace:
+                <br>
                 <a href="https://t.me/+573046128902" class="telegram-btn">
                     <img src="./port/telegram.png" alt="Telegram">
                     Contactar por Telegram
-                </a><br>
+                </a>
+                <br>
                 <span style="font-size: 14px;">¡Envíanos tu contenido y lo publicaremos en GameStore!</span>
             </div>
         </div>
@@ -590,19 +690,27 @@
         <div id="videosScreen" style="display: none;">
             <div class="videos-grid" id="videosContainer"></div>
         </div>
-
-        <div id="linksScreen" style="display: none;">
-            <div class="links-container">
-                <h3>Explora Más</h3>
-                <div class="links-grid">
-                    <a href="https://learningkodes.github.io/GameStore/" class="link-btn">CONTENTS</a>
-                    <a href="https://youtube.com/@jlmc2?si=qHmc0eB24stW3Kcv" class="link-btn">YouTube</a>
-                    <a href="https://www.tiktok.com/@neomc1?_t=ZS-8zkfUb8Lnjm&_r=1" class="link-btn">TikTok</a>
-                    <a href="https://www.instagram.com/neomc12?igsh=MXNqYmcwNHZmOGx3Yg==" class="link-btn">Instagram</a>
-                </div>
-            </div>
-        </div>
     </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button id="navHome" class="active">
+            <i class="material-icons">home</i>
+            Inicio
+        </button>
+        <button id="navApk">
+            <i class="material-icons">contact_phone</i>
+            Contacto
+        </button>
+        <button id="navVideos">
+            <i class="material-icons">videocam</i>
+            Videos
+        </button>
+        <button id="navSearch">
+            <i class="material-icons">search</i>
+            Buscar
+        </button>
+    </nav>
 
     <script>
         // Theme Toggle
@@ -611,6 +719,7 @@
             const isDark = body.dataset.theme === 'dark';
             body.dataset.theme = isDark ? 'light' : 'dark';
             localStorage.setItem('theme', body.dataset.theme);
+            document.getElementById('themeToggle').checked = !isDark;
         }
 
         // Sidebar Toggle
@@ -625,56 +734,110 @@
             searchBar.classList.toggle('active');
             if (searchBar.classList.contains('active')) {
                 document.getElementById('searchInput').focus();
+            } else {
+                document.getElementById('searchInput').value = '';
+                isSearching = false;
+                searchResults.style.display = 'none';
+                if (state.section) {
+                    openSection(state.section, state.version);
+                } else {
+                    renderMainMenu();
+                }
             }
         }
 
-        // Particle Background (Optional, simplified for performance)
-        const canvas = document.getElementById('particles');
-        if (canvas) {
-            canvas.remove(); // Remove particles for Play Store simplicity
-        }
-
-        // Data (unchanged from original)
+        // Data (updated with creator info)
         const DATA = {
             socials: {
                 youtube: {url: "https://youtube.com/@jlmc2?si=qHmc0eB24stW3Kcv", img: "./port/yt.png"},
                 tiktok: {url: "https://www.tiktok.com/@neomc1?_t=ZS-8zkfUb8Lnjm&_r=1", img: "./port/tiktok.png"},
                 instagram: {url: "https://www.instagram.com/neomc12?igsh=MXNqYmcwNHZmOGx3Yg==", img: "./port/inta.jpg"}
             },
+            creator: {
+                name: "NEOMC11",
+                youtube: "https://youtube.com/@jlmc2?si=qHmc0eB24stW3Kcv",
+                desc: "NEOMC11 es un creador de contenido y modder especializado en juegos como Minecraft y Craftsman, ofreciendo mods innovadores, APKs personalizados y tutoriales para mejorar la experiencia de juego."
+            },
             sections: [
                 {
                     id: "craftsman",
                     title: "Craftsman",
-                    desc: "Colección Craftsman",
+                    desc: "Explora la colección definitiva de Craftsman con versiones clásicas y mods exclusivos. ¡Construye mundos increíbles con herramientas avanzadas y creatividad ilimitada!",
+                    banner: "./port/craftsman.png",
                     versions: [
                         {id: "craftsman-main", title: "Craftsman"},
                         {id: "craftsman-01510", title: "Craftsman 0.15.10"},
                         {id: "craftsman-zero", title: "Craftsman Zero"}
                     ]
                 },
-                {id: "neocraft", title: "NEOCRAFT", desc: "Recursos NEOCRAFT"},
-                {id: "textures", title: "Texturas", desc: "Texturas, Shaders, Mundos"},
-                {id: "extras", title: "Extras", desc: "Complementos y utilidades"}
+                {
+                    id: "neocraft",
+                    title: "NEOCRAFT",
+                    desc: "Sumérgete en NeoCraft, la evolución del crafting con gráficos mejorados y mecánicas innovadoras. ¡Descubre recursos únicos para tus aventuras!",
+                    banner: "neocraft/NEOCRAFT.png"
+                },
+                {
+                    id: "textures",
+                    title: "Texturas",
+                    desc: "Personaliza tu experiencia con texturas, shaders y mundos épicos. ¡Transforma tus juegos en obras de arte visuales con calidad premium!",
+                    banner: "./port/texturaa.jpg"
+                },
+                {
+                    id: "extras",
+                    title: "Otras Apps",
+                    desc: "Encuentra complementos, utilidades y apps adicionales como Minecraft y más. ¡Todo lo que necesitas para elevar tu gaming al siguiente nivel!",
+                    banner: "./port/extras.png"
+                }
             ],
             items: {
                 "craftsman-main": [
                     { id: "c-1", title: "Craftsman AB", version: "1.19.50", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/ah73nfy17woyh7j/Craftsman_AB.apk/file" },
-                    // ... (rest of items unchanged)
+                    { id: "c-2", title: "Craftsman EMOTES", version: "1.18", img: "./port/craftsman.png", desc: "PARA GRABAR EMOTES DESDE CRAFTSMAN", url: "https://www.mediafire.com/file/1l0wno4u23when8/Craftsman_emotes.apk/file" },
+                    { id: "c-3", title: "Craftsmine", version: "1.??", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/42lo3yruc2rh4bo/CraftMine_V2.apk/file" },
+                    { id: "c-4", title: "Craftsman PE", version: "", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/r0ummjkdjinpnn1/Craftsman_Pe.apk/file" },
+                    { id: "c-5", title: "Craftsman Trial", version: "1.0", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/p2vj2wjczn2qf3j/Craftsman_Trial_1.0.0.16.apk/file" },
+                    { id: "c-6", title: "Craftsman uno", version: "0.15.10", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/briwk3jkzyald7o/Craftsman_UNO.apk/file" },
+                    { id: "c-7", title: "Craftsman ??", version: "", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/i2jyn06j46j8jur/Craftsman__signed.apk/file" },
+                    { id: "c-8", title: "Craftsman 1.17", version: "", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/drep2uik81qjuqm/minecraft-1-17-2_mod.apk/file" },
+                    { id: "c-9", title: "Craftsman VI", version: "1.16.20", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/hgi53l00ce4okrc/Craftsman+VI+1.16+NEOFACE.apk/file" }
                 ],
                 "craftsman-01510": [
-                    // ... (unchanged)
+                    { id: "c01510-1", title: "Craftsman 0.15.10", version: "0.15.10", img: "./port/craftsman.png", desc: "CRAFTSMAN 0.15.10 PARA ANDROID 14 Y 15 EN ADELANTE", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" },
+                    { id: "c01510-2", title: "Craftsman 0.15.10", version: "0.15.10", img: "./port/craftsman.png", desc: "CRAFTSMAN 0.15.10", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" }
                 ],
                 "craftsman-zero": [
-                    // ... (unchanged)
+                    { id: "cz-1", title: "Craftsman zero", version: "DEMO 1", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/k4krz1ww0299fvk/Craftsman+Zero+Demo+1.apk/file" },
+                    { id: "cz-2", title: "Craftsman zero", version: "1.1.5", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/vudh0hmv9mjh2tz/Cratsman+Zero+1.1.apk/file" },
+                    { id: "cz-3", title: "Craftsman zero NAVIDAD", version: "1.1.5", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/guv0t148wko9h0i/Craftsman+Zero+Navidad.apk/file" },
+                    { id: "cz-4", title: "Craftsman zero", version: "DEMO 2", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/7ds74aevus10761/Craftsman+Zero+Demo+2+Sin+Bugs.apk/file" },
+                    { id: "cz-5", title: "Craftsman zero", version: "DEMO 3", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/ev9m698nl3sjjxt/CRAFTSMAN_ZERO_DEMO_3_WITH_ANIMATIONS__by_NEOMC11.apk/file" },
+                    { id: "cz-6", title: "Craftsman zero", version: "DEMO 3 SKINS", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/4koz7twgiqge5lu/CRAFTSMAN_ZERO_DEMO_3_FOR_SKINS_BY_NEOMC11.apk/file" },
+                    { id: "cz-7", title: "Craftsman zero", version: "SIN ANUNCIOS", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/0h2pdhzy9wktolw/Craftsman_zero_sin_anuncios_By_NEOMC11.apk/file" },
+                    { id: "cz-8", title: "Craftsman zero", version: "1.16.40", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/bdvo2pcqrp5n7g4/Craftsman+Zero+1.16.apk/file" }
                 ],
                 "neocraft": [
-                    // ... (unchanged)
+                    { id: "n-1", title: "NEOCRAFT v1", version: "1.20.12", img: "neocraft/NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/cxqj0b3t0syd6vi/NEOCRAFT.apk/file" },
+                    { id: "n-2", title: "NEOCRAFT v2", version: "", img: "neocraft/1NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/9jc389tiz5qkcy4/NeoCraft+Old+Edition_optimized.apk/file" },
+                    { id: "n-3", title: "NEOCRAFT, trailer edition", version: "", img: "neocraft/2NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/mookw5z8qrbintj/NEOCRAFT_Trailer_Edition_mod.apk/file" },
+                    { id: "n-4", title: "NEOCRAFT SE", version: "", img: "neocraft/3NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/d9942l6uw7whh2n/NEOCRAFT_SE.apk/file" },
+                    { id: "n-5", title: "NEOCRAFT AS", version: "", img: "neocraft/4NEOCRAFT.jpeg", desc: "", url: "https://www.mediafire.com/file/23a74qf7fbv9s7n/Neocraft_AS_V1.apk/file" },
+                    { id: "n-6", title: "NEOCRAFT", version: "1.21.92", img: "neocraft/5NEOCRAFT.jpeg", desc: "", url: "https://www.mediafire.com/file/xml11u44xavdzs6/NEOCRAFT.apk/file" },
+                    { id: "n-7", title: "NEOCRAFT", version: "1.21.92", img: "neocraft/6NEOCRAFT.jpeg", desc: "", url: "https://www.mediafire.com/file/gbqt15tt1htjijv/NEOCRAFT_LTE.apk/file" }
                 ],
                 "textures": [
-                    // ... (unchanged)
+                    { id: "t-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "./port/texturaa.jpg", desc: "(SHADER) MINECRAFT PATCH", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
+                    { id: "t-2", title: "NEWB X LEGACY", version: "1.21+", img: "./port/texturaa.jpg", desc: "(SHADER) MINECRAFT PATCH 1.21+", url: "https://www.mediafire.com/file/8qmz4j57gi45ekd/Newb_X_Legacy_Mcpe_1.21.mcpack.zip/file" },
+                    { id: "t-3", title: "ONE BLOCK", version: "1.5", img: "./port/texturaa.jpg", desc: "(MUNDO) PARA MINECRAFT 1.18 EN ADELANTE", url: "https://www.mediafire.com/file/fwxue1q70q93ybw/One_Block_%2528Spring_to_Life%2529_v%253D1.5.9_By_DtA_MC.mcworld/file" },
+                    { id: "t-4", title: "TEXTURA OUTPUT", version: "", img: "./port/texturaa.jpg", desc: "(TUXTURA) PARA MINECRAFT 1.18+", url: "https://www.mediafire.com/file/yxuie1v5m6v0khg/outcut2.mcpack/file" },
+                    { id: "t-5", title: "LUCKY BLOCK", version: "", img: "./port/texturaa.jpg", desc: "(MUNDO) MINECRAFT 1.18+", url: "https://www.mediafire.com/file/x1fqf8d1d76a9zn/RainbowLuckyBlockRaceV1.1.mcworld/file" },
+                    { id: "t-6", title: "BARE BONES", version: "", img: "./port/texturaa.jpg", desc: "(TEXTURA) PARA MINECRAFT 1.18", url: "https://www.mediafire.com/file/s1ridznky8rp0fn/RP_BB.mcpack/file" },
+                    { id: "t-7", title: "I SEE YOU NOW", version: "", img: "./port/texturaa.jpg", desc: "TEXTURA PARA VER SKINS EN CRAFTING AND BUILDING", url: "https://www.mediafire.com/file/ykl2qy2d62fdnaw/I_SEE_YOU%2521_by_NEOMC11.mcpack/file" },
+                    { id: "t-8", title: "Texturas Vanilla", version: "1.3", img: "./port/texturaa.jpg", desc: "PARA CRAFTSMAN 1.18+", url: "https://www.mediafire.com/file/2wsc0bpel7frifo/Texturas_Vanillas_1.18.0_By_NEOFACEMC.mcpack/file" }
                 ],
                 "extras": [
-                    // ... (unchanged)
+                    { id: "ex-1", title: "GameStore", version: "1.0", img: "./port/texturaa.jpg", desc: "Lleva GameStore contigo! La misma tienda, ahora en una app (apk). Decubre juegos y novedades con una navegacion rapida y fluiuda. Descarga GameStore AHORA!!", url: "https://www.mediafire.com/file/22blvwo2yeaxmea/GStore.apk/file" },
+                    { id: "ex-2", title: "Ultracraft", version: "1.1", img: "port/ultra.png", desc: "", url: "https://www.mediafire.com/folder/h98zm2afn6tju/Updates" },
+                    { id: "ex-3", title: "Minecraft", version: "1.21.113", img: "port/Minecraft_Bedrock.png", desc: "Minecraft 1.21.113 ya esta aqui... lo mejor, en un solo link podras encontra muchas versiones de MINECRAFT BEDROCK, disfrúta!", url: "https://app.mediafire.com/folder/6vzirxgmdn4r2/1.21.94+Oficial+Grissby.com" }
                 ]
             },
             videos: [
@@ -696,19 +859,26 @@
             searchResults.innerHTML = "";
             searchResults.style.display = 'none';
             DATA.sections.forEach(sec => {
-                const c = document.createElement('div');
-                c.className = 'card';
-                const img = document.createElement('img');
-                img.src = sec.id === "craftsman" ? "./port/craftsman.png" :
-                          sec.id === "neocraft" ? "neocraft/NEOCRAFT.png" :
-                          sec.id === "textures" ? "./port/texturaa.jpg" : "./port/extras.png";
-                const info = document.createElement('div');
-                info.className = 'info';
-                info.innerHTML = `<div class="title">${sec.title}</div><div class="desc">${sec.desc || ''}</div>`;
-                c.appendChild(img);
-                c.appendChild(info);
-                c.onclick = () => openSection(sec.id);
-                mainMenu.appendChild(c);
+                const container = document.createElement('div');
+                container.className = 'section-container';
+                const header = document.createElement('h3');
+                header.className = 'section-header';
+                header.textContent = sec.title;
+                const banner = document.createElement('img');
+                banner.className = 'section-banner';
+                banner.src = sec.banner;
+                banner.alt = sec.title;
+                const desc = document.createElement('p');
+                desc.className = 'section-desc';
+                desc.textContent = sec.desc;
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.onclick = () => openSection(sec.id);
+                card.appendChild(banner);
+                card.appendChild(desc);
+                container.appendChild(header);
+                container.appendChild(card);
+                mainMenu.appendChild(container);
             });
         }
 
@@ -769,6 +939,12 @@
             const info = document.createElement('div');
             info.className = 'info';
             info.innerHTML = `<div class="title">${it.title}</div><div class="desc">${it.version || ''} - ${it.desc || ''}</div>`;
+            const creator = document.createElement('div');
+            creator.className = 'creator';
+            creator.innerHTML = `
+                <div class="creator-label">Creador: <a href="${DATA.creator.youtube}" class="creator-link" target="_blank">${DATA.creator.name}</a></div>
+                <p class="creator-desc">${DATA.creator.desc}</p>
+            `;
             const overlay = document.createElement('div');
             overlay.className = 'copy-link-overlay';
             const copyBtn = document.createElement('button');
@@ -788,6 +964,7 @@
             overlay.appendChild(copyBtn);
             c.appendChild(img);
             c.appendChild(info);
+            c.appendChild(creator);
             c.appendChild(overlay);
             c.onclick = () => window.open(it.url, '_blank');
             let pressTimer;
@@ -806,6 +983,29 @@
             c.addEventListener('touchend', () => clearTimeout(pressTimer));
             c.addEventListener('touchcancel', () => clearTimeout(pressTimer));
             return c;
+        }
+
+        // Render Top Charts (flat list of all items)
+        function renderTopCharts() {
+            const topGrid = document.getElementById('topChartsGrid');
+            topGrid.innerHTML = '';
+            Object.keys(DATA.items).forEach(key => {
+                DATA.items[key].forEach(it => {
+                    const c = createItemCard(it, key);
+                    topGrid.appendChild(c);
+                });
+            });
+        }
+
+        // Sub Tab Switching
+        function showSubTab(sub) {
+            document.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`.sub-tab[data-sub="${sub}"]`).classList.add('active');
+            document.getElementById('subParaTi').style.display = sub === 'para-ti' ? 'block' : 'none';
+            document.getElementById('subListaExitos').style.display = sub === 'lista-exitos' ? 'block' : 'none';
+            if (sub === 'lista-exitos') {
+                renderTopCharts();
+            }
         }
 
         // Search Logic
@@ -857,9 +1057,7 @@
                     c = document.createElement('div');
                     c.className = 'card';
                     const img = document.createElement('img');
-                    img.src = sec.id === "craftsman" ? "./port/craftsman.png" :
-                              sec.id === "neocraft" ? "neocraft/NEOCRAFT.png" :
-                              sec.id === "textures" ? "./port/texturaa.jpg" : "./port/extras.png";
+                    img.src = sec.banner;
                     const info = document.createElement('div');
                     info.className = 'info';
                     info.innerHTML = `<div class="title">${sec.title}</div><div class="desc">${sec.desc || ''}</div>`;
@@ -925,45 +1123,46 @@
         const homeScreen = document.getElementById('homeScreen');
         const apkScreen = document.getElementById('apkScreen');
         const videosScreen = document.getElementById('videosScreen');
-        const linksScreen = document.getElementById('linksScreen');
-        const tabs = document.querySelectorAll('.tab');
+        const navButtons = document.querySelectorAll('.bottom-nav button');
 
         function showScreen(screen) {
             homeScreen.style.display = 'none';
             apkScreen.style.display = 'none';
             videosScreen.style.display = 'none';
-            linksScreen.style.display = 'none';
-            tabs.forEach(tab => tab.classList.remove('active'));
+            navButtons.forEach(btn => btn.classList.remove('active'));
             if (screen === 'home') {
                 homeScreen.style.display = 'block';
-                document.querySelector('.tab:nth-child(1)').classList.add('active');
+                document.getElementById('navHome').classList.add('active');
                 if (!isSearching) {
                     renderMainMenu();
                 }
             }
             if (screen === 'apk') {
                 apkScreen.style.display = 'block';
-                document.querySelector('.tab:nth-child(2)').classList.add('active');
+                document.getElementById('navApk').classList.add('active');
             }
             if (screen === 'videos') {
                 videosScreen.style.display = 'block';
-                document.querySelector('.tab:nth-child(3)').classList.add('active');
+                document.getElementById('navVideos').classList.add('active');
                 renderVideos();
             }
-            if (screen === 'links') {
-                linksScreen.style.display = 'block';
-                document.querySelector('.tab:nth-child(4)').classList.add('active');
-            }
         }
+
+        // Assign nav clicks
+        document.getElementById('navHome').onclick = () => showScreen('home');
+        document.getElementById('navApk').onclick = () => showScreen('apk');
+        document.getElementById('navVideos').onclick = () => showScreen('videos');
+        document.getElementById('navSearch').onclick = toggleSearch;
 
         // Initialization
         showScreen('home');
         renderMainMenu();
-        const savedTheme = localStorage.getItem('theme') || 'light';
+        showSubTab('para-ti');
+        const savedTheme = localStorage.getItem('theme') || 'dark';
         document.body.dataset.theme = savedTheme;
         document.getElementById('themeToggle').checked = savedTheme === 'dark';
 
-        // Deep Linking (unchanged)
+        // Deep Linking
         function handleDeepLink() {
             const hash = window.location.hash.substring(1);
             if (hash) {
