@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -202,33 +201,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        #searchInput {
-            flex: 1;
-            padding: 0.8rem;
-            border-radius: 10px;
-            border: 1px solid var(--accent1);
-            background: var(--glass);
-            color: var(--text);
-            font-size: 0.95rem;
-            outline: none;
-            margin: 0 1rem;
-            display: none;
-        }
-
-        #searchScreen #searchInput {
-            display: block;
-        }
-
-        #searchInput:focus {
-            border-color: var(--accent2);
-            box-shadow: 0 0 12px var(--accent2);
-        }
-
-        #searchInput::placeholder {
-            color: var(--muted);
-            opacity: 0.8;
-        }
-
         /* ===== Main Container ===== */
         .main {
             padding: 80px 2rem 100px 2rem;
@@ -332,6 +304,7 @@
             background: var(--bg);
             box-shadow: 0 0 8px var(--accent1);
             flex-shrink: 0;
+            touch-action: manipulation;
         }
 
         .card .info .title {
@@ -361,42 +334,6 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
-        }
-
-        .copy-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s;
-            z-index: 5;
-        }
-
-        .copy-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .copy-btn {
-            padding: 0.8rem 1.5rem;
-            background: var(--gradient);
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .copy-btn:hover {
-            transform: scale(1.05);
         }
 
         /* ===== Cards Grid ===== */
@@ -724,6 +661,28 @@
             padding-top: 2rem;
         }
 
+        #searchScreen #searchInput {
+            flex: 1;
+            padding: 0.8rem;
+            border-radius: 10px;
+            border: 1px solid var(--accent1);
+            background: var(--glass);
+            color: var(--text);
+            font-size: 0.95rem;
+            outline: none;
+            margin: 0 1rem;
+        }
+
+        #searchScreen #searchInput:focus {
+            border-color: var(--accent2);
+            box-shadow: 0 0 12px var(--accent2);
+        }
+
+        #searchScreen #searchInput::placeholder {
+            color: var(--muted);
+            opacity: 0.8;
+        }
+
         #searchScreen .items-grid {
             margin-top: 1rem;
         }
@@ -780,7 +739,6 @@
         <button id="sidebarToggle">☰</button>
         <img class="logo" src="NEOMC11.png" alt="Logo">
         <h1>GameStore</h1>
-        <input id="searchInput" type="text" placeholder="Buscar...">
     </header>
 
     <div class="main" id="mainContent">
@@ -1087,12 +1045,11 @@
         /* ===== Menu Logic ===== */
         const mainMenu = document.getElementById('mainMenu');
         const contentMenu = document.getElementById('contentMenu');
-        const searchResultsHome = document.getElementById('contentMenu'); // Reuse for home search if needed
         const searchResults = document.getElementById('searchResults');
         const backBtn = document.getElementById('backBtn');
         const backBtnSearch = document.getElementById('backBtnSearch');
+        const searchInput = document.getElementById('searchInput');
         let state = { section: null, version: null };
-        let isSearching = false;
 
         function renderMainMenu() {
             mainMenu.innerHTML = "";
@@ -1183,26 +1140,12 @@
             const info = document.createElement('div');
             info.className = 'info';
             info.innerHTML = `<div class="title">${it.title}</div><div class="desc">${it.version || ''} - ${it.desc || ''}</div>`;
-            const overlay = document.createElement('div');
-            overlay.className = 'copy-overlay';
-            const copyBtn = document.createElement('button');
-            copyBtn.className = 'copy-btn';
-            copyBtn.textContent = 'Copiar Enlace';
-            copyBtn.onclick = (e) => {
-                e.stopPropagation();
-                navigator.clipboard.writeText(it.url).then(() => {
-                    showToast('¡Enlace copiado al portapapeles!');
-                    overlay.classList.remove('show');
-                });
-            };
-            overlay.appendChild(copyBtn);
             c.appendChild(img);
             c.appendChild(info);
-            c.appendChild(overlay);
 
-            // Click to open
+            // Click on card to open link with animation
             c.addEventListener('click', (e) => {
-                if (!overlay.classList.contains('show')) {
+                if (e.target !== img || !longPressed) { // Only if not long press on img
                     c.classList.add('opening');
                     setTimeout(() => {
                         c.classList.remove('opening');
@@ -1211,40 +1154,35 @@
                 }
             });
 
-            // Long press to show copy
-            let pressTimer;
-            let isPressed = false;
-            function startPress() {
-                isPressed = true;
-                pressTimer = setTimeout(() => {
-                    if (isPressed) {
-                        overlay.classList.add('show');
-                    }
-                }, 1000); // Show after 1s for better UX
-            }
-            function endPress() {
-                isPressed = false;
-                clearTimeout(pressTimer);
-                if (!overlay.classList.contains('show')) {
-                    // If not showing copy, it's a normal click (handled above)
+            // Long press on image to copy link
+            let longPressTimeout;
+            let longPressed = false;
+            const handleStart = (e) => {
+                longPressTimeout = setTimeout(() => {
+                    longPressed = true;
+                    navigator.clipboard.writeText(it.url).then(() => {
+                        showToast('¡Enlace copiado al portapapeles!');
+                    });
+                    e.preventDefault();
+                }, 500);
+            };
+            const handleEnd = (e) => {
+                clearTimeout(longPressTimeout);
+                if (longPressed) {
+                    e.stopPropagation(); // Prevent card click after long press
                 }
-            }
-            c.addEventListener('mousedown', startPress);
-            c.addEventListener('mouseup', endPress);
-            c.addEventListener('mouseleave', endPress);
-            c.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                startPress();
-            }, { passive: false });
-            c.addEventListener('touchend', endPress);
-            c.addEventListener('touchcancel', endPress);
+                longPressed = false;
+            };
 
-            // Hide overlay on click outside
-            document.addEventListener('click', (e) => {
-                if (!c.contains(e.target)) {
-                    overlay.classList.remove('show');
-                }
-            });
+            // Mouse events
+            img.addEventListener('mousedown', handleStart);
+            img.addEventListener('mouseup', handleEnd);
+            img.addEventListener('mouseleave', handleEnd);
+
+            // Touch events
+            img.addEventListener('touchstart', handleStart, { passive: false });
+            img.addEventListener('touchend', handleEnd, { passive: false });
+            img.addEventListener('touchcancel', handleEnd);
 
             return c;
         }
@@ -1261,7 +1199,6 @@
         }
 
         /* ===== Search Logic ===== */
-        const searchInput = document.getElementById('searchInput');
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.trim().toLowerCase();
             if (query === '') {
@@ -1470,4 +1407,3 @@
     </script>
 </body>
 </html>
-```
