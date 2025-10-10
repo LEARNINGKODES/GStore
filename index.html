@@ -212,6 +212,11 @@
             font-size: 0.95rem;
             outline: none;
             margin: 0 1rem;
+            display: none;
+        }
+
+        #searchScreen #searchInput {
+            display: block;
         }
 
         #searchInput:focus {
@@ -290,7 +295,7 @@
         .card {
             background: var(--panel);
             border-radius: var(--radius);
-            padding: 1rem;
+            padding: 1.5rem;
             display: flex;
             align-items: center;
             gap: 1rem;
@@ -300,6 +305,7 @@
             backdrop-filter: blur(20px);
             position: relative;
             overflow: hidden;
+            min-height: 70px;
         }
 
         .card::before {
@@ -319,24 +325,25 @@
         }
 
         .card img {
-            width: 48px;
-            height: 48px;
+            width: 56px;
+            height: 56px;
             border-radius: 8px;
             object-fit: cover;
             background: var(--bg);
             box-shadow: 0 0 8px var(--accent1);
+            flex-shrink: 0;
         }
 
         .card .info .title {
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.1rem;
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .card .info .desc {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--muted);
             font-weight: 500;
         }
@@ -344,6 +351,52 @@
         .card.highlight {
             border: 2px solid var(--accent2);
             box-shadow: 0 0 24px var(--accent2);
+        }
+
+        .card.opening {
+            animation: pulse 0.3s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .copy-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            z-index: 5;
+        }
+
+        .copy-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .copy-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--gradient);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
         }
 
         /* ===== Cards Grid ===== */
@@ -438,10 +491,10 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.8rem 1.5rem;
+            padding: 1rem 2rem;
             border: none;
             border-radius: 10px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 600;
             background: var(--gradient);
             color: #ffffff;
@@ -467,7 +520,7 @@
             align-items: center;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
-            padding: 0.6rem 0;
+            padding: 0.8rem 0;
             box-shadow: 0 -2px 12px var(--shadow);
             z-index: 10;
         }
@@ -480,9 +533,10 @@
             align-items: center;
             gap: 0.3rem;
             color: var(--text);
-            font-size: 0.85rem;
+            font-size: 1rem;
             cursor: pointer;
-            padding: 0.5rem;
+            padding: 0.8rem 0.5rem;
+            min-width: 60px;
         }
 
         nav button:hover {
@@ -491,8 +545,8 @@
         }
 
         nav button img {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             filter: brightness(100%) contrast(100%);
         }
 
@@ -560,11 +614,11 @@
             gap: 0.5rem;
             background: var(--gradient);
             color: #ffffff;
-            padding: 0.8rem 1.5rem;
+            padding: 1rem 2rem;
             border: none;
             border-radius: 10px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 1rem;
             text-decoration: none;
             box-shadow: 0 0 12px var(--accent1);
             margin: 1rem 0;
@@ -578,8 +632,8 @@
         }
 
         .apk-contact .telegram-btn img {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             filter: brightness(100%) contrast(100%);
         }
 
@@ -662,6 +716,18 @@
             text-align: center;
         }
 
+        /* ===== Search Screen ===== */
+        #searchScreen {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            padding-top: 2rem;
+        }
+
+        #searchScreen .items-grid {
+            margin-top: 1rem;
+        }
+
         /* ===== Toast ===== */
         #toast {
             position: fixed;
@@ -700,6 +766,9 @@
             </a>
             <a href="https://www.instagram.com/neomc12?igsh=MXNqYmcwNHZmOGx3Yg==" class="social-link">
                 <img src="./port/inta.jpg" alt="Instagram"> Instagram
+            </a>
+            <a href="https://learningkodes.github.io/GameStore/" class="social-link">
+                📄 Content
             </a>
         </div>
         <div class="sidebar-section">
@@ -754,7 +823,13 @@
             <div id="mainMenu" class="items-grid"></div>
             <button id="backBtn" class="back-btn" onclick="goBack()" style="display: none;">Atrás</button>
             <div id="contentMenu" class="items-grid"></div>
-            <div id="searchResults" class="items-grid" style="display: none;"></div>
+        </div>
+
+        <!-- Search Screen -->
+        <div id="searchScreen">
+            <input id="searchInput" type="text" placeholder="Buscar apps, texturas, versiones...">
+            <div id="searchResults" class="items-grid"></div>
+            <button id="backBtnSearch" class="back-btn" onclick="goBackSearch()">Atrás</button>
         </div>
 
         <!-- APK Contact Screen -->
@@ -1012,16 +1087,16 @@
         /* ===== Menu Logic ===== */
         const mainMenu = document.getElementById('mainMenu');
         const contentMenu = document.getElementById('contentMenu');
+        const searchResultsHome = document.getElementById('contentMenu'); // Reuse for home search if needed
         const searchResults = document.getElementById('searchResults');
         const backBtn = document.getElementById('backBtn');
+        const backBtnSearch = document.getElementById('backBtnSearch');
         let state = { section: null, version: null };
         let isSearching = false;
 
         function renderMainMenu() {
             mainMenu.innerHTML = "";
             contentMenu.innerHTML = "";
-            searchResults.innerHTML = "";
-            searchResults.style.display = 'none';
             backBtn.style.display = 'none';
             DATA.sections.forEach(sec => {
                 const c = document.createElement('div');
@@ -1048,8 +1123,7 @@
             state.version = versionId;
             mainMenu.innerHTML = "";
             contentMenu.innerHTML = "";
-            searchResults.innerHTML = "";
-            searchResults.style.display = 'none';
+            backBtn.style.display = 'inline-flex';
             const sec = DATA.sections.find(s => s.id === id);
             if (sec.versions && !versionId) {
                 sec.versions.forEach(v => {
@@ -1077,17 +1151,13 @@
                     c.onclick = () => openSection(id, v.id, targetItemId);
                     contentMenu.appendChild(c);
                 });
-                backBtn.style.display = 'inline-flex';
             } else {
                 renderItems(versionId || id, targetItemId);
-                backBtn.style.display = 'inline-flex';
             }
         }
 
         function renderItems(key, targetItemId = null) {
             contentMenu.innerHTML = "";
-            searchResults.innerHTML = "";
-            searchResults.style.display = 'none';
             let list = DATA.items[key] || [];
             if (list.length === 0) {
                 contentMenu.innerHTML = "<div style='padding:12px;color: var(--muted); grid-column: 1/-1;'>Próximamente...</div>";
@@ -1113,29 +1183,51 @@
             const info = document.createElement('div');
             info.className = 'info';
             info.innerHTML = `<div class="title">${it.title}</div><div class="desc">${it.version || ''} - ${it.desc || ''}</div>`;
+            const overlay = document.createElement('div');
+            overlay.className = 'copy-overlay';
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'copy-btn';
+            copyBtn.textContent = 'Copiar Enlace';
+            copyBtn.onclick = (e) => {
+                e.stopPropagation();
+                navigator.clipboard.writeText(it.url).then(() => {
+                    showToast('¡Enlace copiado al portapapeles!');
+                    overlay.classList.remove('show');
+                });
+            };
+            overlay.appendChild(copyBtn);
             c.appendChild(img);
             c.appendChild(info);
-            c.onclick = (e) => {
-                if (e.detail === 1) { // Single click
-                    window.open(it.url, '_blank');
+            c.appendChild(overlay);
+
+            // Click to open
+            c.addEventListener('click', (e) => {
+                if (!overlay.classList.contains('show')) {
+                    c.classList.add('opening');
+                    setTimeout(() => {
+                        c.classList.remove('opening');
+                        window.open(it.url, '_blank');
+                    }, 300);
                 }
-            };
-            // Long press to copy
+            });
+
+            // Long press to show copy
             let pressTimer;
             let isPressed = false;
             function startPress() {
                 isPressed = true;
                 pressTimer = setTimeout(() => {
                     if (isPressed) {
-                        navigator.clipboard.writeText(it.url).then(() => {
-                            showToast('¡Link copiado al portapapeles!');
-                        });
+                        overlay.classList.add('show');
                     }
-                }, 3000);
+                }, 1000); // Show after 1s for better UX
             }
             function endPress() {
                 isPressed = false;
                 clearTimeout(pressTimer);
+                if (!overlay.classList.contains('show')) {
+                    // If not showing copy, it's a normal click (handled above)
+                }
             }
             c.addEventListener('mousedown', startPress);
             c.addEventListener('mouseup', endPress);
@@ -1146,6 +1238,14 @@
             }, { passive: false });
             c.addEventListener('touchend', endPress);
             c.addEventListener('touchcancel', endPress);
+
+            // Hide overlay on click outside
+            document.addEventListener('click', (e) => {
+                if (!c.contains(e.target)) {
+                    overlay.classList.remove('show');
+                }
+            });
+
             return c;
         }
 
@@ -1165,26 +1265,14 @@
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.trim().toLowerCase();
             if (query === '') {
-                isSearching = false;
-                searchResults.style.display = 'none';
-                if (state.section) {
-                    openSection(state.section, state.version);
-                } else {
-                    renderMainMenu();
-                }
+                searchResults.innerHTML = "";
             } else {
-                isSearching = true;
                 performSearch(query);
             }
         });
 
         function performSearch(query) {
-            mainMenu.innerHTML = "";
-            contentMenu.innerHTML = "";
             searchResults.innerHTML = "";
-            searchResults.style.display = 'grid';
-            backBtn.style.display = 'none';
-
             let matches = [];
 
             DATA.sections.forEach(sec => {
@@ -1234,6 +1322,7 @@
                     c.appendChild(img);
                     c.appendChild(info);
                     c.onclick = () => {
+                        showScreen('home');
                         searchInput.value = '';
                         openSection(sec.id);
                     };
@@ -1261,6 +1350,7 @@
                     c.appendChild(img);
                     c.appendChild(info);
                     c.onclick = () => {
+                        showScreen('home');
                         searchInput.value = '';
                         openSection(sec.id, v.id);
                     };
@@ -1270,6 +1360,12 @@
                     searchResults.appendChild(c);
                 }
             });
+        }
+
+        function goBackSearch() {
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+            showScreen('home');
         }
 
         /* ===== Carousel ===== */
@@ -1284,7 +1380,7 @@
             });
             document.querySelector('.slides').style.transform = `translateX(-${currentSlide * 100}%)`;
         }
-        function moveSlide(n) {
+        window.moveSlide = function(n) {
             showSlide(currentSlide + n);
         }
         setInterval(() => showSlide(currentSlide + 1), 4000);
@@ -1321,23 +1417,28 @@
         const navVideos = document.getElementById('navVideos');
         const navSearch = document.getElementById('navSearch');
         const homeScreen = document.getElementById('homeScreen');
+        const searchScreen = document.getElementById('searchScreen');
         const apkScreen = document.getElementById('apkScreen');
         const videosScreen = document.getElementById('videosScreen');
 
         function showScreen(screen) {
             homeScreen.style.display = 'none';
+            searchScreen.style.display = 'none';
             apkScreen.style.display = 'none';
             videosScreen.style.display = 'none';
             if (screen === 'home') {
                 homeScreen.style.display = 'block';
-                if (!isSearching) {
+                if (state.section) {
+                    openSection(state.section, state.version);
+                } else {
                     renderMainMenu();
                 }
-            }
-            if (screen === 'apk') {
+            } else if (screen === 'search') {
+                searchScreen.style.display = 'flex';
+                searchInput.focus();
+            } else if (screen === 'apk') {
                 apkScreen.style.display = 'flex';
-            }
-            if (screen === 'videos') {
+            } else if (screen === 'videos') {
                 videosScreen.style.display = 'block';
                 renderVideos();
             }
@@ -1346,7 +1447,7 @@
         navHome.onclick = () => { showScreen('home'); };
         navApk.onclick = () => { showScreen('apk'); };
         navVideos.onclick = () => { showScreen('videos'); };
-        navSearch.onclick = () => { searchInput.focus(); };
+        navSearch.onclick = () => { showScreen('search'); };
 
         /* ===== Sidebar & Theme ===== */
         document.getElementById('sidebarToggle').onclick = () => {
@@ -1366,7 +1467,6 @@
         /* ===== Initialization ===== */
         showScreen('home');
         renderMainMenu();
-        window.addEventListener('hashchange', () => {}); // Simplified, as deep linking not critical
     </script>
 </body>
 </html>
