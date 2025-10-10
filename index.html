@@ -779,7 +779,7 @@
             <div class="carousel">
                 <div class="slides">
                     <div class="slide active">
-                        <img src="craftsman.png" alt="Craftsman">
+                        <img src="./port/craftsman.png" alt="Craftsman">
                         <div class="caption">Craftsman</div>
                     </div>
                     <div class="slide">
@@ -787,12 +787,16 @@
                         <div class="caption">NeoCraft</div>
                     </div>
                     <div class="slide">
-                        <img src="texturaa.jpg" alt="Texturas">
+                        <img src="./port/texturaa.jpg" alt="Texturas">
                         <div class="caption">Texturas</div>
                     </div>
                     <div class="slide">
-                        <img src="extras.png" alt="Extras">
+                        <img src="./port/extras.png" alt="Extras">
                         <div class="caption">Extras</div>
+                    </div>
+                    <div class="slide">
+                        <img src="./port/ultra.png" alt="UltraCraft">
+                        <div class="caption">UltraCraft</div>
                     </div>
                 </div>
                 <button class="prev" onclick="moveSlide(-1)">❮</button>
@@ -827,7 +831,7 @@
             <div class="links-container">
                 <h3>Explora Más</h3>
                 <div class="links-grid">
-                    <a href="learningkodes.github.oi/GameStore/" class="link-btn">Contents</a>
+                    <a href="https://learningkodes.github.io/GameStore/" class="link-btn">CONTENTS</a>
                 </div>
             </div>
         </div>
@@ -836,15 +840,15 @@
     <!-- Navigation Bar -->
     <nav id="bottomNav">
         <button id="navHome">
-            <img src="home.png" alt="Inicio">
+            <img src="./port/home.png" alt="Inicio">
             Inicio
         </button>
         <button id="navApk">
-            <img src="upload.png" alt="Subir APK">
+            <img src="./port/upload.png" alt="Subir APK">
             Subir APK
         </button>
         <button id="navVideos">
-            <img src="video.png" alt="Videos">
+            <img src="./port/video.png" alt="Videos">
             Videos
         </button>
         <button id="navLinks">
@@ -854,18 +858,18 @@
     </nav>
 
     <footer>
-        <a href="https://youtube.com/@jlmc2?si=qHmc0eB24stW3Kcv" id="yt"><img src="yt.png" alt="YouTube"></a>
-        <a href="https://www.tiktok.com/@neomc1?_t=ZS-8zkfUb8Lnjm&_r=1" id="tt"><img src="tiktok.png" alt="TikTok"></a>
-        <a href="https://www.instagram.com/neomc12?igsh=MXNqYmcwNHZmOGx3Yg==" id="ig"><img src="inta.jpg" alt="Instagram"></a>
+        <a href="https://youtube.com/@jlmc2?si=qHmc0eB24stW3Kcv" id="yt"><img src="./port/yt.png" alt="YouTube"></a>
+        <a href="https://www.tiktok.com/@neomc1?_t=ZS-8zkfUb8Lnjm&_r=1" id="tt"><img src="./port/tiktok.png" alt="TikTok"></a>
+        <a href="https://www.instagram.com/neomc12?igsh=MXNqYmcwNHZmOGx3Yg==" id="ig"><img src="./port/inta.jpg" alt="Instagram"></a>
     </footer>
 
     <script>
         /* ===== Data ===== */
         let DATA = {
             socials: {
-                youtube: {url: "https://youtube.com/@jlmc2?si=qHmc0eB24stW3Kcv", img: "yt.png"},
-                tiktok: {url: "https://www.tiktok.com/@neomc1?_t=ZS-8zkfUb8Lnjm&_r=1", img: "tiktok.png"},
-                instagram: {url: "https://www.instagram.com/neomc12?igsh=MXNqYmcwNHZmOGx3Yg==", img: "inta.jpg"}
+                youtube: {url: "https://youtube.com/@jlmc2?si=qHmc0eB24stW3Kcv", img: "./port/yt.png"},
+                tiktok: {url: "https://www.tiktok.com/@neomc1?_t=ZS-8zkfUb8Lnjm&_r=1", img: "./port/tiktok.png"},
+                instagram: {url: "https://www.instagram.com/neomc12?igsh=MXNqYmcwNHZmOGx3Yg==", img: "./port/inta.jpg"}
             },
             sections: [
                 {
@@ -884,29 +888,29 @@
             ],
             items: {
                 "craftsman-main": [
-                    { id: "c-1", title: "Craftsman AB", version: "1.19.50", img: "craftsman.png", desc: "", url: "https://www.mediafire.com/file/ah73nfy17woyh7j/Craftsman_AB.apk/file" },
-                    { id: "c-2", title: "Craftsman EMOTES", version: "1.18", img: "craftsman.png", desc: "PARA GRABAR EMOTES DESDE CRAFTSMAN", url: "https://www.mediafire.com/file/1l0wno4u23when8/Craftsman_emotes.apk/file" },
-                    { id: "c-3", title: "Craftsmine", version: "1.??", img: "craftsman.png", desc: "", url: "https://www.mediafire.com/file/42lo3yruc2rh4bo/CraftMine_V2.apk/file" },
-                    { id: "c-4", title: "Craftsman PE", version: "", img: "craftsman.png", desc: "", url: "https://www.mediafire.com/file/r0ummjkdjinpnn1/Craftsman_Pe.apk/file" },
-                    { id: "c-5", title: "Craftsman Trial", version: "1.0", img: "craftsman.png", desc: "", url: "https://www.mediafire.com/file/p2vj2wjczn2qf3j/Craftsman_Trial_1.0.0.16.apk/file" },
-                    { id: "c-6", title: "Craftsman uno", version: "0.15.10", img: "craftsman.png", desc: "", url: "https://www.mediafire.com/file/briwk3jkzyald7o/Craftsman_UNO.apk/file" },
-                    { id: "c-7", title: "Craftsman ??", version: "", img: "craftsman.png", desc: "", url: "https://www.mediafire.com/file/i2jyn06j46j8jur/Craftsman__signed.apk/file" },
-                    { id: "c-8", title: "Craftsman 1.17", version: "", img: "craftsman.png", desc: "", url: "https://www.mediafire.com/file/drep2uik81qjuqm/minecraft-1-17-2_mod.apk/file" },
-                    { id: "c-9", title: "Craftsman VI", version: "1.16.20", img: "craftsman.png", desc: "", url: "https://www.mediafire.com/file/hgi53l00ce4okrc/Craftsman+VI+1.16+NEOFACE.apk/file" }
+                    { id: "c-1", title: "Craftsman AB", version: "1.19.50", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/ah73nfy17woyh7j/Craftsman_AB.apk/file" },
+                    { id: "c-2", title: "Craftsman EMOTES", version: "1.18", img: "./port/craftsman.png", desc: "PARA GRABAR EMOTES DESDE CRAFTSMAN", url: "https://www.mediafire.com/file/1l0wno4u23when8/Craftsman_emotes.apk/file" },
+                    { id: "c-3", title: "Craftsmine", version: "1.??", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/42lo3yruc2rh4bo/CraftMine_V2.apk/file" },
+                    { id: "c-4", title: "Craftsman PE", version: "", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/r0ummjkdjinpnn1/Craftsman_Pe.apk/file" },
+                    { id: "c-5", title: "Craftsman Trial", version: "1.0", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/p2vj2wjczn2qf3j/Craftsman_Trial_1.0.0.16.apk/file" },
+                    { id: "c-6", title: "Craftsman uno", version: "0.15.10", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/briwk3jkzyald7o/Craftsman_UNO.apk/file" },
+                    { id: "c-7", title: "Craftsman ??", version: "", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/i2jyn06j46j8jur/Craftsman__signed.apk/file" },
+                    { id: "c-8", title: "Craftsman 1.17", version: "", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/drep2uik81qjuqm/minecraft-1-17-2_mod.apk/file" },
+                    { id: "c-9", title: "Craftsman VI", version: "1.16.20", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/hgi53l00ce4okrc/Craftsman+VI+1.16+NEOFACE.apk/file" }
                 ],
                 "craftsman-01510": [
-                    { id: "c01510-1", title: "Craftsman 0.15.10", version: "0.15.10", img: "craftsman.png", desc: "CRAFTSMAN 0.15.10 PARA ANDOID 14 Y 15 EN ADELANTE", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" },
-                    { id: "c01510-2", title: "Craftsman 0.15.10", version: "0.15.10", img: "craftsman.png", desc: "CRAFTSMAN 0.15.10", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" }
+                    { id: "c01510-1", title: "Craftsman 0.15.10", version: "0.15.10", img: "./port/craftsman.png", desc: "CRAFTSMAN 0.15.10 PARA ANDOID 14 Y 15 EN ADELANTE", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" },
+                    { id: "c01510-2", title: "Craftsman 0.15.10", version: "0.15.10", img: "./port/craftsman.png", desc: "CRAFTSMAN 0.15.10", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" }
                 ],
                 "craftsman-zero": [
-                    { id: "cz-1", title: "Craftsman zero", version: "DEMO 1", img: "zero.png", desc: "", url: "https://www.mediafire.com/file/k4krz1ww0299fvk/Craftsman+Zero+Demo+1.apk/file" },
-                    { id: "cz-2", title: "Craftsman zero", version: "1.1.5", img: "zero.png", desc: "", url: "https://www.mediafire.com/file/vudh0hmv9mjh2tz/Cratsman+Zero+1.1.apk/file" },
-                    { id: "cz-3", title: "Craftsman zero NAVIDAD", version: "1.1.5", img: "zero.png", desc: "", url: "https://www.mediafire.com/file/guv0t148wko9h0i/Craftsman+Zero+Navidad.apk/file" },
-                    { id: "cz-4", title: "Craftsman zero", version: "DEMO 2", img: "zero.png", desc: "", url: "https://www.mediafire.com/file/7ds74aevus10761/Craftsman+Zero+Demo+2+Sin+Bugs.apk/file" },
-                    { id: "cz-5", title: "Craftsman zero", version: "DEMO 3", img: "zero.png", desc: "", url: "https://www.mediafire.com/file/ev9m698nl3sjjxt/CRAFTSMAN_ZERO_DEMO_3_WITH_ANIMATIONS__by_NEOMC11.apk/file" },
-                    { id: "cz-6", title: "Craftsman zero", version: "DEMO 3 SKINS", img: "zero.png", desc: "", url: "https://www.mediafire.com/file/4koz7twgiqge5lu/CRAFTSMAN_ZERO_DEMO_3_FOR_SKINS_BY_NEOMC11.apk/file" },
-                    { id: "cz-7", title: "Craftsman zero", version: "SIN ANUNCIOS", img: "zero.png", desc: "", url: "https://www.mediafire.com/file/0h2pdhzy9wktolw/Craftsman_zero_sin_anuncios_By_NEOMC11.apk/file" },
-                    { id: "cz-8", title: "Craftsman zero", version: "1.16.40", img: "zero.png", desc: "", url: "https://www.mediafire.com/file/bdvo2pcqrp5n7g4/Craftsman+Zero+1.16.apk/file" }
+                    { id: "cz-1", title: "Craftsman zero", version: "DEMO 1", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/k4krz1ww0299fvk/Craftsman+Zero+Demo+1.apk/file" },
+                    { id: "cz-2", title: "Craftsman zero", version: "1.1.5", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/vudh0hmv9mjh2tz/Cratsman+Zero+1.1.apk/file" },
+                    { id: "cz-3", title: "Craftsman zero NAVIDAD", version: "1.1.5", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/guv0t148wko9h0i/Craftsman+Zero+Navidad.apk/file" },
+                    { id: "cz-4", title: "Craftsman zero", version: "DEMO 2", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/7ds74aevus10761/Craftsman+Zero+Demo+2+Sin+Bugs.apk/file" },
+                    { id: "cz-5", title: "Craftsman zero", version: "DEMO 3", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/ev9m698nl3sjjxt/CRAFTSMAN_ZERO_DEMO_3_WITH_ANIMATIONS__by_NEOMC11.apk/file" },
+                    { id: "cz-6", title: "Craftsman zero", version: "DEMO 3 SKINS", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/4koz7twgiqge5lu/CRAFTSMAN_ZERO_DEMO_3_FOR_SKINS_BY_NEOMC11.apk/file" },
+                    { id: "cz-7", title: "Craftsman zero", version: "SIN ANUNCIOS", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/0h2pdhzy9wktolw/Craftsman_zero_sin_anuncios_By_NEOMC11.apk/file" },
+                    { id: "cz-8", title: "Craftsman zero", version: "1.16.40", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/bdvo2pcqrp5n7g4/Craftsman+Zero+1.16.apk/file" }
                 ],
                 "neocraft": [
                     { id: "n-1", title: "NEOCRAFT v1", version: "1.20.12", img: "neocraft/NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/cxqj0b3t0syd6vi/NEOCRAFT.apk/file" },
@@ -918,23 +922,23 @@
                     { id: "n-7", title: "NEOCRAFT", version: "1.21.92", img: "neocraft/6NEOCRAFT.jpeg", desc: "", url: "https://www.mediafire.com/file/gbqt15tt1htjijv/NEOCRAFT_LTE.apk/file" }
                 ],
                 "textures": [
-                    { id: "t-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "texturaa.jpg", desc: "(SHADER) MINECRAFT PATCH", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
-                    { id: "t-2", title: "NEWB X LEGACY", version: "1.21+", img: "texturaa.jpg", desc: "(SHADER) MINECRAFT PATCH 1.21+", url: "https://www.mediafire.com/file/8qmz4j57gi45ekd/Newb_X_Legacy_Mcpe_1.21.mcpack.zip/file" },
-                    { id: "t-3", title: "ONE BLOCK", version: "1.5", img: "texturaa.jpg", desc: "(MUNDO) PARA MINECRAFT 1.18 EN ADELANTE", url: "https://www.mediafire.com/file/fwxue1q70q93ybw/One_Block_%2528Spring_to_Life%2529_v%253D1.5.9_By_DtA_MC.mcworld/file" },
-                    { id: "t-4", title: "TEXTURA OUTPUT", version: "", img: "texturaa.jpg", desc: "(TUXTURA) PARA MINECRAFT 1.18+", url: "https://www.mediafire.com/file/yxuie1v5m6v0khg/outcut2.mcpack/file" },
-                    { id: "t-5", title: "LUCKY BLOCK", version: "", img: "texturaa.jpg", desc: "(MUNDO) MINECRAFT 1.18+", url: "https://www.mediafire.com/file/x1fqf8d1d76a9zn/RainbowLuckyBlockRaceV1.1.mcworld/file" },
-                    { id: "t-6", title: "BARE BONES", version: "", img: "texturaa.jpg", desc: "(TEXTURA) PARA MINECRAFT 1.18", url: "https://www.mediafire.com/file/s1ridznky8rp0fn/RP_BB.mcpack/file" },
-                    { id: "t-7", title: "I SEE YOU NOW", version: "", img: "texturaa.jpg", desc: "TEXTURA PARA VER SKINS EN CRAFTING AND BUILDING", url: "https://www.mediafire.com/file/ykl2qy2d62fdnaw/I_SEE_YOU%2521_by_NEOMC11.mcpack/file" },
-                    { id: "t-8", title: "Texturas Vanilla", version: "1.3", img: "texturaa.jpg", desc: "PARA CRAFTSMAN 1.18+", url: "https://www.mediafire.com/file/2wsc0bpel7frifo/Texturas_Vanillas_1.18.0_By_NEOFACEMC.mcpack/file" }
+                    { id: "t-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "./port/texturaa.jpg", desc: "(SHADER) MINECRAFT PATCH", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
+                    { id: "t-2", title: "NEWB X LEGACY", version: "1.21+", img: "./port/texturaa.jpg", desc: "(SHADER) MINECRAFT PATCH 1.21+", url: "https://www.mediafire.com/file/8qmz4j57gi45ekd/Newb_X_Legacy_Mcpe_1.21.mcpack.zip/file" },
+                    { id: "t-3", title: "ONE BLOCK", version: "1.5", img: "./port/texturaa.jpg", desc: "(MUNDO) PARA MINECRAFT 1.18 EN ADELANTE", url: "https://www.mediafire.com/file/fwxue1q70q93ybw/One_Block_%2528Spring_to_Life%2529_v%253D1.5.9_By_DtA_MC.mcworld/file" },
+                    { id: "t-4", title: "TEXTURA OUTPUT", version: "", img: "./port/texturaa.jpg", desc: "(TUXTURA) PARA MINECRAFT 1.18+", url: "https://www.mediafire.com/file/yxuie1v5m6v0khg/outcut2.mcpack/file" },
+                    { id: "t-5", title: "LUCKY BLOCK", version: "", img: "./port/texturaa.jpg", desc: "(MUNDO) MINECRAFT 1.18+", url: "https://www.mediafire.com/file/x1fqf8d1d76a9zn/RainbowLuckyBlockRaceV1.1.mcworld/file" },
+                    { id: "t-6", title: "BARE BONES", version: "", img: "./port/texturaa.jpg", desc: "(TEXTURA) PARA MINECRAFT 1.18", url: "https://www.mediafire.com/file/s1ridznky8rp0fn/RP_BB.mcpack/file" },
+                    { id: "t-7", title: "I SEE YOU NOW", version: "", img: "./port/texturaa.jpg", desc: "TEXTURA PARA VER SKINS EN CRAFTING AND BUILDING", url: "https://www.mediafire.com/file/ykl2qy2d62fdnaw/I_SEE_YOU%2521_by_NEOMC11.mcpack/file" },
+                    { id: "t-8", title: "Texturas Vanilla", version: "1.3", img: "./port/texturaa.jpg", desc: "PARA CRAFTSMAN 1.18+", url: "https://www.mediafire.com/file/2wsc0bpel7frifo/Texturas_Vanillas_1.18.0_By_NEOFACEMC.mcpack/file" }
                 ],
                 "extras": [
-                    { id: "ex-1", title: "GameStore", version: "1.0", img: "texturaa.jpg", desc: "Lleva GameStore contigo! La misma tienda, ahora en una app (apk). Decubre juegos y novedades con una navegacion rapida y fluiuda. Descarga GameStore AHORA!!", url: "https://www.mediafire.com/file/22blvwo2yeaxmea/GStore.apk/file" },
+                    { id: "ex-1", title: "GameStore", version: "1.0", img: "./port/texturaa.jpg", desc: "Lleva GameStore contigo! La misma tienda, ahora en una app (apk). Decubre juegos y novedades con una navegacion rapida y fluiuda. Descarga GameStore AHORA!!", url: "https://www.mediafire.com/file/22blvwo2yeaxmea/GStore.apk/file" },
                     { id: "ex-2", title: "Ultracraft", version: "1.1", img: "port/ultra.png", desc: "", url: "https://www.mediafire.com/folder/h98zm2afn6tju/Updates" }
                 ]
             },
             videos: [
-                { id: "v-1", title: "I SEE YOU NOW 👀", url: "https://www.youtube.com/embed/TpIy0LwxfGA?si=WICy3XEOVsV_YRLC", thumbnail: "miniatura1.jpg" },
-                { id: "v-2", title: "NEW UPDATE OF CRAFTING", url: "https://www.youtube.com/embed/b35C_J-j5fk?si=WxQgWkuyTpzcb0yJ", thumbnail: "miniatura.jpg" }
+                { id: "v-1", title: "I SEE YOU NOW 👀", url: "https://www.youtube.com/embed/TpIy0LwxfGA?si=WICy3XEOVsV_YRLC", thumbnail: "./port/miniatura1 (1).jpg" },
+                { id: "v-2", title: "NEW UPDATE OF CRAFTING", url: "https://www.youtube.com/embed/b35C_J-j5fk?si=WxQgWkuyTpzcb0yJ", thumbnail: "./port/miniatura.jpg" }
             ]
         };
 
@@ -956,9 +960,9 @@
                 const c = document.createElement('div');
                 c.className = 'card';
                 const img = document.createElement('img');
-                img.src = sec.id === "craftsman" ? "craftsman.png" :
+                img.src = sec.id === "craftsman" ? "./port/craftsman.png" :
                           sec.id === "neocraft" ? "neocraft/NEOCRAFT.png" :
-                          sec.id === "textures" ? "texturaa.jpg" : "extras.png";
+                          sec.id === "textures" ? "./port/texturaa.jpg" : "./port/extras.png";
                 const info = document.createElement('div');
                 info.className = 'info';
                 info.innerHTML = `<div class="title">${sec.title}</div><div class="desc">${sec.desc || ''}</div>`;
@@ -982,8 +986,8 @@
                     const c = document.createElement('div');
                     c.className = 'card';
                     const img = document.createElement('img');
-                    img.src = v.id === "craftsman-main" ? "craftsman.png" :
-                              v.id === "craftsman-zero" ? "zero.png" : "craftsman.png";
+                    img.src = v.id === "craftsman-main" ? "./port/craftsman.png" :
+                              v.id === "craftsman-zero" ? "zero.png" : "./port/craftsman.png";
                     const info = document.createElement('div');
                     info.className = 'info';
                     info.innerHTML = `<div class="title">${v.title}</div>`;
@@ -1041,7 +1045,7 @@
                     ? `${baseUrl}#${section.id}/${sectionKey}/${it.id}`
                     : `${baseUrl}#${sectionKey}/${it.id}`;
                 navigator.clipboard.writeText(itemUrl).then(() => {
-                    alert('Link copiado al portapapeles!');
+                    alert('Link copiado al portapapeles! :)');
                 });
             };
             overlay.appendChild(copyBtn);
@@ -1163,9 +1167,9 @@
                     c = document.createElement('div');
                     c.className = 'card';
                     const img = document.createElement('img');
-                    img.src = sec.id === "craftsman" ? "craftsman.png" :
+                    img.src = sec.id === "craftsman" ? "./port/craftsman.png" :
                               sec.id === "neocraft" ? "neocraft/NEOCRAFT.png" :
-                              sec.id === "textures" ? "texturaa.jpg" : "extras.png";
+                              sec.id === "textures" ? "./port/texturaa.jpg" : "./port/extras.png";
                     const info = document.createElement('div');
                     info.className = 'info';
                     info.innerHTML = `<div class="title">${sec.title}</div><div class="desc">${sec.desc || ''}</div>`;
