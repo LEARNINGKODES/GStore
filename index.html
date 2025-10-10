@@ -324,6 +324,13 @@
         .card.highlight {
             border: 2px solid var(--accent2);
             box-shadow: 0 0 24px var(--accent2);
+            animation: highlightPulse 0.5s ease-in-out;
+        }
+
+        @keyframes highlightPulse {
+            0% { transform: scale(1); box-shadow: 0 0 24px var(--accent2); }
+            50% { transform: scale(1.02); box-shadow: 0 0 32px var(--accent2); }
+            100% { transform: scale(1); box-shadow: 0 0 24px var(--accent2); }
         }
 
         .card.opening {
@@ -1143,9 +1150,9 @@
             c.appendChild(img);
             c.appendChild(info);
 
-            // Click on card to open link with animation
+            // Click on card to open download link with animation
             c.addEventListener('click', (e) => {
-                if (e.target !== img || !longPressed) { // Only if not long press on img
+                if (!copied) {
                     c.classList.add('opening');
                     setTimeout(() => {
                         c.classList.remove('opening');
@@ -1154,24 +1161,26 @@
                 }
             });
 
-            // Long press on image to copy link
+            // Long press on image to copy share link
             let longPressTimeout;
-            let longPressed = false;
+            let copied = false;
+            const baseUrl = window.location.origin + window.location.pathname;
+            const section = DATA.sections.find(s => s.id === sectionKey || (s.versions && s.versions.some(v => v.id === sectionKey)));
+            const itemUrl = section.versions
+                ? `${baseUrl}#${section.id}/${sectionKey}/${it.id}`
+                : `${baseUrl}#${sectionKey}/${it.id}`;
+
             const handleStart = (e) => {
+                e.preventDefault();
                 longPressTimeout = setTimeout(() => {
-                    longPressed = true;
-                    navigator.clipboard.writeText(it.url).then(() => {
-                        showToast('¡Enlace copiado al portapapeles!');
+                    copied = true;
+                    navigator.clipboard.writeText(itemUrl).then(() => {
+                        showToast('¡Link compartido copiado!');
                     });
-                    e.preventDefault();
                 }, 500);
             };
             const handleEnd = (e) => {
                 clearTimeout(longPressTimeout);
-                if (longPressed) {
-                    e.stopPropagation(); // Prevent card click after long press
-                }
-                longPressed = false;
             };
 
             // Mouse events
@@ -1196,6 +1205,28 @@
                 renderMainMenu();
             }
             window.location.hash = '';
+        }
+
+        /* ===== Deep Linking ===== */
+        function handleDeepLink() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const parts = hash.split('/');
+                if (parts.length >= 1) {
+                    const sectionId = parts[0];
+                    const subKey = parts[1];
+                    const itemId = parts[2] || null;
+                    const section = DATA.sections.find(s => s.id === sectionId);
+                    if (section) {
+                        showScreen('home');
+                        if (section.versions && subKey && section.versions.some(v => v.id === subKey)) {
+                            openSection(sectionId, subKey, itemId);
+                        } else {
+                            openSection(sectionId, subKey, itemId);
+                        }
+                    }
+                }
+            }
         }
 
         /* ===== Search Logic ===== */
@@ -1404,6 +1435,8 @@
         /* ===== Initialization ===== */
         showScreen('home');
         renderMainMenu();
+        handleDeepLink();
+        window.addEventListener('hashchange', handleDeepLink);
     </script>
 </body>
 </html>
