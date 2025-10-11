@@ -13,6 +13,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="NEOCRAFTss.png">
     <meta name="msapplication-TileImage" content="NEOCRAFTss.png">
     <meta name="msapplication-TileColor" content="#0a0b1a">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
@@ -715,6 +717,26 @@
             opacity: 1;
             visibility: visible;
         }
+
+        /* ===== Install Button ===== */
+        #installButton {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 9999;
+            padding: 10px 20px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            display: none;
+        }
+
+        #installButton:hover {
+            background: linear-gradient(135deg, var(--accent3), var(--accent1));
+        }
     </style>
 </head>
 <body>
@@ -838,6 +860,9 @@
 
     <!-- Toast -->
     <div id="toast"></div>
+
+    <!-- Install Button -->
+    <button id="installButton">📱 Instalar App</button>
 
     <script>
         // Particle Background (Enhanced Aesthetic - Blue Nebula Effect)
@@ -1433,6 +1458,41 @@
                 toggleBtn.textContent = '☀️ Cambiar a Modo Claro';
             }
         };
+
+        /* ===== PWA Install Prompt ===== */
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    showToast('¡App instalada!');
+                    deferredPrompt = null;
+                    installButton.style.display = 'none';
+                }
+            }
+        });
+
+        /* ===== Service Worker Registration ===== */
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registrado con éxito:', registration);
+                    })
+                    .catch((error) => {
+                        console.log('Error al registrar Service Worker:', error);
+                    });
+            });
+        }
 
         /* ===== Initialization ===== */
         showScreen('home');
