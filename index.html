@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameStore</title>
+    <!-- Favicon -->
+    <link rel="icon" href="NEOCRAFTss.png" type="image/png">
+    <link rel="icon" type="image/png" sizes="32x32" href="NEOCRAFTss.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="NEOCRAFTss.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="NEOCRAFTss.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="NEOCRAFTss.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="NEOCRAFTss.png">
+    <meta name="msapplication-TileImage" content="NEOCRAFTss.png">
+    <meta name="msapplication-TileColor" content="#0a0b1a">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="particles"></canvas>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="sidebar-section">
+            <h3>Enlaces Sociales</h3>
+            <a href="https://youtube.com/@jlmc2?si=qHmc0eB24stW3Kcv" class="social-link">
+                <img src="./port/yt.png" alt="YouTube"> YouTube
+            </a>
+            <a href="https://www.tiktok.com/@neomc1?_t=ZS-8zkfUb8Lnjm&_r=1" class="social-link">
+                <img src="./port/tiktok.png" alt="TikTok"> TikTok
+            </a>
+            <a href="https://www.instagram.com/neomc12?igsh=MXNqYmcwNHZmOGx3Yg==" class="social-link">
+                <img src="./port/inta.jpg" alt="Instagram"> Instagram
+            </a>
+            <a href="https://learningkodes.github.io/GameStore/" class="social-link">
+                📄 Content
+            </a>
+        </div>
+        <div class="sidebar-section">
+            <button id="themeToggle">☀️ Cambiar a Modo Claro</button>
+        </div>
+    </div>
+
+    <header>
+        <button id="sidebarToggle">☰</button>
+        <img class="logo" src="NEOCRAFT.png" alt="Logo">
+        <h1>GameStore</h1>
+    </header>
+
+    <div class="main" id="mainContent">
+        <!-- Home Screen -->
+        <div id="homeScreen">
+            <div class="hero-section">
+                <h2>Descubre el Mundo de GameStore</h2>
+                <p>Tu plataforma definitiva para descargar APKs de Minecraft, texturas, shaders y mucho más. Explora colecciones exclusivas como Craftsman y NeoCraft en un entorno moderno e intuitivo.</p>
+                <div class="facts">
+                    <h3>Datos Curiosos</h3>
+                    <ul>
+                        <li>Minecraft ha vendido más de 300 millones de copias en todo el mundo.</li>
+                        <li>Los shaders transforman la iluminación en Minecraft para un realismo impresionante.</li>
+                        <li>Craftsman es una versión modificada favorita para dispositivos móviles.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="carousel">
+                <div class="slides">
+                    <div class="slide active">
+                        <img src="./port/craftsman.png" alt="Craftsman">
+                        <div class="caption">Craftsman</div>
+                    </div>
+                    <div class="slide">
+                        <img src="neocraft/2NEOCRAFT.png" alt="NeoCraft">
+                        <div class="caption">NeoCraft</div>
+                    </div>
+                    <div class="slide">
+                        <img src="./port/texturaa.jpg" alt="Complementos">
+                        <div class="caption">Complementos</div>
+                    </div>
+                    <div class="slide">
+                        <img src="./port/extras.png" alt="Otras Apps">
+                        <div class="caption">Otras Apps</div>
+                    </div>
+                </div>
+                <button class="prev" onclick="moveSlide(-1)">❮</button>
+                <button class="next" onclick="moveSlide(1)">❯</button>
+            </div>
+            <div id="mainMenu" class="items-grid"></div>
+            <button id="backBtn" class="back-btn" onclick="goBack()" style="display: none;">Atrás</button>
+            <div id="contentMenu" class="items-grid"></div>
+        </div>
+
+        <!-- Search Screen -->
+        <div id="searchScreen">
+            <input id="searchInput" type="text" placeholder="Buscar apps, texturas, versiones...">
+            <div id="searchResults" class="items-grid"></div>
+            <button id="backBtnSearch" class="back-btn" onclick="goBackSearch()">Atrás</button>
+        </div>
+
+        <!-- APK Contact Screen -->
+        <div id="apkScreen" style="display: none;">
+            <div class="apk-contact">
+                <b>¿Quieres que tu APK aparezca aquí?</b><br>
+                Contáctanos vía Telegram para enviar tu APK, portada, descripción y enlace:<br>
+                <a href="https://t.me/+573046128902" class="telegram-btn">
+                    <img src="./port/telegram.png" alt="Telegram">
+                    Contactar por Telegram
+                </a><br>
+                <span style="font-size: 0.9rem;">¡Envíanos tu contenido y lo publicaremos en GameStore!</span>
+            </div>
+        </div>
+
+        <!-- Videos Screen -->
+        <div id="videosScreen" style="display: none;">
+            <div class="videos-grid" id="videosContainer"></div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav id="bottomNav">
+        <button id="navHome">
+            <img src="./port/home.png" alt="Inicio">
+            Inicio
+        </button>
+        <button id="navApk">
+            <img src="./port/telegram.png" alt="Contacto">
+            Contacto
+        </button>
+        <button id="navVideos">
+            <img src="./port/video.png" alt="Videos">
+            Videos
+        </button>
+        <button id="navSearch">
+            <img src="./port/serch.png" alt="Buscar">
+            Buscar
+        </button>
+    </nav>
+    <audio id="highlightSound" src="../rs/correcto.mp3" preload="auto"></audio>
+
+    <!-- Toast -->
+    <div id="toast"></div>
+
+    <!-- Install Button -->
+    <button id="installButton">📱 Instalar App</button>
+
+    <!-- Importar archivo.js para el objeto DATA -->
+    <script src="archivo.js"></script>
+
+    <script>
+        // Particle Background (Enhanced Aesthetic - Blue Nebula Effect)
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.6 + 0.4;
+                const blueShades = ['#3b82f6', '#1d4ed8', '#06b6d4'];
+                this.color = blueShades[Math.floor(Math.random() * blueShades.length)];
+                this.glow = Math.random() * 6 + 3;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+                this.opacity = Math.max(0.3, this.opacity + (Math.random() - 0.5) * 0.01);
+            }
+
+            draw() {
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = this.glow;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        function connectParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 120) {
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.6 - distance / 120})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const particleCount = Math.min(window.innerWidth / 4, 150);
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
+        // Toast Function
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        /* ===== Menu Logic ===== */
+        const mainMenu = document.getElementById('mainMenu');
+        const contentMenu = document.getElementById('contentMenu');
+        const searchResults = document.getElementById('searchResults');
+        const backBtn = document.getElementById('backBtn');
+        const backBtnSearch = document.getElementById('backBtnSearch');
+        const searchInput = document.getElementById('searchInput');
+        let state = { section: null, version: null };
+
+        function renderMainMenu() {
+            mainMenu.innerHTML = "";
+            contentMenu.innerHTML = "";
+            backBtn.style.display = 'none';
+            DATA.sections.forEach(sec => {
+                const c = document.createElement('div');
+                c.className = 'card';
+                let imgSrc = "./port/extras.png";
+                if (sec.id === "craftsman") imgSrc = "./port/craftsman.png";
+                else if (sec.id === "neocraft") imgSrc = "neocraft/NEOCRAFT.png";
+                else if (sec.id === "complementos") imgSrc = "./port/texturaa.jpg";
+                else if (sec.id === "otras-apps") imgSrc = "./port/extras.png";
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                const info = document.createElement('div');
+                info.className = 'info';
+                info.innerHTML = `<div class="title">${sec.title}</div><div class="desc">${sec.desc || ''}</div>`;
+                c.appendChild(img);
+                c.appendChild(info);
+                c.onclick = () => openSection(sec.id);
+                mainMenu.appendChild(c);
+            });
+        }
+
+        function openSection(id, versionId = null, targetItemId = null) {
+            state.section = id;
+            state.version = versionId;
+            mainMenu.innerHTML = "";
+            contentMenu.innerHTML = "";
+            backBtn.style.display = 'inline-flex';
+            const sec = DATA.sections.find(s => s.id === id);
+            if (sec.versions && !versionId) {
+                sec.versions.forEach(v => {
+                    const c = document.createElement('div');
+                    c.className = 'card';
+                    let imgSrc = "./port/craftsman.png";
+                    if (id === "craftsman") {
+                        if (v.id === "craftsman-main" || v.id === "craftsman-01510") imgSrc = "./port/craftsman.png";
+                        else if (v.id === "craftsman-zero") imgSrc = "./port/zero.png";
+                    } else if (id === "complementos") {
+                        imgSrc = "./port/texturaa.jpg";
+                    } else if (id === "otras-apps") {
+                        if (v.id === "minecraft") imgSrc = "port/Minecraft_Bedrock.png";
+                        else if (v.id === "ultra-raft") imgSrc = "port/ultra.png";
+                        else if (v.id === "gamestore") imgSrc = "./port/texturaa.jpg";
+                        else imgSrc = "./port/extras.png";
+                    }
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    const info = document.createElement('div');
+                    info.className = 'info';
+                    info.innerHTML = `<div class="title">${v.title}</div>`;
+                    c.appendChild(img);
+                    c.appendChild(info);
+                    c.onclick = () => openSection(id, v.id, targetItemId);
+                    contentMenu.appendChild(c);
+                });
+            } else {
+                renderItems(versionId || id, targetItemId);
+            }
+        }
+
+        function renderItems(key, targetItemId = null) {
+            contentMenu.innerHTML = "";
+            let list = DATA.items[key] || [];
+            if (list.length === 0) {
+                contentMenu.innerHTML = "<div style='padding:12px;color: var(--muted); grid-column: 1/-1;'>Próximamente...</div>";
+                return;
+            }
+            list.forEach(it => {
+                const c = createItemCard(it, key);
+                if (targetItemId && it.id === targetItemId) {
+                    c.classList.add('highlight');
+                    setTimeout(() => {
+                        c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        const sound = document.getElementById('highlightSound');
+                        if (sound) sound.play();
+                    }, 100);
+                }
+                contentMenu.appendChild(c);
+            });
+        }
+
+        function createItemCard(it, sectionKey) {
+            const c = document.createElement('div');
+            c.className = 'card';
+            const img = document.createElement('img');
+            img.src = it.img || './port/craftsman.png';
+            const info = document.createElement('div');
+            info.className = 'info';
+            info.innerHTML = `<div class="title">${it.title}</div><div class="desc">${it.version || ''} - ${it.desc || ''}</div>`;
+            c.appendChild(img);
+            c.appendChild(info);
+
+            // Click on card to open download link with animation
+            c.addEventListener('click', (e) => {
+                if (!copied) {
+                    c.classList.add('opening');
+                    setTimeout(() => {
+                        c.classList.remove('opening');
+                        window.open(it.url, '_blank');
+                    }, 300);
+                }
+            });
+
+            // Long press on image to copy share link
+            let longPressTimeout;
+            let copied = false;
+            const baseUrl = window.location.origin + window.location.pathname;
+            const section = DATA.sections.find(s => s.id === sectionKey || (s.versions && s.versions.some(v => v.id === sectionKey)));
+            const itemUrl = section.versions
+                ? `${baseUrl}#${section.id}/${sectionKey}/${it.id}`
+                : `${baseUrl}#${sectionKey}/${it.id}`;
+
+            const handleStart = (e) => {
+                e.preventDefault();
+                longPressTimeout = setTimeout(() => {
+                    copied = true;
+                    navigator.clipboard.writeText(itemUrl).then(() => {
+                        showToast('¡Link compartido copiado!');
+                    });
+                }, 500);
+            };
+            const handleEnd = (e) => {
+                clearTimeout(longPressTimeout);
+            };
+
+            // Mouse events
+            img.addEventListener('mousedown', handleStart);
+            img.addEventListener('mouseup', handleEnd);
+            img.addEventListener('mouseleave', handleEnd);
+
+            // Touch events
+            img.addEventListener('touchstart', handleStart, { passive: false });
+            img.addEventListener('touchend', handleEnd, { passive: false });
+            img.addEventListener('touchcancel', handleEnd);
+
+            return c;
+        }
+
+        function goBack() {
+            if (state.version) {
+                state.version = null;
+                openSection(state.section);
+            } else {
+                state.section = null;
+                renderMainMenu();
+            }
+            window.location.hash = '';
+        }
+
+        /* ===== Deep Linking ===== */
+        function handleDeepLink() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const parts = hash.split('/');
+                if (parts.length >= 1) {
+                    const sectionId = parts[0];
+                    const subKey = parts[1];
+                    const itemId = parts[2] || null;
+                    const section = DATA.sections.find(s => s.id === sectionId);
+                    if (section) {
+                        showScreen('home');
+                        if (section.versions && subKey && section.versions.some(v => v.id === subKey)) {
+                            openSection(sectionId, subKey, itemId);
+                        } else {
+                            openSection(sectionId, subKey, itemId);
+                        }
+                    }
+                }
+            }
+        }
+
+        /* ===== Search Logic ===== */
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim().toLowerCase();
+            if (query === '') {
+                searchResults.innerHTML = "";
+            } else {
+                performSearch(query);
+            }
+        });
+
+        function performSearch(query) {
+            searchResults.innerHTML = "";
+            let matches = [];
+
+            DATA.sections.forEach(sec => {
+                if (sec.title.toLowerCase().includes(query) || (sec.desc && sec.desc.toLowerCase().includes(query))) {
+                    matches.push({ type: 'section', data: sec });
+                }
+                if (sec.versions) {
+                    sec.versions.forEach(v => {
+                        if (v.title.toLowerCase().includes(query)) {
+                            matches.push({ type: 'subsection', data: v, sectionId: sec.id });
+                        }
+                    });
+                }
+            });
+
+            Object.keys(DATA.items).forEach(key => {
+                DATA.items[key].forEach(it => {
+                    if (it.title.toLowerCase().includes(query) || 
+                        (it.version && it.version.toLowerCase().includes(query)) || 
+                        (it.desc && it.desc.toLowerCase().includes(query))) {
+                        matches.push({ type: 'item', data: it, sectionId: key });
+                    }
+                });
+            });
+
+            if (matches.length === 0) {
+                searchResults.innerHTML = "<div style='padding:12px;color: var(--muted); grid-column: 1/-1;'>No se encontraron resultados</div>";
+                return;
+            }
+
+            matches.forEach(match => {
+                let c;
+                if (match.type === 'section') {
+                    const sec = match.data;
+                    c = document.createElement('div');
+                    c.className = 'card';
+                    let imgSrc = "./port/extras.png";
+                    if (sec.id === "craftsman") imgSrc = "./port/craftsman.png";
+                    else if (sec.id === "neocraft") imgSrc = "neocraft/NEOCRAFT.png";
+                    else if (sec.id === "complementos") imgSrc = "./port/texturaa.jpg";
+                    else if (sec.id === "otras-apps") imgSrc = "./port/extras.png";
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    const info = document.createElement('div');
+                    info.className = 'info';
+                    info.innerHTML = `<div class="title">${sec.title}</div><div class="desc">${sec.desc || ''}</div>`;
+                    c.appendChild(img);
+                    c.appendChild(info);
+                    c.onclick = () => {
+                        showScreen('home');
+                        searchInput.value = '';
+                        openSection(sec.id);
+                    };
+                    searchResults.appendChild(c);
+                } else if (match.type === 'subsection') {
+                    const v = match.data;
+                    const sec = DATA.sections.find(s => s.id === match.sectionId);
+                    c = document.createElement('div');
+                    c.className = 'card';
+                    let imgSrc = "./port/texturaa.jpg";
+                    if (sec.id === "craftsman") {
+                        if (v.id.includes("zero")) imgSrc = "./port/zero.png";
+                        else imgSrc = "./port/craftsman.png";
+                    } else if (sec.id === "otras-apps") {
+                        if (v.id === "minecraft") imgSrc = "port/Minecraft_Bedrock.png";
+                        else if (v.id === "ultra-raft") imgSrc = "port/ultra.png";
+                        else if (v.id === "gamestore") imgSrc = "./port/texturaa.jpg";
+                        else imgSrc = "./port/extras.png";
+                    }
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    const info = document.createElement('div');
+                    info.className = 'info';
+                    info.innerHTML = `<div class="title">${v.title}</div><div class="desc">En ${sec.title}</div>`;
+                    c.appendChild(img);
+                    c.appendChild(info);
+                    c.onclick = () => {
+                        showScreen('home');
+                        searchInput.value = '';
+                        openSection(sec.id, v.id);
+                    };
+                    searchResults.appendChild(c);
+                } else if (match.type === 'item') {
+                    c = createItemCard(match.data, match.sectionId);
+                    searchResults.appendChild(c);
+                }
+            });
+        }
+
+        function goBackSearch() {
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+            showScreen('home');
+        }
+
+        /* ===== Carousel ===== */
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        function showSlide(i) {
+            currentSlide = i;
+            if (currentSlide >= slides.length) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = slides.length - 1;
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            document.querySelector('.slides').style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+        window.moveSlide = function(n) {
+            showSlide(currentSlide + n);
+        }
+        setInterval(() => showSlide(currentSlide + 1), 4000);
+        showSlide(0);
+
+        /* ===== Videos ===== */
+        function renderVideos() {
+            const videosContainer = document.getElementById('videosContainer');
+            videosContainer.innerHTML = '';
+            DATA.videos.forEach(video => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.innerHTML = `
+                    <img src="${video.thumbnail}" alt="${video.title}">
+                    <div class="play-overlay"></div>
+                    <iframe src="${video.url}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="video-title">${video.title}</div>
+                `;
+                card.onclick = () => {
+                    card.classList.toggle('active');
+                    if (card.classList.contains('active')) {
+                        card.querySelector('iframe').src += "&autoplay=1";
+                    } else {
+                        card.querySelector('iframe').src = video.url;
+                    }
+                };
+                videosContainer.appendChild(card);
+            });
+        }
+
+        /* ===== Navigation ===== */
+        const navHome = document.getElementById('navHome');
+        const navApk = document.getElementById('navApk');
+        const navVideos = document.getElementById('navVideos');
+        const navSearch = document.getElementById('navSearch');
+        const homeScreen = document.getElementById('homeScreen');
+        const searchScreen = document.getElementById('searchScreen');
+        const apkScreen = document.getElementById('apkScreen');
+        const videosScreen = document.getElementById('videosScreen');
+
+        function showScreen(screen) {
+            homeScreen.style.display = 'none';
+            searchScreen.style.display = 'none';
+            apkScreen.style.display = 'none';
+            videosScreen.style.display = 'none';
+            if (screen === 'home') {
+                homeScreen.style.display = 'block';
+                if (state.section) {
+                    openSection(state.section, state.version);
+                } else {
+                    renderMainMenu();
+                }
+            } else if (screen === 'search') {
+                searchScreen.style.display = 'flex';
+                searchInput.focus();
+            } else if (screen === 'apk') {
+                apkScreen.style.display = 'flex';
+            } else if (screen === 'videos') {
+                videosScreen.style.display = 'block';
+                renderVideos();
+            }
+        }
+
+        navHome.onclick = () => { showScreen('home'); };
+        navApk.onclick = () => { showScreen('apk'); };
+        navVideos.onclick = () => { showScreen('videos'); };
+        navSearch.onclick = () => { showScreen('search'); };
+
+        /* ===== Sidebar & Theme ===== */
+        document.getElementById('sidebarToggle').onclick = () => {
+            document.getElementById('sidebar').classList.toggle('open');
+        };
+
+        document.getElementById('themeToggle').onclick = () => {
+            document.body.classList.toggle('light');
+            const toggleBtn = document.getElementById('themeToggle');
+            if (document.body.classList.contains('light')) {
+                toggleBtn.textContent = '🌙 Cambiar a Modo Oscuro';
+            } else {
+                toggleBtn.textContent = '☀️ Cambiar a Modo Claro';
+            }
+        };
+
+        /* ===== PWA Install Prompt ===== */
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    showToast('¡App instalada!');
+                    deferredPrompt = null;
+                    installButton.style.display = 'none';
+                }
+            }
+        });
+
+        /* ===== Service Worker Registration ===== */
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registrado con éxito:', registration);
+                    })
+                    .catch((error) => {
+                        console.log('Error al registrar Service Worker:', error);
+                    });
+            });
+        }
+
+        /* ===== Initialization ===== */
+        showScreen('home');
+        renderMainMenu();
+        handleDeepLink();
+        window.addEventListener('hashchange', handleDeepLink);
+    </script>
+    <script src="archivos.js"></script>
+</body>
+</html>
