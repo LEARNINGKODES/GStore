@@ -509,7 +509,7 @@
             transform: scaleX(1);
         }
 
-        /* ===== Subir APK Section ===== */
+        /* ===== APK Contact Section ===== */
         #apkScreen {
             text-align: center;
             display: flex;
@@ -518,7 +518,7 @@
             min-height: calc(100vh - 160px);
         }
 
-        .upload-section {
+        .apk-contact {
             max-width: 500px;
             margin: 2rem auto;
             padding: 2rem;
@@ -534,7 +534,7 @@
             overflow: hidden;
         }
 
-        .upload-section::before {
+        .apk-contact::before {
             content: '';
             position: absolute;
             top: 0;
@@ -545,55 +545,42 @@
             opacity: 0.9;
         }
 
-        .upload-section h2 {
-            font-size: 1.8rem;
+        .apk-contact b {
+            font-size: 1.4rem;
             font-weight: 700;
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 1.5rem;
-            animation: glow 3s infinite;
         }
 
-        .upload-section form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .upload-section input, .upload-section select, .upload-section textarea {
-            padding: 0.8rem;
-            border-radius: 8px;
-            border: 1px solid var(--accent1);
-            background: var(--glass);
-            color: var(--text);
-            font-size: 0.95rem;
-            outline: none;
-            box-shadow: 0 0 8px var(--accent3);
-            transition: box-shadow 0.3s;
-        }
-
-        .upload-section input:focus, .upload-section select:focus, .upload-section textarea:focus {
-            border-color: var(--accent2);
-            box-shadow: 0 0 12px var(--accent2);
-        }
-
-        .upload-section button {
+        .apk-contact .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
             background: var(--gradient);
             color: #ffffff;
-            padding: 1rem;
+            padding: 1rem 2rem;
             border: none;
             border-radius: 10px;
             font-weight: 600;
             font-size: 1rem;
+            text-decoration: none;
             box-shadow: 0 0 12px var(--accent1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 1rem 0;
+            max-width: 250px;
         }
 
-        .upload-section button:hover {
+        .apk-contact .telegram-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 0 20px var(--accent3);
             background: linear-gradient(135deg, var(--accent3), var(--accent1));
+        }
+
+        .apk-contact .telegram-btn img {
+            width: 24px;
+            height: 24px;
+            filter: brightness(100%) contrast(100%);
         }
 
         /* ===== Videos Section ===== */
@@ -750,165 +737,6 @@
         #installButton:hover {
             background: linear-gradient(135deg, var(--accent3), var(--accent1));
         }
-
-        /* ===== Admin Section ===== */
-        .admin-section {
-            background: var(--panel);
-            border-radius: var(--radius);
-            padding: 2rem;
-            margin: 1rem auto;
-            max-width: 800px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            text-align: center;
-        }
-
-        .admin-section h2, .admin-section h3 {
-            font-weight: 700;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-            animation: glow 3s infinite;
-        }
-
-        .admin-section form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .admin-section input, .admin-section select, .admin-section textarea {
-            padding: 0.8rem;
-            border-radius: 8px;
-            border: 1px solid var(--accent1);
-            background: var(--glass);
-            color: var(--text);
-            font-size: 0.95rem;
-            outline: none;
-            box-shadow: 0 0 8px var(--accent3);
-            transition: box-shadow 0.3s;
-        }
-
-        .admin-section input:focus, .admin-section select:focus, .admin-section textarea:focus {
-            border-color: var(--accent2);
-            box-shadow: 0 0 12px var(--accent2);
-        }
-
-        .admin-section button {
-            background: var(--gradient);
-            color: #ffffff;
-            padding: 0.8rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .admin-section button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px var(--accent3);
-        }
-
-        .admin-section table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-            background: var(--glass);
-            border-radius: var(--radius);
-            overflow: hidden;
-        }
-
-        .admin-section th, .admin-section td {
-            padding: 0.8rem;
-            border: 1px solid var(--muted);
-            text-align: left;
-            color: var(--text);
-        }
-
-        .admin-section th {
-            background: var(--gradient);
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        .admin-section td button {
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-        }
-
-        .admin-section td button:first-child {
-            background: #22c55e; /* Verde para aprobar */
-            color: #ffffff;
-        }
-
-        .admin-section td button:last-child {
-            background: #ef4444; /* Rojo para rechazar */
-            color: #ffffff;
-        }
-
-        .admin-section td button:hover {
-            transform: scale(1.05);
-        }
-
-        /* ===== Admin Login Prompt ===== */
-        #adminLoginPrompt {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--panel);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            z-index: 100;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        #adminLoginPrompt h2 {
-            font-size: 1.5rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-        }
-
-        #adminLoginForm {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        #adminLoginPrompt input {
-            padding: 0.8rem;
-            border-radius: 8px;
-            border: 1px solid var(--accent1);
-            background: var(--glass);
-            color: var(--text);
-            outline: none;
-            box-shadow: 0 0 8px var(--accent3);
-        }
-
-        #adminLoginPrompt button {
-            background: var(--gradient);
-            color: #ffffff;
-            padding: 0.8rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        #adminLoginPrompt button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px var(--accent3);
-        }
     </style>
 </head>
 <body>
@@ -930,7 +758,6 @@
             <a href="https://learningkodes.github.io/GameStore/" class="social-link">
                 📄 Content
             </a>
-            <a href="#" class="social-link" id="adminLink">🔒 ADMIN</a>
         </div>
         <div class="sidebar-section">
             <button id="themeToggle">☀️ Cambiar a Modo Claro</button>
@@ -985,75 +812,30 @@
             <div id="contentMenu" class="items-grid"></div>
         </div>
 
-        <!-- Subir APK Screen (antes Contacto) -->
-        <div id="apkScreen" style="display: none;">
-            <div class="upload-section">
-                <h2>Subir APK</h2>
-                <form id="uploadApkForm">
-                    <input type="url" name="link" placeholder="Enlace del APK" required>
-                    <input type="text" name="name" placeholder="Nombre del APK" required>
-                    <input type="url" name="portada" placeholder="URL de la portada (ej. Google Drive)" required>
-                    <textarea name="description" placeholder="Descripción" rows="4"></textarea>
-                    <input type="text" name="version" placeholder="Versión (ej. 1.0)">
-                    <select name="category" required>
-                        <option value="" disabled selected>Selecciona una categoría</option>
-                        <!-- Populado dinámicamente -->
-                    </select>
-                    <button type="submit">Subir APK</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Admin Screen -->
-        <div id="adminScreen" style="display: none;">
-            <div class="admin-section">
-                <h2>Panel de Administración</h2>
-                <h3>Aprobar/Rechazar APKs</h3>
-                <table id="pendingApksTable">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Versión</th>
-                            <th>Categoría</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <h3>Crear Nueva Sección</h3>
-                <form id="createSectionForm">
-                    <input type="text" name="section_id" placeholder="ID de la sección (ej. animas)" required>
-                    <input type="text" name="title" placeholder="Título (ej. Animas)" required>
-                    <textarea name="description" placeholder="Descripción" rows="4"></textarea>
-                    <select name="parent_id">
-                        <option value="">Sin categoría principal</option>
-                        <!-- Populado dinámicamente -->
-                    </select>
-                    <button type="submit">Crear Sección</button>
-                </form>
-            </div>
-        </div>
-
         <!-- Search Screen -->
-        <div id="searchScreen" style="display: none;">
+        <div id="searchScreen">
             <input id="searchInput" type="text" placeholder="Buscar apps, texturas, versiones...">
             <div id="searchResults" class="items-grid"></div>
             <button id="backBtnSearch" class="back-btn" onclick="goBackSearch()">Atrás</button>
+        </div>
+
+        <!-- APK Contact Screen -->
+        <div id="apkScreen" style="display: none;">
+            <div class="apk-contact">
+                <b>¿Quieres que tu APK aparezca aquí?</b><br>
+                Contáctanos vía Telegram para enviar tu APK, portada, descripción y enlace:<br>
+                <a href="https://t.me/+573046128902" class="telegram-btn">
+                    <img src="./port/telegram.png" alt="Telegram">
+                    Contactar por Telegram
+                </a><br>
+                <span style="font-size: 0.9rem;">¡Envíanos tu contenido y lo publicaremos en GameStore!</span>
+            </div>
         </div>
 
         <!-- Videos Screen -->
         <div id="videosScreen" style="display: none;">
             <div class="videos-grid" id="videosContainer"></div>
         </div>
-    </div>
-
-    <!-- Admin Login Prompt -->
-    <div id="adminLoginPrompt">
-        <h2>Iniciar Sesión Admin</h2>
-        <form id="adminLoginForm">
-            <input type="password" name="password" placeholder="Contraseña" required>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
     </div>
 
     <!-- Navigation Bar -->
@@ -1063,8 +845,8 @@
             Inicio
         </button>
         <button id="navApk">
-            <img src="./port/telegram.png" alt="Subir APK">
-            Subir APK
+            <img src="./port/telegram.png" alt="Contacto">
+            Contacto
         </button>
         <button id="navVideos">
             <img src="./port/video.png" alt="Videos">
@@ -1178,16 +960,122 @@
         }
 
         /* ===== Data ===== */
-        let DATA = { sections: [], items: {} };
-
-        async function fetchData() {
-            const response = await fetch('get_data.php');
-            const data = await response.json();
-            DATA.sections = data.sections;
-            DATA.items = data.items;
-            renderMainMenu();
-            populateCategorySelect();
-        }
+        let DATA = {
+            socials: {
+                youtube: {url: "https://youtube.com/@jlmc2?si=qHmc0eB24stW3Kcv", img: "./port/yt.png"},
+                tiktok: {url: "https://www.tiktok.com/@neomc1?_t=ZS-8zkfUb8Lnjm&_r=1", img: "./port/tiktok.png"},
+                instagram: {url: "https://www.instagram.com/neomc12?igsh=MXNqYmcwNHZmOGx3Yg==", img: "./port/inta.jpg"}
+            },
+            sections: [
+                {
+                    id: "craftsman",
+                    title: "Craftsman",
+                    desc: "Colección Craftsman",
+                    versions: [
+                        {id: "craftsman-main", title: "Craftsman"},
+                        {id: "craftsman-zero", title: "Craftsman Zero"},
+                        {id: "craftsman-01510", title: "Craftsman 0.15.10 & 0.14.3"}
+                    ]
+                },
+                {
+                    id: "neocraft",
+                    title: "NeoCraft",
+                    desc: "Recursos NeoCraft"
+                },
+                {
+                    id: "complementos",
+                    title: "Complementos",
+                    desc: "Texturas, Shaders, Mundos y Addons",
+                    versions: [
+                        {id: "texturas", title: "Texturas"},
+                        {id: "shaders", title: "Shaders"},
+                        {id: "mundos", title: "Mundos"},
+                        {id: "addons", title: "Addons"}
+                    ]
+                },
+                {
+                    id: "otras-apps",
+                    title: "Otras Apps",
+                    desc: "Otras aplicaciones increíbles",
+                    versions: [
+                        {id: "minecraft", title: "Minecraft"},
+                        {id: "ultra-raft", title: "Ultra Raft"},
+                        {id: "balioncraft", title: "BALIONCRAFT"},
+                        {id: "hipercraft", title: "Hipercraft"},
+                        {id: "gamestore", title: "GameStore"}
+                    ]
+                }
+            ],
+            items: {
+                "craftsman-main": [
+                    { id: "c-1", title: "Craftsman AB", version: "1.19.50", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/ah73nfy17woyh7j/Craftsman_AB.apk/file" },
+                    { id: "c-2", title: "Craftsman EMOTES", version: "1.18", img: "./port/craftsman.png", desc: "PARA GRABAR EMOTES DESDE CRAFTSMAN", url: "https://www.mediafire.com/file/1l0wno4u23when8/Craftsman_emotes.apk/file" },
+                    { id: "c-3", title: "Craftsmine", version: "1.??", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/42lo3yruc2rh4bo/CraftMine_V2.apk/file" },
+                    { id: "c-4", title: "Craftsman PE", version: "", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/r0ummjkdjinpnn1/Craftsman_Pe.apk/file" },
+                    { id: "c-5", title: "Craftsman Trial", version: "1.0", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/p2vj2wjczn2qf3j/Craftsman_Trial_1.0.0.16.apk/file" },
+                    { id: "c-6", title: "Craftsman uno", version: "0.15.10", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/briwk3jkzyald7o/Craftsman_UNO.apk/file" },
+                    { id: "c-7", title: "Craftsman ??", version: "", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/i2jyn06j46j8jur/Craftsman__signed.apk/file" },
+                    { id: "c-8", title: "Craftsman 1.17", version: "", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/drep2uik81qjuqm/minecraft-1-17-2_mod.apk/file" },
+                    { id: "c-9", title: "Craftsman VI", version: "1.16.20", img: "./port/craftsman.png", desc: "", url: "https://www.mediafire.com/file/hgi53l00ce4okrc/Craftsman+VI+1.16+NEOFACE.apk/file" }
+                ],
+                "craftsman-01510": [
+                    { id: "c01510-1", title: "Craftsman 0.15.10", version: "0.15.10", img: "./port/craftsman.png", desc: "CRAFTSMAN 0.15.10 PARA ANDROID 14 Y 15 EN ADELANTE", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" },
+                    { id: "c01510-2", title: "Craftsman 0.15.10", version: "0.15.10", img: "./port/craftsman.png", desc: "CRAFTSMAN 0.15.10", url: "https://www.mediafire.com/file/38z1flqyp7jkvwi/CRAFTSMAN_FOR_ANDROID_13-14_BY_NEOMC11.apk/file" },
+{ id: "c01510-3", title: "Craftsman 0.14.3 Mod 1.19", version: "0.14.3", img: "./port/Minecraft_Mod.png", desc: "Craftsman 0.14.3 - Mod 1.19 Update By GOBLINyt y AlexMC", url: "https://www.mediafire.com/file/ppotbt1nxvf8tzi/Mod_1.19_Upcade_By_GOBLINyt_y_AlexMC.apk/file" }
+                ],
+                "craftsman-zero": [
+                    { id: "cz-1", title: "Craftsman zero", version: "DEMO 1", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/k4krz1ww0299fvk/Craftsman+Zero+Demo+1.apk/file" },
+                    { id: "cz-2", title: "Craftsman zero", version: "1.1.5", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/vudh0hmv9mjh2tz/Cratsman+Zero+1.1.apk/file" },
+                    { id: "cz-3", title: "Craftsman zero NAVIDAD", version: "1.1.5", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/guv0t148wko9h0i/Craftsman+Zero+Navidad.apk/file" },
+                    { id: "cz-4", title: "Craftsman zero", version: "DEMO 2", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/7ds74aevus10761/Craftsman+Zero+Demo+2+Sin+Bugs.apk/file" },
+                    { id: "cz-5", title: "Craftsman zero", version: "DEMO 3", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/ev9m698nl3sjjxt/CRAFTSMAN_ZERO_DEMO_3_WITH_ANIMATIONS__by_NEOMC11.apk/file" },
+                    { id: "cz-6", title: "Craftsman zero", version: "DEMO 3 SKINS", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/4koz7twgiqge5lu/CRAFTSMAN_ZERO_DEMO_3_FOR_SKINS_BY_NEOMC11.apk/file" },
+                    { id: "cz-7", title: "Craftsman zero", version: "SIN ANUNCIOS", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/0h2pdhzy9wktolw/Craftsman_zero_sin_anuncios_By_NEOMC11.apk/file" },
+                    { id: "cz-8", title: "Craftsman zero", version: "1.16.40", img: "./port/zero.png", desc: "", url: "https://www.mediafire.com/file/bdvo2pcqrp5n7g4/Craftsman+Zero+1.16.apk/file" }
+                ],
+                "neocraft": [
+                    { id: "n-1", title: "NEOCRAFT v1", version: "1.20.12", img: "neocraft/NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/cxqj0b3t0syd6vi/NEOCRAFT.apk/file" },
+                    { id: "n-2", title: "NEOCRAFT v2", version: "", img: "neocraft/1NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/9jc389tiz5qkcy4/NeoCraft+Old+Edition_optimized.apk/file" },
+                    { id: "n-3", title: "NEOCRAFT, trailer edition", version: "", img: "neocraft/2NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/mookw5z8qrbintj/NEOCRAFT_Trailer_Edition_mod.apk/file" },
+                    { id: "n-4", title: "NEOCRAFT SE", version: "", img: "neocraft/3NEOCRAFT.png", desc: "", url: "https://www.mediafire.com/file/d9942l6uw7whh2n/NEOCRAFT_SE.apk/file" },
+                    { id: "n-5", title: "NEOCRAFT AS", version: "", img: "neocraft/4NEOCRAFT.jpeg", desc: "", url: "https://www.mediafire.com/file/23a74qf7fbv9s7n/Neocraft_AS_V1.apk/file" },
+                    { id: "n-6", title: "NEOCRAFT", version: "1.21.92", img: "neocraft/5NEOCRAFT.jpeg", desc: "", url: "https://www.mediafire.com/file/xml11u44xavdzs6/NEOCRAFT.apk/file" },
+                    { id: "n-7", title: "NEOCRAFT", version: "1.21.92", img: "neocraft/6NEOCRAFT.jpeg", desc: "", url: "https://www.mediafire.com/file/gbqt15tt1htjijv/NEOCRAFT_LTE.apk/file" }
+                ],
+                "shaders": [
+                    { id: "s-1", title: "NEW X DRAGON COMPLEMENTARY", version: "", img: "./port/texturaa.jpg", desc: "(SHADER) MINECRAFT PATCH", url: "https://www.mediafire.com/file/tk98dpuu1vfdfl4/Newb_X_Dragon_Complementary_Reimagined_-_Android.mcpack/file" },
+                    { id: "s-2", title: "NEWB X LEGACY", version: "1.21+", img: "./port/texturaa.jpg", desc: "(SHADER) MINECRAFT PATCH 1.21+", url: "https://www.mediafire.com/file/8qmz4j57gi45ekd/Newb_X_Legacy_Mcpe_1.21.mcpack.zip/file" }
+                ],
+                "mundos": [
+                    { id: "m-1", title: "ONE BLOCK", version: "1.5", img: "./port/texturaa.jpg", desc: "(MUNDO) PARA MINECRAFT 1.18 EN ADELANTE", url: "https://www.mediafire.com/file/fwxue1q70q93ybw/One_Block_%2528Spring_to_Life%2529_v%253D1.5.9_By_DtA_MC.mcworld/file" },
+                    { id: "m-2", title: "LUCKY BLOCK", version: "", img: "./port/texturaa.jpg", desc: "(MUNDO) MINECRAFT 1.18+", url: "https://www.mediafire.com/file/x1fqf8d1d76a9zn/RainbowLuckyBlockRaceV1.1.mcworld/file" }
+                ],
+                "texturas": [
+                    { id: "tx-1", title: "TEXTURA OUTPUT", version: "", img: "./port/texturaa.jpg", desc: "(TEXTURA) PARA MINECRAFT 1.18+", url: "https://www.mediafire.com/file/yxuie1v5m6v0khg/outcut2.mcpack/file" },
+                    { id: "tx-2", title: "BARE BONES", version: "", img: "./port/texturaa.jpg", desc: "(TEXTURA) PARA MINECRAFT 1.18", url: "https://www.mediafire.com/file/s1ridznky8rp0fn/RP_BB.mcpack/file" },
+                    { id: "tx-3", title: "I SEE YOU NOW", version: "", img: "./port/texturaa.jpg", desc: "TEXTURA PARA VER SKINS EN CRAFTING AND BUILDING", url: "https://www.mediafire.com/file/ykl2qy2d62fdnaw/I_SEE_YOU%2521_by_NEOMC11.mcpack/file" },
+                    { id: "tx-4", title: "Texturas Vanilla", version: "1.3", img: "./port/texturaa.jpg", desc: "PARA CRAFTSMAN 1.18+", url: "https://www.mediafire.com/file/2wsc0bpel7frifo/Texturas_Vanillas_1.18.0_By_NEOFACEMC.mcpack/file" }
+                ],
+                "addons": [],
+                "minecraft": [
+                    { id: "mc-1", title: "Minecraft", version: "1.21.113", img: "port/Minecraft_Bedrock.png", desc: "Minecraft 1.21.113 ya esta aqui... lo mejor, en un solo link podras encontra muchas versiones de MINECRAFT BEDROCK, disfrúta!", url: "https://app.mediafire.com/folder/6vzirxgmdn4r2/1.21.94+Oficial+Grissby.com" }
+                ],
+                "ultra-raft": [
+                    { id: "ur-1", title: "Ultracraft", version: "1.0", img: "port/ultra.png", desc: "Primera version de UltraCraft... CREADOR:Gabito", url: "https://www.mediafire.com/file/jkyr6jvpal1vfl5/ULTRACRAFT_Gabito.Gaming.apk/file" },
+                    { id: "ur-2", title: "Ultracraft", version: "1.1.1", img: "port/ultra.png", desc: "Segunda version de UltraCraft... CREADOR:Gabito", url: "https://www.mediafire.com/file/73vyix8atnk2k2f/ULTRACRAFT_%25E2%259C%2585_ACTUALIZADO_%25E2%259C%25A8_Gabito.Gaming.apk/file" },
+                    { id: "ur-3", title: "Ultracraft", version: "1.1.5", img: "port/ultra.png", desc: "Tercera version (todas las versiones siguiente) de UltraCraft... CREADOR:Gabito", url: "https://www.mediafire.com/folder/h98zm2afn6tju/Updates" }
+                ],
+                "balioncraft": [],
+                "hipercraft": [],
+                "gamestore": [
+                    { id: "gs-1", title: "GameStore", version: "1.0", img: "./port/texturaa.jpg", desc: "Lleva GameStore contigo! La misma tienda, ahora en una app (apk). Decubre juegos y novedades con una navegacion rapida y fluiuda. Descarga GameStore AHORA!!", url: "https://www.mediafire.com/file/22blvwo2yeaxmea/GStore.apk/file" }
+                ]
+            },
+            videos: [
+                { id: "v-1", title: "I SEE YOU NOW 👀", url: "https://www.youtube.com/embed/TpIy0LwxfGA?si=WICy3XEOVsV_YRLC", thumbnail: "./port/miniatura1 (1).jpg" },
+                { id: "v-2", title: "NEW UPDATE OF CRAFTING", url: "https://www.youtube.com/embed/b35C_J-j5fk?si=WxQgWkuyTpzcb0yJ", thumbnail: "./port/miniatura.jpg" }
+            ]
+        };
 
         /* ===== Menu Logic ===== */
         const mainMenu = document.getElementById('mainMenu');
@@ -1229,7 +1117,7 @@
             contentMenu.innerHTML = "";
             backBtn.style.display = 'inline-flex';
             const sec = DATA.sections.find(s => s.id === id);
-            if (sec.versions && sec.versions.length > 0 && !versionId) {
+            if (sec.versions && !versionId) {
                 sec.versions.forEach(v => {
                     const c = document.createElement('div');
                     c.className = 'card';
@@ -1290,7 +1178,7 @@
             c.appendChild(img);
             c.appendChild(info);
 
-            // Click en la card para abrir el link con animación
+            // Click on card to open download link with animation
             c.addEventListener('click', (e) => {
                 if (!copied) {
                     c.classList.add('opening');
@@ -1301,7 +1189,7 @@
                 }
             });
 
-            // Long press en la imagen para copiar link de compartir
+            // Long press on image to copy share link
             let longPressTimeout;
             let copied = false;
             const baseUrl = window.location.origin + window.location.pathname;
@@ -1323,12 +1211,12 @@
                 clearTimeout(longPressTimeout);
             };
 
-            // Eventos mouse
+            // Mouse events
             img.addEventListener('mousedown', handleStart);
             img.addEventListener('mouseup', handleEnd);
             img.addEventListener('mouseleave', handleEnd);
 
-            // Eventos touch
+            // Touch events
             img.addEventListener('touchstart', handleStart, { passive: false });
             img.addEventListener('touchend', handleEnd, { passive: false });
             img.addEventListener('touchcancel', handleEnd);
@@ -1534,7 +1422,6 @@
             searchScreen.style.display = 'none';
             apkScreen.style.display = 'none';
             videosScreen.style.display = 'none';
-            adminScreen.style.display = 'none';
             if (screen === 'home') {
                 homeScreen.style.display = 'block';
                 if (state.section) {
@@ -1550,8 +1437,6 @@
             } else if (screen === 'videos') {
                 videosScreen.style.display = 'block';
                 renderVideos();
-            } else if (screen === 'admin') {
-                adminScreen.style.display = 'block';
             }
         }
 
@@ -1610,147 +1495,11 @@
             });
         }
 
-        /* ===== Upload APK Logic ===== */
-        const uploadApkForm = document.getElementById('uploadApkForm');
-        uploadApkForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(uploadApkForm);
-            const response = await fetch('upload_apk.php', {
-                method: 'POST',
-                body: formData
-            }).then(res => res.json());
-
-            if (response.success) {
-                showToast(response.message);
-                uploadApkForm.reset();
-            } else {
-                showToast(response.message || 'Error al subir el APK.');
-            }
-        });
-
-        /* ===== Admin Panel Logic ===== */
-        const adminLink = document.getElementById('adminLink');
-        const adminLoginPrompt = document.getElementById('adminLoginPrompt');
-        const adminLoginForm = document.getElementById('adminLoginForm');
-        const adminScreen = document.getElementById('adminScreen');
-        const pendingApksTable = document.getElementById('pendingApksTable').querySelector('tbody');
-        const createSectionForm = document.getElementById('createSectionForm');
-
-        adminLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            adminLoginPrompt.style.display = 'block';
-            document.getElementById('sidebar').classList.remove('open');
-        });
-
-        adminLoginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(adminLoginForm);
-            const response = await fetch('admin_login.php', {
-                method: 'POST',
-                body: formData
-            }).then(res => res.json());
-
-            if (response.success) {
-                adminLoginPrompt.style.display = 'none';
-                showScreen('admin');
-                fetchPendingApks();
-                adminLoginForm.reset();
-            } else {
-                showToast(response.message || 'Error al iniciar sesión.');
-            }
-        });
-
-        async function fetchPendingApks() {
-            const response = await fetch('admin_actions.php?action=get_pending_apks').then(res => res.json());
-            if (response.success) {
-                pendingApksTable.innerHTML = '';
-                response.apks.forEach(apk => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${apk.name}</td>
-                        <td>${apk.version || '-'}</td>
-                        <td>${apk.category}</td>
-                        <td>
-                            <button onclick="approveApk(${apk.id})">Aprobar</button>
-                            <button onclick="rejectApk(${apk.id})">Rechazar</button>
-                        </td>
-                    `;
-                    pendingApksTable.appendChild(row);
-                });
-            }
-        }
-
-        window.approveApk = async (id) => {
-            const formData = new FormData();
-            formData.append('id', id);
-            const response = await fetch('admin_actions.php?action=approve_apk', {
-                method: 'POST',
-                body: formData
-            }).then(res => res.json());
-            showToast(response.message);
-            if (response.success) {
-                fetchPendingApks();
-                fetchData(); // Refresh main data
-            }
-        };
-
-        window.rejectApk = async (id) => {
-            const formData = new FormData();
-            formData.append('id', id);
-            const response = await fetch('admin_actions.php?action=reject_apk', {
-                method: 'POST',
-                body: formData
-            }).then(res => res.json());
-            showToast(response.message);
-            if (response.success) {
-                fetchPendingApks();
-            }
-        };
-
-        createSectionForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(createSectionForm);
-            const response = await fetch('admin_actions.php?action=create_section', {
-                method: 'POST',
-                body: formData
-            }).then(res => res.json());
-            showToast(response.message);
-            if (response.success) {
-                createSectionForm.reset();
-                fetchData(); // Refresh sections
-                populateCategorySelect();
-            }
-        });
-
-        async function populateCategorySelect() {
-            const response = await fetch('admin_actions.php?action=get_sections').then(res => res.json());
-            if (response.success) {
-                const categorySelect = document.querySelector('#uploadApkForm select[name="category"]');
-                const parentSelect = document.querySelector('#createSectionForm select[name="parent_id"]');
-                categorySelect.innerHTML = '<option value="" disabled selected>Selecciona una categoría</option>';
-                parentSelect.innerHTML = '<option value="">Sin categoría principal</option>';
-                response.sections.forEach(sec => {
-                    const option = document.createElement('option');
-                    option.value = sec.section_id;
-                    option.textContent = sec.title;
-                    categorySelect.appendChild(option.cloneNode(true));
-                    if (!sec.parent_id) {
-                        parentSelect.appendChild(option);
-                    }
-                });
-            }
-        }
-
         /* ===== Initialization ===== */
-        fetchData();
         showScreen('home');
+        renderMainMenu();
         handleDeepLink();
         window.addEventListener('hashchange', handleDeepLink);
-        // Videos data (agrega tus videos aquí si quieres)
-        DATA.videos = [
-            { id: "v-1", title: "I SEE YOU NOW 👀", url: "https://www.youtube.com/embed/TpIy0LwxfGA?si=WICy3XEOVsV_YRLC", thumbnail: "./port/miniatura1 (1).jpg" },
-            { id: "v-2", title: "NEW UPDATE OF CRAFTING", url: "https://www.youtube.com/embed/b35C_J-j5fk?si=WxQgWkuyTpzcb0yJ", thumbnail: "./port/miniatura.jpg" }
-        ];
     </script>
 </body>
 </html>
