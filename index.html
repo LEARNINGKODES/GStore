@@ -47,8 +47,8 @@
 
     <header>
         <button id="sidebarToggle">☰</button>
-        <img class="logo" src="NEOCRAFT.png" alt="Logo">
         <h1>GameStore</h1>
+        <img class="logo" src="NEOCRAFT.png" alt="Logo">
     </header>
 
     <div class="main" id="mainContent">
@@ -147,7 +147,7 @@
     <button id="installButton">📱 Instalar App</button>
 
     <script>
-        // Particle Background (Enhanced Aesthetic - Blue Nebula Effect)
+        // Enhanced Particle Background (Blue Nebula Effect with more variety)
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -164,13 +164,14 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-                this.opacity = Math.random() * 0.6 + 0.4;
-                const blueShades = ['#3b82f6', '#1d4ed8', '#06b6d4'];
-                this.color = blueShades[Math.floor(Math.random() * blueShades.length)];
-                this.glow = Math.random() * 6 + 3;
+                this.size = Math.random() * 4 + 0.8;
+                this.speedX = (Math.random() - 0.5) * 0.8;
+                this.speedY = (Math.random() - 0.5) * 0.8;
+                this.opacity = Math.random() * 0.7 + 0.3;
+                const nebulaColors = ['#1e3a8a', '#3b82f6', '#06b6d4', '#0ea5e9', '#0284c7'];
+                this.color = nebulaColors[Math.floor(Math.random() * nebulaColors.length)];
+                this.glow = Math.random() * 8 + 4;
+                this.twinkle = Math.random() * 0.02 + 0.01; // For twinkling effect
             }
 
             update() {
@@ -178,10 +179,12 @@
                 this.y += this.speedY;
                 if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
                 if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-                this.opacity = Math.max(0.3, this.opacity + (Math.random() - 0.5) * 0.01);
+                this.opacity += (Math.random() - 0.5) * this.twinkle;
+                this.opacity = Math.max(0.2, Math.min(1, this.opacity));
             }
 
             draw() {
+                ctx.save();
                 ctx.globalAlpha = this.opacity;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -189,8 +192,11 @@
                 ctx.shadowBlur = this.glow;
                 ctx.shadowColor = this.color;
                 ctx.fill();
-                ctx.shadowBlur = 0;
-                ctx.globalAlpha = 1;
+                // Add inner glow for nebula feel
+                ctx.shadowBlur = this.glow / 2;
+                ctx.fillStyle = this.color + '80';
+                ctx.fill();
+                ctx.restore();
             }
         }
 
@@ -200,9 +206,9 @@
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < 120) {
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.6 - distance / 120})`;
-                        ctx.lineWidth = 0.8;
+                    if (distance < 150) {
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.4 - distance / 150})`;
+                        ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
@@ -214,7 +220,7 @@
 
         function initParticles() {
             particles = [];
-            const particleCount = Math.min(window.innerWidth / 4, 150);
+            const particleCount = Math.min(window.innerWidth / 3, 200);
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
@@ -232,6 +238,43 @@
 
         initParticles();
         animateParticles();
+
+        // Enhanced Highlight Particles (for deep link animation)
+        function createHighlightParticles(card) {
+            const rect = card.getBoundingClientRect();
+            const particleContainer = document.createElement('div');
+            particleContainer.style.cssText = `
+                position: absolute;
+                top: ${rect.top + window.scrollY}px;
+                left: ${rect.left + window.scrollX}px;
+                width: ${rect.width}px;
+                height: ${rect.height}px;
+                pointer-events: none;
+                z-index: 1001;
+            `;
+            document.body.appendChild(particleContainer);
+
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random() * 6 + 2}px;
+                    height: ${Math.random() * 6 + 2}px;
+                    background: radial-gradient(circle, var(--accent-blue), transparent);
+                    border-radius: 50%;
+                    top: ${Math.random() * rect.height}px;
+                    left: ${Math.random() * rect.width}px;
+                    opacity: 1;
+                    transform: scale(0);
+                    animation: particleFloat 1.2s ease-out forwards ${Math.random() * 0.5}s;
+                `;
+                particleContainer.appendChild(particle);
+            }
+
+            setTimeout(() => {
+                document.body.removeChild(particleContainer);
+            }, 1500);
+        }
 
         // Toast Function
         function showToast(message) {
@@ -441,6 +484,7 @@
                 const c = createItemCard(it, key);
                 if (targetItemId && it.id === targetItemId) {
                     c.classList.add('highlight');
+                    createHighlightParticles(c);
                     setTimeout(() => {
                         c.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         const sound = document.getElementById('highlightSound');
@@ -800,6 +844,7 @@
         const c = createItemCard(it, key);
         if (targetItemId && it.id === targetItemId) {
             c.classList.add('highlight');
+            createHighlightParticles(c);
             setTimeout(() => {
                 c.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 const sound = document.getElementById('highlightSound');
@@ -810,5 +855,17 @@
     });
 }
     </script>
+    <style>
+        @keyframes particleFloat {
+            0% {
+                opacity: 1;
+                transform: scale(0) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1) translateY(-50px) rotate(360deg);
+            }
+        }
+    </style>
 </body>
 </html>
