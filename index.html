@@ -148,7 +148,7 @@ canvas#particles {
     color: #ffffff;
 }
 
-.sidebar-upload-btn, .sidebar-admin-btn {
+.sidebar-upload-btn {
     display: block;
     width: 90%;
     margin: 10px auto;
@@ -165,7 +165,7 @@ canvas#particles {
     transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
 }
 
-.sidebar-upload-btn:hover, .sidebar-admin-btn:hover {
+.sidebar-upload-btn:hover {
     transform: scale(1.05);
     box-shadow: 0 0 20px var(--accent3);
     background: linear-gradient(135deg, #2563eb, #1d4ed8);
@@ -297,7 +297,7 @@ header h1 {
 }
 
 /* ===== Cards ===== */
-.card, .approved-item {
+.card {
     background: var(--panel);
     border-radius: var(--radius);
     padding: 1.5rem;
@@ -313,7 +313,7 @@ header h1 {
     min-height: 70px;
 }
 
-.card::before, .approved-item::before {
+.card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -324,12 +324,12 @@ header h1 {
     opacity: 0.9;
 }
 
-.card:hover, .approved-item:hover {
+.card:hover {
     transform: translateY(-4px);
     box-shadow: 0 0 24px var(--accent2);
 }
 
-.card img, .approved-item img {
+.card img {
     width: 56px;
     height: 56px;
     border-radius: 8px;
@@ -340,7 +340,7 @@ header h1 {
     touch-action: manipulation;
 }
 
-.card .info .title, .approved-item .info .title {
+.card .info .title {
     font-weight: 700;
     font-size: 1.1rem;
     background: var(--gradient);
@@ -348,25 +348,25 @@ header h1 {
     -webkit-text-fill-color: transparent;
 }
 
-.card .info .desc, .approved-item .info .desc {
+.card .info .desc {
     font-size: 0.9rem;
     color: var(--muted);
     font-weight: 500;
 }
 
-.card.highlight, .approved-item.highlight {
+.card.highlight {
     border: 2px solid var(--accent2);
     box-shadow: 0 0 24px var(--accent2);
-    animation: highlightPulse 0.5s ease-in-out;
+    animation: highlightPulse 1.5s infinite;
 }
 
 @keyframes highlightPulse {
-    0% { transform: scale(1); box-shadow: 0 0 24px var(--accent2); }
-    50% { transform: scale(1.02); box-shadow: 0 0 32px var(--accent2); }
-    100% { transform: scale(1); box-shadow: 0 0 24px var(--accent2); }
+    0% { box-shadow: 0 0 24px var(--accent2); opacity: 1; }
+    50% { box-shadow: 0 0 32px var(--accent2); opacity: 0.7; }
+    100% { box-shadow: 0 0 24px var(--accent2); opacity: 1; }
 }
 
-.card.opening, .approved-item.opening {
+.card.opening {
     animation: pulse 0.3s ease-in-out;
 }
 
@@ -757,11 +757,29 @@ nav button:hover::after {
     visibility: hidden;
     z-index: 20;
     transition: opacity 0.3s, visibility 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 #toast.show {
     opacity: 1;
     visibility: visible;
+}
+
+#toast button {
+    background: #ffffff;
+    color: var(--accent2);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#toast button:hover {
+    background: var(--accent3);
+    color: #ffffff;
 }
 
 /* ===== Install Button ===== */
@@ -781,91 +799,6 @@ nav button:hover::after {
 }
 
 #installButton:hover {
-    background: linear-gradient(135deg, var(--accent3), var(--accent1));
-}
-
-/* ===== Admin Modal ===== */
-#adminModal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
-
-#adminModal > div {
-    background: var(--panel);
-    color: var(--text);
-    padding: 20px;
-    border-radius: var(--radius);
-    min-width: 320px;
-    max-width: 90%;
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(20px);
-}
-
-#adminModal h3 {
-    margin-top: 0;
-    font-size: 1.3rem;
-    font-weight: 600;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#adminModal p {
-    color: var(--muted);
-    margin: 6px 0 12px;
-    font-size: 0.95rem;
-}
-
-#adminModal input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    background: transparent;
-    color: var(--text);
-    font-size: 1rem;
-    outline: none;
-}
-
-#adminModal input:focus {
-    border-color: var(--accent2);
-    box-shadow: 0 0 12px var(--accent2);
-}
-
-#adminModal div {
-    text-align: right;
-    margin-top: 12px;
-}
-
-#adminModal button {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-#adminModal #adminCancelBtn {
-    background: #374151;
-    color: #fff;
-    margin-right: 8px;
-}
-
-#adminModal #adminCancelBtn:hover {
-    background: #4b5563;
-}
-
-#adminModal #adminSubmitBtn {
-    background: var(--gradient);
-    color: #fff;
-}
-
-#adminModal #adminSubmitBtn:hover {
     background: linear-gradient(135deg, var(--accent3), var(--accent1));
 }
 
@@ -908,16 +841,16 @@ nav button:hover::after {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 
-    .card img, .approved-item img {
+    .card img {
         width: 48px;
         height: 48px;
     }
 
-    .card .info .title, .approved-item .info .title {
+    .card .info .title {
         font-size: 1rem;
     }
 
-    .card .info .desc, .approved-item .info .desc {
+    .card .info .desc {
         font-size: 0.85rem;
     }
 
@@ -1012,9 +945,8 @@ nav button:hover::after {
             </a>
         </div>
         <div class="sidebar-section">
-            <h3>Administración</h3>
-            <a href="upload_form.php" class="sidebar-upload-btn">SUBIR APK</a>
-            <button id="adminBtn" class="sidebar-admin-btn">ADMIN</button>
+            <h3>Subir Contenido</h3>
+            <a href="APK.html" class="sidebar-upload-btn">SUBIR APK</a>
         </div>
         <div class="sidebar-section">
             <button id="themeToggle">☀️ Cambiar a Modo Claro</button>
@@ -1085,7 +1017,7 @@ nav button:hover::after {
                     <img src="./port/telegram.png" alt="Telegram">
                     Contactar por Telegram
                 </a><br>
-                <a href="upload_form.php" class="btn-subir-apk">🚀 Subir APK</a><br>
+                <a href="APK.html" class="btn-subir-apk">🚀 Subir APK</a><br>
                 <span style="font-size: 0.9rem;">¡Envíanos tu contenido y lo publicaremos en GameStore!</span>
             </div>
         </div>
@@ -1121,23 +1053,6 @@ nav button:hover::after {
 
     <!-- Install Button -->
     <button id="installButton">📱 Instalar App</button>
-
-    <!-- Admin Modal & Secure POST Form -->
-    <div id="adminModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:9999">
-        <div style="background:#0f1724;color:#fff;padding:20px;border-radius:12px;min-width:320px;max-width:90%">
-            <h3 style="margin-top:0">Acceso Administrador</h3>
-            <p style="color:#9aa6bf;margin:6px 0 12px">Introduce tu contraseña para acceder al panel administrativo.</p>
-            <input id="adminPasswordInput" type="password" placeholder="Contraseña" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff">
-            <div style="text-align:right;margin-top:12px">
-                <button id="adminCancelBtn" style="margin-right:8px;padding:8px 12px;border-radius:8px;border:none;background:#374151;color:#fff;cursor:pointer">Cancelar</button>
-                <button id="adminSubmitBtn" style="padding:8px 12px;border-radius:8px;border:none;background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;cursor:pointer">Entrar</button>
-            </div>
-        </div>
-    </div>
-
-    <form id="adminHiddenForm" method="POST" action="admin.php" style="display:none">
-        <input type="hidden" name="login_password" id="adminHiddenPassword">
-    </form>
 
     <script>
         // Particle Background (Enhanced Aesthetic - Blue Nebula Effect)
@@ -1229,9 +1144,17 @@ nav button:hover::after {
         // Toast Function
         function showToast(message) {
             const toast = document.getElementById('toast');
-            toast.textContent = message;
+            toast.innerHTML = `${message}<button onclick="copyToClipboard('${message}')">Copiar</button>`;
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
+            setTimeout(() => toast.classList.remove('show'), 5000);
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Enlace copiado al portapapeles');
+            }).catch(() => {
+                showToast('Error al copiar el enlace');
+            });
         }
 
         /* ===== Data ===== */
@@ -1368,33 +1291,6 @@ nav button:hover::after {
         const searchInput = document.getElementById('searchInput');
         let state = { section: null, version: null };
 
-        async function loadApprovedItems() {
-            try {
-                const response = await fetch('items.php');
-                const approvedItems = await response.json();
-                if (approvedItems.error) {
-                    showToast(approvedItems.error);
-                    return;
-                }
-                approvedItems.forEach(item => {
-                    const sectionKey = item.section_id === 'otras-apps' ? 'otras-apks' : item.section_id;
-                    if (!DATA.items[sectionKey]) {
-                        DATA.items[sectionKey] = [];
-                    }
-                    DATA.items[sectionKey].push({
-                        id: item.id,
-                        title: item.title,
-                        version: item.version || '',
-                        img: item.img_url || './port/extras.png',
-                        desc: item.desc || '',
-                        url: item.url
-                    });
-                });
-            } catch (error) {
-                showToast('Error al cargar ítems aprobados: ' + error.message);
-            }
-        }
-
         function renderMainMenu() {
             mainMenu.innerHTML = "";
             contentMenu.innerHTML = "";
@@ -1479,7 +1375,7 @@ nav button:hover::after {
 
         function createItemCard(it, sectionKey) {
             const c = document.createElement('div');
-            c.className = it.img.includes('Uploads/') ? 'approved-item' : 'card';
+            c.className = 'card';
             const img = document.createElement('img');
             img.src = it.img || './port/extras.png';
             const info = document.createElement('div');
@@ -1488,51 +1384,43 @@ nav button:hover::after {
             c.appendChild(img);
             c.appendChild(info);
 
-            // Click on card to open download link with animation
+            // Click on the entire card to open the download link with animation
             c.addEventListener('click', (e) => {
-                if (!copied) {
-                    c.classList.add('opening');
-                    setTimeout(() => {
-                        c.classList.remove('opening');
-                        window.open(it.url, '_blank');
-                    }, 300);
-                }
+                c.classList.add('opening');
+                setTimeout(() => {
+                    c.classList.remove('opening');
+                    window.open(it.url, '_blank');
+                }, 300);
             });
 
-            // Long press on image to copy share link
+            // Generate dynamic section link
+            const section = DATA.sections.find(s => s.versions ? s.versions.some(v => v.id === sectionKey) : s.id === sectionKey);
+            const sectionId = section ? section.id : sectionKey;
+            const versionId = section && section.versions ? sectionKey : '';
+            const link = `https://learningkodes.github.io/GStore/#${sectionId}${versionId ? '/' + versionId : ''}/${it.id}`;
+
+            // Long press on image to show section link
             let longPressTimeout;
-            let copied = false;
-            const baseUrl = window.location.origin + window.location.pathname;
-            const section = DATA.sections.find(s => s.id === sectionKey || (s.versions && s.versions.some(v => v.id === sectionKey)));
-            const itemUrl = section.versions
-                ? `${baseUrl}#${section.id}/${sectionKey}/${it.id}`
-                : `${baseUrl}#${sectionKey}/${it.id}`;
-
-            const handleStart = (e) => {
-                e.preventDefault();
+            img.addEventListener('mousedown', (e) => {
                 longPressTimeout = setTimeout(() => {
-                    copied = true;
-                    navigator.clipboard.writeText(it.url).then(() => {
-                        showToast('¡Enlace de descarga copiado!');
-                    }).catch(() => {
-                        showToast('Error al copiar el enlace');
-                    });
-                    setTimeout(() => { copied = false; }, 500);
+                    showToast(link);
                 }, 500);
-            };
-            const handleEnd = () => {
-                clearTimeout(longPressTimeout);
-            };
+            });
+            img.addEventListener('mouseup', () => clearTimeout(longPressTimeout));
+            img.addEventListener('mouseleave', () => clearTimeout(longPressTimeout));
 
-            // Mouse events
-            img.addEventListener('mousedown', handleStart);
-            img.addEventListener('mouseup', handleEnd);
-            img.addEventListener('mouseleave', handleEnd);
-
-            // Touch events
-            img.addEventListener('touchstart', handleStart, { passive: false });
-            img.addEventListener('touchend', handleEnd, { passive: false });
-            img.addEventListener('touchcancel', handleEnd);
+            img.addEventListener('touchstart', (e) => {
+                longPressTimeout = setTimeout(() => {
+                    showToast(link);
+                    navigator.clipboard.writeText(link).then(() => {
+                        setTimeout(() => showToast('Enlace copiado al portapapeles'), 5100);
+                    }).catch(() => {
+                        setTimeout(() => showToast('Error al copiar el enlace'), 5100);
+                    });
+                }, 500);
+            }, { passive: false });
+            img.addEventListener('touchend', () => clearTimeout(longPressTimeout), { passive: false });
+            img.addEventListener('touchcancel', () => clearTimeout(longPressTimeout));
 
             return c;
         }
@@ -1768,25 +1656,6 @@ nav button:hover::after {
             document.getElementById('themeToggle').textContent = '🌙 Cambiar a Modo Oscuro';
         }
 
-        /* ===== Admin Modal ===== */
-        document.getElementById('adminBtn').onclick = () => {
-            document.getElementById('adminModal').style.display = 'flex';
-        };
-        document.getElementById('adminCancelBtn').onclick = () => {
-            document.getElementById('adminModal').style.display = 'none';
-            document.getElementById('adminPasswordInput').value = '';
-        };
-        document.getElementById('adminSubmitBtn').onclick = () => {
-            const passwordInput = document.getElementById('adminPasswordInput');
-            const hiddenForm = document.getElementById('adminHiddenForm');
-            const hiddenPassword = document.getElementById('adminHiddenPassword');
-            
-            hiddenPassword.value = passwordInput.value;
-            hiddenForm.submit();
-            document.getElementById('adminModal').style.display = 'none';
-            passwordInput.value = '';
-        };
-
         /* ===== PWA Install Prompt ===== */
         let deferredPrompt;
         const installButton = document.getElementById('installButton');
@@ -1813,8 +1682,7 @@ nav button:hover::after {
         });
 
         /* ===== Initial Load ===== */
-        async function init() {
-            await loadApprovedItems();
+        function init() {
             showScreen('home');
             handleDeepLink();
         }
