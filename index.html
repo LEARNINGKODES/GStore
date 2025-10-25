@@ -948,7 +948,7 @@
             <a href="./apk.html" class="sidebar-upload-btn" aria-label="Subir un APK">SUBIR APK</a>
         </div>
         <div class="sidebar-section">
-            <button id="themeToggle" aria-label="Cambiar entre modo claro y oscuro">☀️Modo Claro</button>
+            <button id="themeToggle" aria-label="Cambiar entre modo claro y oscuro">☀️ Modo Claro</button>
         </div>
     </div>
 
@@ -963,7 +963,7 @@
         <div id="homeScreen">
             <div class="hero-section">
                 <h2>Descubre el Mundo de GameStore</h2>
-                <p>Tu plataforma definitiva para descargar APKs de Minecraft, texturas, shaders y mucho más. Explora colecciones exclusivas como Craftsman, NeoCraft, VolumeCraft y Hypercraft en un entorno moderno e intuitivo.</p>
+                <p>Tu plataforma definitiva para descargar APKs de Minecraft, texturas, shaders y mucho más. Explora colecciones exclusivas como Craftsman, NeoCraft, BalionCraft y Hypercraft en un entorno moderno e intuitivo.</p>
                 <div class="facts">
                     <h3>Datos Curiosos</h3>
                     <ul>
@@ -1182,7 +1182,10 @@
                 {
                     id: "neocraft",
                     title: "NeoCraft",
-                    desc: "Recursos NeoCraft"
+                    desc: "Recursos NeoCraft",
+                    versions: [
+                        {id: "neocraft", title: "NeoCraft"}
+                    ]
                 },
                 {
                     id: "complementos",
@@ -1202,9 +1205,8 @@
                     versions: [
                         {id: "minecraft", title: "Minecraft"},
                         {id: "ultra-raft", title: "Ultra Raft"},
-                        {id: "balioncraft", title: "BALIONCRAFT"},
+                        {id: "balioncraft", title: "BalionCraft"},
                         {id: "hipercraft", title: "Hypercraft"},
-                        {id: "volumecraft", title: "VolumeCraft"},
                         {id: "gamestore", title: "GameStore"}
                     ]
                 },
@@ -1280,9 +1282,6 @@
                 "hipercraft": [
                     {id: "hiper-1", title: "Hypercraft", version: "1.21.100", img: "./port/hiper.png", desc: " HIPERCRAFT EN LA VERSIÓN 1.21.100", url: "https://www.mediafire.com/file/jzeipqgtevpowca/HyperCraft_signed.apk/file" }
                 ],
-                "volumecraft": [
-                    {id: "volume-1", title: "VolumeCraft", version: "1.0", img: "./port/volume.png", desc: "Primera versión de VolumeCraft, una experiencia única para los fans de Minecraft.", url: "https://www.mediafire.com/file/example/VolumeCraft.apk/file" }
-                ],
                 "gamestore": [
                     { id: "gs-1", title: "GameStore", version: "1.0", img: "./port/texturaa.jpg", desc: "Lleva GameStore contigo! La misma tienda, ahora en una app (apk). Decubre juegos y novedades con una navegacion rapida y fluida. Descarga GameStore AHORA!!", url: "https://www.mediafire.com/file/22blvwo2yeaxmea/GStore.apk/file" }
                 ],
@@ -1345,6 +1344,8 @@
                     if (id === "craftsman") {
                         if (v.id === "craftsman-main" || v.id === "craftsman-01510") imgSrc = "./port/craftsman.png";
                         else if (v.id === "craftsman-zero") imgSrc = "./port/zero.png";
+                    } else if (id === "neocraft") {
+                        imgSrc = "neocraft/NEOCRAFT.png";
                     } else if (id === "complementos") {
                         imgSrc = "./port/texturaa.jpg";
                     } else if (id === "otras-apps") {
@@ -1352,7 +1353,6 @@
                         else if (v.id === "ultra-raft") imgSrc = "port/ultra.png";
                         else if (v.id === "balioncraft") imgSrc = "./port/balion.png";
                         else if (v.id === "hipercraft") imgSrc = "./port/hiper.png";
-                        else if (v.id === "volumecraft") imgSrc = "./port/volume.png";
                         else if (v.id === "gamestore") imgSrc = "./port/texturaa.jpg";
                     }
                     const img = document.createElement('img');
@@ -1424,7 +1424,7 @@
             const section = DATA.sections.find(s => s.versions ? s.versions.some(v => v.id === sectionKey) : s.id === sectionKey);
             const sectionId = section ? section.id : sectionKey;
             const versionId = section && section.versions ? sectionKey : '';
-            const link = `https://learningkodes.github.io/GStore/#${sectionId}${versionId ? '/' + versionId : ''}/${it.id}`;
+            const link = `https://learningkodes.github.io/GameStore/#${sectionId}${versionId ? '/' + versionId : ''}/${it.id}`;
 
             // Long press on image to show section link
             let longPressTimeout;
@@ -1468,20 +1468,24 @@
             const hash = window.location.hash.substring(1);
             if (hash) {
                 const parts = hash.split('/');
-                if (parts.length >= 1) {
-                    const sectionId = parts[0];
-                    const subKey = parts[1];
-                    const itemId = parts[2] || null;
-                    const section = DATA.sections.find(s => s.id === sectionId);
-                    if (section) {
-                        showScreen('home');
-                        if (section.versions && subKey && section.versions.some(v => v.id === subKey)) {
-                            openSection(sectionId, subKey, itemId);
-                        } else {
-                            openSection(sectionId, subKey, itemId);
-                        }
+                const sectionId = parts[0];
+                const subKey = parts[1] || null;
+                const itemId = parts[2] || null;
+                const section = DATA.sections.find(s => s.id === sectionId);
+                if (section) {
+                    showScreen('home');
+                    if (section.versions && subKey && section.versions.some(v => v.id === subKey)) {
+                        openSection(sectionId, subKey, itemId);
+                    } else {
+                        openSection(sectionId, subKey || sectionId, itemId);
                     }
+                } else {
+                    showScreen('home');
+                    renderMainMenu();
                 }
+            } else {
+                showScreen('home');
+                renderMainMenu();
             }
         }
 
@@ -1566,12 +1570,13 @@
                     if (sec.id === "craftsman") {
                         if (v.id.includes("zero")) imgSrc = "./port/zero.png";
                         else imgSrc = "./port/craftsman.png";
+                    } else if (sec.id === "neocraft") {
+                        imgSrc = "neocraft/NEOCRAFT.png";
                     } else if (sec.id === "otras-apps") {
                         if (v.id === "minecraft") imgSrc = "port/Minecraft_Bedrock.png";
                         else if (v.id === "ultra-raft") imgSrc = "port/ultra.png";
                         else if (v.id === "balioncraft") imgSrc = "./port/balion.png";
                         else if (v.id === "hipercraft") imgSrc = "./port/hiper.png";
-                        else if (v.id === "volumecraft") imgSrc = "./port/volume.png";
                         else if (v.id === "gamestore") imgSrc = "./port/texturaa.jpg";
                     }
                     const img = document.createElement('img');
@@ -1642,12 +1647,12 @@
         /* ===== Videos ===== */
         function renderVideos() {
             const videosContainer = document.getElementById('videosContainer');
-            videosContainer.innerHTML = '';
+            videosContainer.innerHTML = "";
             DATA.videos.forEach(video => {
                 const card = document.createElement('div');
                 card.className = 'video-card';
                 card.innerHTML = `
-                    <img src="${video.thumbnail}" alt="${video.title}">
+                    <img src="${video.thumbnail}" alt="Miniatura de ${video.title}">
                     <div class="play-overlay"></div>
                     <iframe src="${video.url}" title="${video.title}" frameborder="0" allowfullscreen></iframe>
                     <div class="video-title">${video.title}</div>
