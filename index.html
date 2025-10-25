@@ -939,7 +939,7 @@
             <a href="https://www.instagram.com/neomc12?igsh=MXNqYmcwNHZmOGx3Yg==" class="social-link" aria-label="Visitar nuestro perfil de Instagram">
                 <img src="./port/inta.jpg" alt="Ícono de Instagram"> Instagram
             </a>
-            <a href="https://learningkodes.github.io/GameStore/" class="social-link" aria-label="Ver contenido adicional">
+            <a href="https://learningkodes.github.io/GStore/" class="social-link" aria-label="Ver contenido adicional">
                 📄 Content
             </a>
         </div>
@@ -1384,7 +1384,7 @@
                     c.classList.add('highlight');
                     setTimeout(() => {
                         c.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }, 100);
+                    }, 500);
                 }
                 contentMenu.appendChild(c);
             });
@@ -1424,7 +1424,7 @@
             const section = DATA.sections.find(s => s.versions ? s.versions.some(v => v.id === sectionKey) : s.id === sectionKey);
             const sectionId = section ? section.id : sectionKey;
             const versionId = section && section.versions ? sectionKey : '';
-            const link = `https://learningkodes.github.io/GameStore/#${sectionId}${versionId ? '/' + versionId : ''}/${it.id}`;
+            const link = `https://learningkodes.github.io/GStore/#${sectionId}${versionId ? '/' + versionId : ''}/${it.id}`;
 
             // Long press on image to show section link
             let longPressTimeout;
