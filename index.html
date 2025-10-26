@@ -1142,6 +1142,12 @@ function showToast(message) {
 }
 
 /* ===== Data ===== */
+// Estructura de datos escalable: puedes añadir nuevas secciones, versiones y elementos
+// Para añadir una nueva sección, agrega un objeto en DATA.sections
+// Para añadir elementos, agrega un array en DATA.items con el ID correspondiente
+// Ejemplo para nueva sección:
+// { id: "nueva-seccion", title: "Nueva Sección", desc: "Descripción", versions: [{id: "nueva-version", title: "Nueva Versión"}] }
+// Añade elementos en DATA.items["nueva-version"] = [{id: "item-1", title: "...", ...}]
 let DATA = {
     socials: {
         youtube: {url: "https://youtube.com/@jlmc2?si=qHmc0eB24stW3Kcv", img: "./port/yt.png"},
@@ -1365,7 +1371,9 @@ function renderItems(key, targetItemId = null) {
             setTimeout(() => {
                 c.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 const sound = document.getElementById('highlightSound');
-                if (sound) sound.play();
+                if (sound) {
+                    sound.play().catch(err => console.error('Error al reproducir sonido:', err));
+                }
             }, 100);
         }
         contentMenu.appendChild(c);
@@ -1387,19 +1395,10 @@ function createItemCard(it, sectionKey) {
     // Click on the entire card to open the download link with animation
     c.addEventListener('click', (e) => {
         c.classList.add('opening');
-        fetch(it.url, { method: 'HEAD' })
-            .then(response => {
-                c.classList.remove('opening');
-                if (response.ok) {
-                    window.open(it.url, '_blank');
-                } else {
-                    showToast('El enlace no está disponible. Intenta de nuevo más tarde.');
-                }
-            })
-            .catch(() => {
-                c.classList.remove('opening');
-                showToast('Error de red. Verifica tu conexión e intenta de nuevo.');
-            });
+        setTimeout(() => {
+            c.classList.remove('opening');
+            window.open(it.url, '_blank'); // Abrir el enlace directamente
+        }, 300); // Retraso para la animación
     });
 
     // Generate dynamic section link
